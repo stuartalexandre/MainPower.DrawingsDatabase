@@ -147,10 +147,6 @@
     <Compile Include="AddDrawingWindow.xaml.cs">
       <DependentUpon>AddDrawingWindow.xaml</DependentUpon>
     </Compile>
-    <None Include="RelayCommand.cs" />
-    <None Include="SearchView.xaml.cs">
-      <DependentUpon>SearchView.xaml</DependentUpon>
-    </None>
     <Compile Include="GUISettings.xaml.cs">
       <DependentUpon>GUISettings.xaml</DependentUpon>
     </Compile>
@@ -165,14 +161,12 @@
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
-    <None Include="SearchViewModel.cs" />
     <Compile Include="SubBrowser.xaml.cs">
       <DependentUpon>SubBrowser.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewDrawingWindow.xaml.cs">
       <DependentUpon>ViewDrawingWindow.xaml</DependentUpon>
     </Compile>
-    <None Include="ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,10 +179,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <None Include="SearchView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </None>
     <Page Include="GUISettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
