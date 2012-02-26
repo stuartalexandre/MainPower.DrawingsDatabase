@@ -1,0 +1,1516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="10.0" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">$(FxCopDir)\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded, Good, Noise" NewOnly="False" />
+   <Report Status="Active, Good, Noise" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <AssemblyReferenceDirectories>
+   <Directory>$(ProjectDir)/Reference/</Directory>
+  </AssemblyReferenceDirectories>
+  <Target Name="$(ProjectDir)/Output/AutoCadPlugin.dll" Analyze="False" AnalyzeAllChildren="False" />
+  <Target Name="$(ProjectDir)/Output/DatabaseHelper.dll" Analyze="False" AnalyzeAllChildren="False" />
+  <Target Name="$(ProjectDir)/Output/DrawingsDatabaseGUI.exe" Analyze="False" AnalyzeAllChildren="False" />
+  <Target Name="$(ProjectDir)/Output/HC.Utils.dll" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityTransparencyRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="10.0">
+  <Namespaces>
+   <Namespace Name="HC.Utils">
+    <Messages>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+      <Issue Name="Namespace">
+       <Item>Utils</Item>
+       <Item>HC.Utils</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="HC.Utils.Controls">
+    <Messages>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+      <Issue Name="Namespace">
+       <Item>Utils</Item>
+       <Item>HC.Utils.Controls</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="HC.Utils.Controls.Converters">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2011-05-20 23:04:45Z">
+      <Issue>
+       <Item>HC.Utils.Controls.Converters</Item>
+      </Issue>
+     </Message>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+      <Issue Name="Namespace">
+       <Item>Utils</Item>
+       <Item>HC.Utils.Controls.Converters</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="HC.Utils.Controls.Data">
+    <Messages>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+      <Issue Name="Namespace">
+       <Item>Utils</Item>
+       <Item>HC.Utils.Controls.Data</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="HC.Utils.Controls.TypeEditors">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2011-05-20 23:04:45Z">
+      <Issue>
+       <Item>HC.Utils.Controls.TypeEditors</Item>
+      </Issue>
+     </Message>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+      <Issue Name="Namespace">
+       <Item>Utils</Item>
+       <Item>HC.Utils.Controls.TypeEditors</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="XamlGeneratedNamespace">
+    <Messages>
+     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Created="2011-05-20 23:04:45Z">
+      <Issue>
+       <Item>XamlGeneratedNamespace</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+  </Namespaces>
+  <Targets>
+   <Target Name="$(ProjectDir)/Output/AutoCadPlugin.dll">
+    <Modules>
+     <Module Name="autocadplugin.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2011-05-20 23:04:45Z">
+        <Issue Name="NoStrongName">
+         <Item>'AutoCadPlugin.dll'</Item>
+        </Issue>
+       </Message>
+       <Message Id="Plugin" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2011-05-20 23:04:45Z">
+        <Issue Name="Assembly">
+         <Item>Plugin</Item>
+         <Item>'AutoCadPlugin.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="MainPower.DrawingsDatabase.AutoCad">
+        <Types>
+         <Type Name="Commands">
+          <Members>
+           <Member Name="#ShowSearchWindow()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Commands.ShowSearchWindow()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DrawingCommands">
+          <Members>
+           <Member Name="#AutoNumberBlockThenSave()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-26 04:53:20Z">
+              <Issue>
+               <Item>'DrawingCommands.AutoNumberBlockThenSave()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#BlockToDatabase()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.BlockToDatabase()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#BlockToDatabase(Autodesk.AutoCAD.DatabaseServices.BlockReference,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.BlockToDatabase(BlockReference, Transaction)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DatabaseToBlock()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.DatabaseToBlock()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DatabaseToBlock(Autodesk.AutoCAD.DatabaseServices.BlockReference,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.DatabaseToBlock(BlockReference, Transaction)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DatabaseToDrawing()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.DatabaseToDrawing()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DatabaseToLayout()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.DatabaseToLayout()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DrawingToDatabase()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.DrawingToDatabase()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DumpBlockAttributes()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.DumpBlockAttributes()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetSheetSizeFromBlock(Autodesk.AutoCAD.DatabaseServices.BlockReference,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.GetSheetSizeFromBlock(BlockReference, Transaction)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LayoutToDatabase()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.LayoutToDatabase()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#NeedAnotherRevision()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.NeedAnotherRevision()'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetBlockSheetSize(Autodesk.AutoCAD.DatabaseServices.BlockReference,System.String,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Excluded" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DrawingCommands.SetBlockSheetSize(BlockReference, string, Transaction)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/Output/HC.Utils.dll">
+    <Modules>
+     <Module Name="hc.utils.dll">
+      <Messages>
+       <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+        <Issue Name="Assembly">
+         <Item>Utils</Item>
+         <Item>'HC.Utils.dll'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Created="2011-05-20 23:04:45Z">
+        <Issue>
+         <Item>'HC.Utils.dll'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824" Created="2011-05-20 23:04:45Z">
+        <Issue>
+         <Item>'HC.Utils.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="HC.Utils">
+        <Types>
+         <Type Name="AssemblyInfoHelper">
+          <Members>
+           <Member Name="#AssemblyVersion">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'AssemblyInfoHelper.AssemblyVersion'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CustomAttributes`1()">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'AssemblyInfoHelper.CustomAttributes&lt;T&gt;()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FileName">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'AssemblyInfoHelper.FileName'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FilePath">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'AssemblyInfoHelper.FilePath'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FileVersion">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'AssemblyInfoHelper.FileVersion'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CustomWindow">
+          <Members>
+           <Member Name="#.ctor(System.String)">
+            <Messages>
+             <Message TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201" Created="2011-05-20 23:04:45Z">
+              <Issue Name="TooGeneric">
+               <Item>'CustomWindow.CustomWindow(string)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+              <Issue Name="TooGeneric">
+               <Item>'CustomWindow.CustomWindow(string)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+              <Issue Name="TooGeneric">
+               <Item>'CustomWindow.CustomWindow(string)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+             <Message Id="name" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'CustomWindow.CustomWindow(string)'</Item>
+               <Item>name</Item>
+               <Item>'class_name'</Item>
+               <Item>Name</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'CustomWindow.CustomWindow(string)'</Item>
+               <Item>'class_name'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'CustomWindow.CustomWindow(string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CreateWindowExW(System.UInt32,System.String,System.String,System.UInt32,System.Int32,System.Int32,System.Int32,System.Int32,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'CustomWindow.CreateWindowExW(uint, string, string, uint, int, int, int, int, IntPtr, IntPtr, IntPtr, IntPtr)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DefWindowProcW(System.IntPtr,System.UInt32,System.IntPtr,System.IntPtr)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'CustomWindow.DefWindowProcW(IntPtr, uint, IntPtr, IntPtr)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#DestroyWindow(System.IntPtr)">
+            <Messages>
+             <Message TypeName="MarkBooleanPInvokeArgumentsWithMarshalAs" Category="Microsoft.Interoperability" CheckId="CA1414" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Return">
+               <Item>'CustomWindow.DestroyWindow(IntPtr)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'CustomWindow.DestroyWindow(IntPtr)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Dispose()">
+            <Messages>
+             <Message TypeName="DisposableTypesShouldDeclareFinalizer" Category="Microsoft.Usage" CheckId="CA2216" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'CustomWindow'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Hwnd">
+            <Messages>
+             <Message Id="Hwnd" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Hwnd</Item>
+               <Item>'CustomWindow.Hwnd'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#RegisterClassW(HC.Utils.CustomWindow+WNDCLASS&amp;)">
+            <Messages>
+             <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'CustomWindow.RegisterClassW(ref CustomWindow.WNDCLASS)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Logger">
+          <Members>
+           <Member Name="#LogDebug(System.String)">
+            <Messages>
+             <Message Id="str" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'Logger.LogDebug(string)'</Item>
+               <Item>str</Item>
+               <Item>'str'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LogError(System.String)">
+            <Messages>
+             <Message Id="str" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'Logger.LogError(string)'</Item>
+               <Item>str</Item>
+               <Item>'str'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LogMessage(System.String)">
+            <Messages>
+             <Message Id="str" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'Logger.LogMessage(string)'</Item>
+               <Item>str</Item>
+               <Item>'str'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LogMessage(System.String,System.Windows.Media.Brush)">
+            <Messages>
+             <Message Id="str" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'Logger.LogMessage(string, Brush)'</Item>
+               <Item>str</Item>
+               <Item>'str'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LogWarning(System.String)">
+            <Messages>
+             <Message Id="str" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'Logger.LogWarning(string)'</Item>
+               <Item>str</Item>
+               <Item>'str'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="HC.Utils.Controls">
+        <Types>
+         <Type Name="CloseableTabItem">
+          <Members>
+           <Member Name="#.cctor()">
+            <Messages>
+             <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'CloseableTabItem'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ColumnChooser">
+          <Members>
+           <Member Name="#.ctor(System.Type,System.Windows.Controls.ListView,System.Windows.DataTemplate,System.Collections.Generic.Dictionary`2&lt;System.Type,System.Windows.Data.IValueConverter&gt;)">
+            <Messages>
+             <Message Id="t" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-26 04:53:20Z">
+              <Issue Name="MemberParameterMoreMeaningfulName">
+               <Item>'ColumnChooser.ColumnChooser(Type, ListView, DataTemplate, Dictionary&lt;Type, IValueConverter&gt;)'</Item>
+               <Item>'t'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#_columns">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ColumnChooser._columns'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#System.Windows.Markup.IComponentConnector.Connect(System.Int32,System.Object)">
+            <Messages>
+             <Message TypeName="InterfaceMethodsShouldBeCallableByChildTypes" Category="Microsoft.Design" CheckId="CA1033" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ColumnChooser'</Item>
+               <Item>'IComponentConnector.Connect(int, object)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ColumnChooser+ListColumn">
+          <Messages>
+           <Message TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034" Created="2011-05-20 23:04:45Z">
+            <Issue>
+             <Item>'ColumnChooser.ListColumn'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2011-05-26 04:53:20Z">
+              <Issue Name="BaseType">
+               <Item>'ColumnChooser.ListColumn.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Extras">
+          <Members>
+           <Member Name="#TextBox_PreviewDragOver(System.Object,System.Windows.DragEventArgs)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Extras.TextBox_PreviewDragOver(object, DragEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#TextBox_PreviewDrop(System.Object,System.Windows.DragEventArgs)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Extras.TextBox_PreviewDrop(object, DragEventArgs)'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.Format(System.String,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IFormatProviderAlternateString">
+               <Item>'string.Format(string, object)'</Item>
+               <Item>'Extras.TextBox_PreviewDrop(object, DragEventArgs)'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ListViewCustomComparer">
+          <Members>
+           <Member Name="#cols">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ListViewCustomComparer.cols'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'List&lt;string&gt;'</Item>
+               <Item>'ListViewCustomComparer.cols'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetSortColumnList()">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'List&lt;string&gt;'</Item>
+               <Item>'ListViewCustomComparer.GetSortColumnList()'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Created="2011-05-20 23:04:45Z">
+              <Issue Certainty="50">
+               <Item>'ListViewCustomComparer.GetSortColumnList()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#sortColumns">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ListViewCustomComparer.sortColumns'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ListViewSorter">
+          <Members>
+           <Member Name="#CustomSorterProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ListViewSorter.CustomSorterProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetIsListviewSortable(System.Windows.DependencyObject)">
+            <Messages>
+             <Message Id="Listview" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Listview</Item>
+               <Item>'ListViewSorter.GetIsListviewSortable(DependencyObject)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GridViewColumnHeaderClickedHandler(System.Object,System.Windows.RoutedEventArgs)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ListViewSorter.GridViewColumnHeaderClickedHandler(object, RoutedEventArgs)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'ListViewSorter.GridViewColumnHeaderClickedHandler(object, RoutedEventArgs)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IsListviewSortableProperty">
+            <Messages>
+             <Message Id="Listview" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Listview</Item>
+               <Item>'ListViewSorter.IsListviewSortableProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SetIsListviewSortable(System.Windows.DependencyObject,System.Boolean)">
+            <Messages>
+             <Message Id="Listview" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Listview</Item>
+               <Item>'ListViewSorter.SetIsListviewSortable(DependencyObject, bool)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Sort(System.String,System.Nullable`1&lt;System.ComponentModel.ListSortDirection&gt;)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ListViewSorter.Sort(string, ListSortDirection?)'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#SortBindingMemberProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ListViewSorter.SortBindingMemberProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PropertyGrid">
+          <Members>
+           <Member Name="#.cctor()">
+            <Messages>
+             <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#AutomaticlyExpandObjects">
+            <Messages>
+             <Message Id="Automaticly" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Automaticly</Item>
+               <Item>'PropertyGrid.AutomaticlyExpandObjects'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#AutomaticlyExpandObjectsProperty">
+            <Messages>
+             <Message Id="Automaticly" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Automaticly</Item>
+               <Item>'PropertyGrid.AutomaticlyExpandObjectsProperty'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.AutomaticlyExpandObjectsProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CategorizedProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.CategorizedProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#FilterProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.FilterProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IsReadOnlyProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-26 04:53:20Z">
+              <Issue>
+               <Item>'PropertyGrid.IsReadOnlyProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#NameWidthProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.NameWidthProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Properties">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.Properties'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Refresh()">
+            <Messages>
+             <Message Id="System.String.ToLower" TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'string.ToLower()'</Item>
+               <Item>'PropertyGrid.Refresh()'</Item>
+               <Item>'string.ToLower(CultureInfo)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowDescriptionProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.ShowDescriptionProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ShowPreviewProperty">
+            <Messages>
+             <Message TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'PropertyGrid.ShowPreviewProperty'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PropertyTemplateSelector">
+          <Members>
+           <Member Name="#FindDataTemplate(HC.Utils.Controls.Data.Property,System.Windows.FrameworkElement)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'PropertyTemplateSelector.FindDataTemplate(Property, FrameworkElement)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="HC.Utils.Controls.Data">
+        <Types>
+         <Type Name="ExpandableProperty">
+          <Members>
+           <Member Name="#Items">
+            <Accessors>
+             <Accessor Name="#get_Items()">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Created="2011-05-20 23:04:45Z">
+                <Issue>
+                 <Item>'ExpandableProperty.Items.get()'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Property">
+          <Messages>
+           <Message Id="Property" TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716" Created="2011-05-20 23:04:45Z">
+            <Issue Name="Type">
+             <Item>'Property'</Item>
+             <Item>Property</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(System.Object,System.ComponentModel.PropertyDescriptor)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Parameter">
+               <Item>'instance'</Item>
+               <Item>'ICustomTypeDescriptor'</Item>
+               <Item>'Property.Property(object, PropertyDescriptor)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#_instance">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Property._instance'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#_property">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Property._property'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CompareByCategoryThenByName">
+            <Messages>
+             <Message TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Property.CompareByCategoryThenByName'</Item>
+               <Item>'IComparer&lt;Property&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CompareByName">
+            <Messages>
+             <Message TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'Property.CompareByName'</Item>
+               <Item>'IComparer&lt;Property&gt;'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#IsWriteable">
+            <Messages>
+             <Message Id="Writeable" TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Writeable</Item>
+               <Item>'Property.IsWriteable'</Item>
+               <Item>Writable</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Value">
+            <Accessors>
+             <Accessor Name="#set_Value(System.Object)">
+              <Messages>
+               <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2011-05-20 23:04:45Z">
+                <Issue>
+                 <Item>'Property.Value.set(object)'</Item>
+                 <Item>'Exception'</Item>
+                </Issue>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Property+ByCategoryThenByNameComparer">
+          <Members>
+           <Member Name="#Compare(HC.Utils.Controls.Data.Property,HC.Utils.Controls.Data.Property)">
+            <Messages>
+             <Message Id="System.String.CompareTo(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'string.CompareTo(string)'</Item>
+               <Item>'Property.ByCategoryThenByNameComparer.Compare(Property, Property)'</Item>
+               <Item>'string.Compare(string, string, StringComparison)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'string.CompareTo(string)'</Item>
+               <Item>'Property.ByCategoryThenByNameComparer.Compare(Property, Property)'</Item>
+               <Item>'string.Compare(string, string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Property+ByNameComparer">
+          <Members>
+           <Member Name="#Compare(HC.Utils.Controls.Data.Property,HC.Utils.Controls.Data.Property)">
+            <Messages>
+             <Message Id="System.String.CompareTo(System.String)" TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'string.CompareTo(string)'</Item>
+               <Item>'Property.ByNameComparer.Compare(Property, Property)'</Item>
+               <Item>'string.Compare(string, string, StringComparison)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="PropertyCollection">
+          <Messages>
+           <Message TypeName="IdentifiersShouldNotHaveIncorrectSuffix" Category="Microsoft.Naming" CheckId="CA1711" Created="2011-05-20 23:04:45Z">
+            <Issue Name="TypeNoAlternate">
+             <Item>'PropertyCollection'</Item>
+             <Item>Collection</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#.ctor(System.Object,System.Boolean,System.Boolean,System.String)">
+            <Messages>
+             <Message Id="automaticly" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberParameter">
+               <Item>'PropertyCollection.PropertyCollection(object, bool, bool, string)'</Item>
+               <Item>automaticly</Item>
+               <Item>'automaticlyExpandObjects'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.String.ToLower" TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'string.ToLower()'</Item>
+               <Item>'PropertyCollection.PropertyCollection(object, bool, bool, string)'</Item>
+               <Item>'string.ToLower(CultureInfo)'</Item>
+              </Issue>
+              <Issue>
+               <Item>'string.ToLower()'</Item>
+               <Item>'PropertyCollection.PropertyCollection(object, bool, bool, string)'</Item>
+               <Item>'string.ToLower(CultureInfo)'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'PropertyCollection.PropertyCollection(object, bool, bool, string)'</Item>
+              </Issue>
+              <Issue Name="IsNullOrEmpty">
+               <Item>'string.operator ==(string, string)'</Item>
+               <Item>'PropertyCollection.PropertyCollection(object, bool, bool, string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="HC.Utils.Controls.TypeEditors">
+        <Types>
+         <Type Name="IntegerTypeEditor">
+          <Members>
+           <Member Name="#CountDown()">
+            <Messages>
+             <Message Id="CountDown" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Created="2011-05-20 23:04:45Z">
+              <Issue Name="MemberShouldBeDiscreteTerm">
+               <Item>CountDown</Item>
+               <Item>'IntegerTypeEditor.CountDown()'</Item>
+               <Item>Countdown</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.Parse(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IFormatProviderAlternate">
+               <Item>'int.Parse(string)'</Item>
+               <Item>'IntegerTypeEditor.CountDown()'</Item>
+               <Item>'int.Parse(string, IFormatProvider)'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IFormatProviderAlternateString">
+               <Item>'int.ToString()'</Item>
+               <Item>'IntegerTypeEditor.CountDown()'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#CountUp()">
+            <Messages>
+             <Message Id="System.Int32.Parse(System.String)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IFormatProviderAlternate">
+               <Item>'int.Parse(string)'</Item>
+               <Item>'IntegerTypeEditor.CountUp()'</Item>
+               <Item>'int.Parse(string, IFormatProvider)'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+             <Message Id="System.Int32.ToString" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IFormatProviderAlternateString">
+               <Item>'int.ToString()'</Item>
+               <Item>'IntegerTypeEditor.CountUp()'</Item>
+               <Item>'int.ToString(IFormatProvider)'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NumberTypeEditor`1">
+          <Members>
+           <Member Name="#Typ">
+            <Messages>
+             <Message Id="Typ" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Member">
+               <Item>Typ</Item>
+               <Item>'NumberTypeEditor&lt;T&gt;.Typ'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="System.Linq.Dynamic">
+        <Types>
+         <Type Name="ClassFactory">
+          <Members>
+           <Member Name="#.cctor()">
+            <Messages>
+             <Message TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ClassFactory'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateEquals(System.Reflection.Emit.TypeBuilder,System.Reflection.FieldInfo[])">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ClassFactory.GenerateEquals(TypeBuilder, FieldInfo[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateGetHashCode(System.Reflection.Emit.TypeBuilder,System.Reflection.FieldInfo[])">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ClassFactory.GenerateGetHashCode(TypeBuilder, FieldInfo[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateProperties(System.Reflection.Emit.TypeBuilder,System.Linq.Dynamic.DynamicProperty[])">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ClassFactory.GenerateProperties(TypeBuilder, DynamicProperty[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DynamicExpression">
+          <Members>
+           <Member Name="#ParseLambda`2(System.String,System.Object[])">
+            <Messages>
+             <Message TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'DynamicExpression.ParseLambda&lt;T, S&gt;(string, params object[])'</Item>
+               <Item>'Expression&lt;Func&lt;T, S&gt;&gt;'</Item>
+              </Issue>
+             </Message>
+             <Message Id="S" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue Name="MethodTypeParameterMoreMeaningfulName">
+               <Item>'DynamicExpression.ParseLambda&lt;T, S&gt;(string, params object[])'</Item>
+               <Item>'S'</Item>
+              </Issue>
+             </Message>
+             <Message Id="T" TypeName="IdentifiersShouldHaveCorrectPrefix" Category="Microsoft.Naming" CheckId="CA1715" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue Name="MethodTypeParameter">
+               <Item>'DynamicExpression.ParseLambda&lt;T, S&gt;(string, params object[])'</Item>
+               <Item>'S'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DynamicProperty">
+          <Members>
+           <Member Name="#Type">
+            <Messages>
+             <Message TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721" Created="2011-05-20 23:04:45Z">
+              <Issue Name="BaseType">
+               <Item>'DynamicProperty.Type'</Item>
+               <Item>'object.GetType()'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ExpressionParser">
+          <Members>
+           <Member Name="#FindPropertyOrField(System.Type,System.String,System.Boolean)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.FindPropertyOrField(Type, string, bool)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.GenerateEqual(Expression, Expression)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateNotEqual(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.GenerateNotEqual(Expression, Expression)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateStringConcat(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.GenerateStringConcat(Expression, Expression)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GenerateSubtract(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.GenerateSubtract(Expression, Expression)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#GetStaticMethod(System.String,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.GetStaticMethod(string, Expression, Expression)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#keywordIif">
+            <Messages>
+             <Message TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ExpressionParser.keywordIif'</Item>
+               <Item>iif</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#keywordIt">
+            <Messages>
+             <Message TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ExpressionParser.keywordIt'</Item>
+               <Item>it</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#keywordNew">
+            <Messages>
+             <Message TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802" Created="2011-05-20 23:04:45Z">
+              <Issue>
+               <Item>'ExpressionParser.keywordNew'</Item>
+               <Item>new</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ParseError(System.Int32,System.String,System.Object[])">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Created="2011-05-20 23:04:45Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'ExpressionParser.ParseError(int, string, params object[])'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#PromoteExpression(System.Linq.Expressions.Expression,System.Type,System.Boolean)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Parameter">
+               <Item>'expr'</Item>
+               <Item>'ConstantExpression'</Item>
+               <Item>'ExpressionParser.PromoteExpression(Expression, Type, bool)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ParseException">
+          <Messages>
+           <Message TypeName="ImplementStandardExceptionConstructors" Category="Microsoft.Design" CheckId="CA1032" Created="2011-05-20 23:04:45Z">
+            <Issue Name="MissingConstructor">
+             <Item>'ParseException'</Item>
+             <Item>private ParseException(SerializationInfo, StreamingContext)</Item>
+            </Issue>
+            <Issue Name="MissingConstructor">
+             <Item>'ParseException'</Item>
+             <Item>public ParseException()</Item>
+            </Issue>
+            <Issue Name="MissingConstructor">
+             <Item>'ParseException'</Item>
+             <Item>public ParseException(String)</Item>
+            </Issue>
+            <Issue Name="MissingConstructor">
+             <Item>'ParseException'</Item>
+             <Item>public ParseException(String, Exception)</Item>
+            </Issue>
+           </Message>
+           <Message TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237" Created="2011-05-20 23:04:45Z">
+            <Issue Certainty="95" Level="Error">
+             <Item>'ParseException'</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#ToString()">
+            <Messages>
+             <Message Id="System.String.Format(System.String,System.Object,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2011-05-20 23:04:45Z">
+              <Issue Name="IFormatProviderAlternateString">
+               <Item>'string.Format(string, object, object)'</Item>
+               <Item>'ParseException.ToString()'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Signature">
+          <Members>
+           <Member Name="#Equals(System.Object)">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2011-05-20 23:04:45Z">
+              <Issue Name="Parameter">
+               <Item>'obj'</Item>
+               <Item>'Signature'</Item>
+               <Item>'Signature.Equals(object)'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" />
+   <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
+    <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
+    <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>
+   </Rule>
+   <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
+    <Resolution Name="MemberShouldBeDiscreteTerm">The compound word '{0}' in member name {1} exists as a discrete term. If your usage is intended to be single word, case it as '{2}' or strip the first token entirely if it represents any sort of Hungarian notation.</Resolution>
+   </Rule>
+   <Rule TypeName="DisposableTypesShouldDeclareFinalizer" Category="Microsoft.Usage" CheckId="CA2216">
+    <Resolution Name="Default">Implement a finalizer or destructor on {0}.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+    <Resolution Name="Parameter">{0}, a parameter, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+    <Resolution Name="Default">Modify {0} to catch a more specific exception than {1} or rethrow the exception.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareReadOnlyMutableReferenceTypes" Category="Microsoft.Security" CheckId="CA2104">
+    <Resolution Name="Default">Remove the read-only designation from {0} or change the field to one that is an immutable reference type. If the reference type {1} is, in fact, immutable, exclude this message.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051">
+    <Resolution Name="Default">Because field {0} is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002">
+    <Resolution Name="Default">Change {0} in {1} to use Collection&lt;T&gt;, ReadOnlyCollection&lt;T&gt; or KeyedCollection&lt;K,V&gt;</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotNestGenericTypesInMemberSignatures" Category="Microsoft.Design" CheckId="CA1006">
+    <Resolution Name="Default">Consider a design where {0} doesn't nest generic type {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotRaiseReservedExceptionTypes" Category="Microsoft.Usage" CheckId="CA2201">
+    <Resolution Name="TooGeneric">{0} creates an exception of type {1}, an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+    <Resolution Name="MemberParameter">In member {0}, correct the casing of '{1}' in parameter name {2} by changing it to '{3}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+    <Resolution Name="Assembly">Correct the spelling of '{0}' in assembly name {1}.</Resolution>
+    <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+    <Resolution Name="MemberParameterMoreMeaningfulName">In method {0}, consider providing a more meaningful name than parameter name {1}.</Resolution>
+    <Resolution Name="MethodTypeParameterMoreMeaningfulName">On method {0}, consider providing a more meaningful name than generic type parameter name {1}.</Resolution>
+    <Resolution Name="Namespace">Correct the spelling of '{0}' in namespace name '{1}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldHaveCorrectPrefix" Category="Microsoft.Naming" CheckId="CA1715">
+    <Resolution Name="MethodTypeParameter">On method {0}, prefix generic type parameter name {1} with 'T'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707">
+    <Resolution Name="MemberParameter">In member {0}, remove the underscores from parameter name {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotHaveIncorrectSuffix" Category="Microsoft.Naming" CheckId="CA1711">
+    <Resolution Name="TypeNoAlternate">Rename type name {0} so that it does not end in '{1}'.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716">
+    <Resolution Name="Type">Rename type {0} so that it no longer conflicts with the reserved language keyword '{1}'. Using a reserved keyword as the name of a type makes it harder for consumers in other languages to use the type.</Resolution>
+   </Rule>
+   <Rule TypeName="ImplementStandardExceptionConstructors" Category="Microsoft.Design" CheckId="CA1032">
+    <Resolution Name="MissingConstructor">Add the following constructor to {0}: {1}.</Resolution>
+   </Rule>
+   <Rule TypeName="InitializeReferenceTypeStaticFieldsInline" Category="Microsoft.Performance" CheckId="CA1810">
+    <Resolution Name="Default">Initialize all static fields in {0} when those fields are declared and remove the explicit static constructor.</Resolution>
+   </Rule>
+   <Rule TypeName="InterfaceMethodsShouldBeCallableByChildTypes" Category="Microsoft.Design" CheckId="CA1033">
+    <Resolution Name="Default">Make {0} sealed (a breaking change if this class has previously shipped), implement the method non-explicitly, or implement a new method that exposes the functionality of {1} and is visible to derived classes.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+    <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkAssembliesWithNeutralResourcesLanguage" Category="Microsoft.Performance" CheckId="CA1824">
+    <Resolution Name="Default">Because assembly {0} contains a ResX-based resource file, mark it with the NeutralResourcesLanguage attribute, specifying the language of the resources within the assembly. This could improve lookup performance the first time a resource is retrieved.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkBooleanPInvokeArgumentsWithMarshalAs" Category="Microsoft.Interoperability" CheckId="CA1414">
+    <Resolution Name="Return">Add the MarshalAsAttribute to the return type of P/Invoke {0}. If the corresponding unmanaged return type is a 4-byte Win32 'BOOL', use MarshalAs(UnmanagedType.Bool). For a 1-byte C++ 'bool', use MarshalAs(UnmanagedType.U1).</Resolution>
+   </Rule>
+   <Rule TypeName="MarkISerializableTypesWithSerializable" Category="Microsoft.Usage" CheckId="CA2237">
+    <Resolution Name="Default">Add [Serializable] to {0} as this type implements ISerializable.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+    <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060">
+    <Resolution Name="Default">Because it is a P/Invoke method, {0} should be defined in a class named NativeMethods, SafeNativeMethods, or UnsafeNativeMethods.</Resolution>
+   </Rule>
+   <Rule TypeName="NestedTypesShouldNotBeVisible" Category="Microsoft.Design" CheckId="CA1034">
+    <Resolution Name="Default">Do not nest type {0}. Alternatively, change its accessibility so that it is not externally visible.</Resolution>
+   </Rule>
+   <Rule TypeName="NonConstantFieldsShouldNotBeVisible" Category="Microsoft.Usage" CheckId="CA2211">
+    <Resolution Name="Default">Consider making {0} non-public or a constant.</Resolution>
+   </Rule>
+   <Rule TypeName="PropertyNamesShouldNotMatchGetMethods" Category="Microsoft.Naming" CheckId="CA1721">
+    <Resolution Name="BaseType">The property name {0} is confusing given the existence of inherited method {1}. Rename or remove this property.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyCultureInfo" Category="Microsoft.Globalization" CheckId="CA1304">
+    <Resolution Name="Default">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify 'CultureInfo.CurrentCulture' as the 'CultureInfo' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify 'CultureInfo.InvariantCulture'.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+    <Resolution Name="IFormatProviderAlternate">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be based on input from the user, specify {3} as the 'IFormatProvider' parameter. Otherwise, if the result will based on input stored and accessed by software, such as when it is loaded from disk or from a database, specify {4}.</Resolution>
+    <Resolution Name="IFormatProviderAlternateString">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify {3} as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify {4}.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyStringComparison" Category="Microsoft.Globalization" CheckId="CA1307">
+    <Resolution Name="Default">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, such as when sorting a list of items for display in a list box, specify 'StringComparison.CurrentCulture' or 'StringComparison.CurrentCultureIgnoreCase' as the 'StringComparison' parameter. If comparing case-insensitive identifiers, such as file paths, environment variables, or registry keys and values, specify 'StringComparison.OrdinalIgnoreCase'. Otherwise, if comparing case-sensitive identifiers, specify 'StringComparison.Ordinal'.</Resolution>
+   </Rule>
+   <Rule TypeName="TestForEmptyStringsUsingStringLength" Category="Microsoft.Performance" CheckId="CA1820">
+    <Resolution Name="IsNullOrEmpty">Replace the call to {0} in {1} with a call to 'String.IsNullOrEmpty'.</Resolution>
+   </Rule>
+   <Rule TypeName="UseLiteralsWhereAppropriate" Category="Microsoft.Performance" CheckId="CA1802">
+    <Resolution Name="Default">Field {0} is declared as 'static readonly' but is initialized with a constant value '{1}'. Mark this field as 'const' instead.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePreferredTerms" Category="Microsoft.Naming" CheckId="CA1726">
+    <Resolution Name="Member">Replace the term '{0}' in member name {1} with the preferred alternate '{2}'.</Resolution>
+   </Rule>
+   <Rule TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024">
+    <Resolution Name="Default">Change {0} to a property if appropriate.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

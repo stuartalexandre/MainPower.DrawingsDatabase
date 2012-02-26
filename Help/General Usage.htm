@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>General Usage</Title>
+</HEAD>
+<BODY>
+
+<h1>Using the Drawings Database Program</h1>
+<h2>Search for a drawing</h2>
+Fill out the fields on the main search page (shown below).  You can have more than one search open at a time by selecting Tasks->Search Drawings.
+<br /><br />
+<img src="searchWindow.png" />
+
+
+<h2>Advanced searching</h2>
+If you need very complex search terms, you can use a execute Language Integrated Query (LINQ) directly to find what you are looking for.  Eg the query Number.Contains("1234") will search for any drawing which has the number 1234 in the drawing number.  
+<br /><br />
+At this stage this feature is temporary and is used primarily for testing purposes.
+<br />
+<br/>
+<img src="advcSearchWindow.png" />
+
+<h2>Add a drawing (Tasks->Add Drawing)</h2>
+Use this to add a new drawing to the database (to do this you must have write permissions to the database).  The drawing number will be automatically populated with the next available drawing number.  Fill out remaining fields as necessary, and click Add Drawing.  You must enter a unique Drawing Number and Sheet Number combination before adding the drawing.
+
+<h2>Edit a drawing</h2>
+Search for the drawing you wish to edit in the database, and then double click the entry in the list to edit the drawing.
+
+<h2>Delete a drawing</h2>
+Deleting a drawing should not normally be necessary, but can be done by right clicking an entry in the search results list, whilst pressing the shift key.  A previously hidden &quot;Delete&quot; menu item will be in the list, click this to delete the drawing.
+
+<h2>Open a Drawing</h2>
+Search for the drawing that you want to open, then right click the entry in the list and select Open Drawing.  The default viewer for the drawing will be opened.
+
+<h2>Printing Search Results</h2>
+Select Tasks->Print Search Results, and you will be presented with a print preview of the results.  The preview will take into account the columns and widths that are visible in the search results view.  You can choose from A3/A4 and Portrait/Landscape by going to Options->GUI.  Remember: You must select the correct paper in the printer for the paper size you have specified, otherwise the printed result will not appear as expected.
+
+
+<h2>Database Options (Options->Database)</h2>
+<i>Database Connection String</i><br />
+This is the connection string to the database.  If the database ever moves location you will need to update this to reflect that change.<br />
+
+<h2>Raw Database Viewer (Tasks->Raw Database Viewer)</h2>
+The raw database viewer shows the database as it is stored with no (not much) data manipulation.  This is used mainly for testing and debugging purposes.
+
+<h2>Sub Browser (Tasks->Sub Browser)</h2>
+The Substation Browser is a quick way to view all the drawings for a substation.  It works by searching for the substation's name in the project title, combined with the Zone Substation category.  The text shown is the drawing number followed by the Title Line 1 field of the drawing.  Double-click an entry to open it in AutoCAD. 
+</BODY>
+</HTML>

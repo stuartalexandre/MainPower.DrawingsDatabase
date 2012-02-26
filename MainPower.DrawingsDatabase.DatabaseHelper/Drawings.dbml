@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Drawings" Class="DrawingsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Drawings" Member="Drawings">
+    <Type Name="Drawing">
+      <Column Name="ID" Member="Id" Storage="_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsReadOnly="true" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CATEGORY" Member="Category" Storage="_CATEGORY" Type="DrawingCategory" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="STATUS" Member="Status" Storage="_STATUS" Type="DrawingStatus" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CONSULTANT" Member="Consultant" Storage="_CONSULTANT" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="FILENAME" Member="FileName" Storage="_FILENAME" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="SCALE" Member="Scale" Storage="_SCALE" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="LEGACY_DRAWING" Member="LegacyDrawing" Storage="_LEGACY_DRAWING" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="NUMBER" Member="Number" Storage="_NUMBER" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="PROJECT_TITLE" Member="ProjectTitle" Storage="_PROJECT_TITLE" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="TITLE_LINE_1" Member="TitleLine1" Storage="_TITLE_LINE_1" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ELECTRONIC" Member="Electronic" Storage="_ELECTRONIC" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TITLE_LINE_2" Member="TitleLine2" Storage="_TITLE_LINE_2" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="TITLE_LINE_3" Member="TitleLine3" Storage="_TITLE_LINE_3" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="TITLE_LINE_4" Member="TitleLine4" Storage="_TITLE_LINE_4" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="SHEET" Member="Sheet" Storage="_SHEET" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SHEET_SIZE" Member="SheetSize" Storage="_SHEET_SIZE" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SHEET_REVISION" Member="SheetRevision" Storage="_SHEET_REVISION" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DRAWN_BY" Member="DrawnBy" Storage="_DRAWN_BY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_DATE" Member="DrawnDate" Storage="_DRAWN_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CHECKED_BY" Member="CheckedBy" Storage="_CHECKED_BY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CHECKED_DATE" Member="CheckedDate" Storage="_CHECKED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="APPRV_BY" Member="ApprovedBy" Storage="_APPRV_BY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_DATE" Member="ApprovedDate" Storage="_APPRV_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="REV_A" Member="RevA" Storage="_REV_A" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="REV_B" Member="RevB" Storage="_REV_B" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="REV_C" Member="RevC" Storage="_REV_C" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="REV_D" Member="RevD" Storage="_REV_D" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="REV_E" Member="RevE" Storage="_REV_E" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="REV_F" Member="RevF" Storage="_REV_F" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="REV_G" Member="RevG" Storage="_REV_G" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_A" Member="DrawnByRevA" Storage="_DRAWN_BY_A" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_B" Member="DrawnByRevB" Storage="_DRAWN_BY_B" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_C" Member="DrawnByRevC" Storage="_DRAWN_BY_C" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_D" Member="DrawnByRevD" Storage="_DRAWN_BY_D" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_E" Member="DrawnByRevE" Storage="_DRAWN_BY_E" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_F" Member="DrawnByRevF" Storage="_DRAWN_BY_F" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DRAWN_BY_G" Member="DrawnByRevG" Storage="_DRAWN_BY_G" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="DATE_A" Member="DateRevA" Storage="_DATE_A" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_B" Member="DateRevB" Storage="_DATE_B" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_C" Member="DateRevC" Storage="_DATE_C" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_D" Member="DateRevD" Storage="_DATE_D" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_E" Member="DateRevE" Storage="_DATE_E" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_F" Member="DateRevF" Storage="_DATE_F" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DATE_G" Member="DateRevG" Storage="_DATE_G" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DESCRIPTION_A" Member="DescriptionRevA" Storage="_DESCRIPTION_A" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="DESCRIPTION_B" Member="DescriptionRevB" Storage="_DESCRIPTION_B" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="DESCRIPTION_C" Member="DescriptionRevC" Storage="_DESCRIPTION_C" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="DESCRIPTION_D" Member="DescriptionRevD" Storage="_DESCRIPTION_D" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="DESCRIPTION_E" Member="DescriptionRevE" Storage="_DESCRIPTION_E" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="DESCRIPTION_F" Member="DescriptionRevF" Storage="_DESCRIPTION_F" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="DESCRIPTION_G" Member="DescriptionRevG" Storage="_DESCRIPTION_G" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="APPRV_BY_A" Member="ApprovedByRevA" Storage="_APPRV_BY_A" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_BY_B" Member="ApprovedByRevB" Storage="_APPRV_BY_B" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_BY_C" Member="ApprovedByRevC" Storage="_APPRV_BY_C" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_BY_D" Member="ApprovedByRevD" Storage="_APPRV_BY_D" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_BY_E" Member="ApprovedByRevE" Storage="_APPRV_BY_E" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_BY_F" Member="ApprovedByRevF" Storage="_APPRV_BY_F" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="APPRV_BY_G" Member="ApprovedByRevG" Storage="_APPRV_BY_G" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="COMMENTS" Member="Comments" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

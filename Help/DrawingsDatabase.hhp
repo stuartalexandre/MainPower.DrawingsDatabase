@@ -1,0 +1,22 @@
+[OPTIONS]
+Auto Index=Yes
+Compatibility=1.1 or later
+Compiled file=DrawingsDatabase.chm
+Contents file=Table of Contents.hhc
+Default topic=User Guide.htm
+Display compile progress=No
+Language=0x1409 English (New Zealand)
+Title=MainPower Drawings Database User Guide
+
+
+[FILES]
+Important Information.htm
+Release Notes.htm
+User Guide.htm
+General Usage.htm
+Installing.htm
+Using from AutoCAD.htm
+Feedback.htm
+
+[INFOTYPES]
+

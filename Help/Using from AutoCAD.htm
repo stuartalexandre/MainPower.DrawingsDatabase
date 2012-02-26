@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>Using from AutoCAD</Title>
+</HEAD>
+<BODY>
+
+<h1>Using the AutoCAD Interface</h1>
+<b>Note:</b>  Before you can use the AutoCAD interface, you must first install the AutoCAD plugin.  You can do this by selecting Tasks->AutoCAD Plugin from the Drawings Database program.
+<br/>
+<br />
+You can update drawing title blocks from the database and vice-versa using the AutoCAD interface to the database, which is implemented via the AutoCadPlugin.dll file.  The plugin exposes the following functions to AutoCAD:
+<ul>
+	<li>ddbget - Pull data from the database into a selected block</li>
+	<li>ddbgetd - Pull data from the database into all blocks in the drawing</li>
+	<li>ddbgetl - Pull data from the database into all blocks in the current layout</li>
+	<li>ddbput - Put data from the selected block into the database</li>
+	<li>ddbputd - Put data from all the blocks in the drawing into the database</li>
+	<li>ddbputl - Put data from all the blocks in the current layout into the database</li>
+	<li>ddbsettings - Edit various settings used by the library</li>
+	<li>ddbsearch - Show the search and editing dialog for the database</li>
+	<li>ddbabout - Shows the about information dialog</li>
+	<li>ddbadd - Manually add a drawing into the database</li>
+	<li>ddbmorerev - Shift the revisions down so that b revision occupies a  revision and so on (a drops off the bottom and is lost)</li>
+	<li>ddbnum - Autonumber a title block and save</li>
+	<li>ddbedit - Opens a dialog allowing editing of drawing attributes, the saves to the database and updates the title block.</li>
+	<li>ddbversion - Prints the database version</li>
+</ul>
+
+</BODY>
+</HTML>

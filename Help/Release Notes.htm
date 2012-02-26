@@ -1,0 +1,378 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<Title>Release Notes</Title>
+<style>
+table {
+	border-color:gray;
+	border-style:solid;
+	border-width:1px;
+}
+td {
+	border-color:gray;
+	border-style:solid;
+	border-width:1px;
+}
+</style>
+</HEAD>
+<BODY>
+<h1>Release Notes</h1>
+
+<h2>Version 0.9.1 - 22/02/2012</h2>
+Release for preview and feedback only. 
+
+<table cellspacing="0">
+                <tr>
+		<td>Added</td>
+		<td>Generation drawing category</td>
+	</tr>
+</table>
+
+<h2>Version 0.9 - 5/10/2011</h2>
+Release for preview and feedback only. 
+
+<table cellspacing="0">
+                <tr>
+		<td>Added</td>
+		<td>ddbversion command</td>
+	</tr>
+	<tr>
+		<td>Changed</td>
+		<td>Defulat DB connection string to facilitate server move</td>
+	</tr>
+	<tr>
+		<td>Changed</td>
+		<td>Date formats to datetime from datetime2 to facilitate server move</td>
+	</tr>
+	<tr>
+		<td>Changed</td>
+		<td>ddbeul command is now ddbedit</td>
+	</tr>
+                <tr>
+		<td>Removed</td>
+		<td>ddbeditl command</td>
+	</tr>
+
+</table>
+
+<h2>Version 0.8.1 - 30/09/2011</h2>
+Release for preview and feedback only. 
+
+<table cellspacing="0">
+	<tr>
+		<td>Added</td>
+		<td>Option to search Legacy Drawing Numbers</td>
+	</tr>
+	<tr>
+		<td>Added</td>
+		<td>Option to save search columns layout</td>
+	</tr>
+	<tr>
+		<td>Added</td>
+		<td>AutoCAD command for editing extended drawing attributes in the database (ddbeditl)</td>
+	</tr>
+                <tr>
+		<td>Added</td>
+		<td>AutoCAD command for editing and updating extended drawing attributes in the database (ddbeul)</td>
+	</tr>
+
+</table>
+
+<h2>Version 0.8 - 05/09/2011</h2>
+Release for preview and feedback only. 
+
+<table cellspacing="0">
+	<tr>
+		<td>Added</td>
+		<td>Electronic field filters to search page</td>
+	</tr>
+	<tr>
+		<td>Removed</td>
+		<td>AutoCADLauncherPath Setting - this is now redundant as using shell exec to open drawings</td>
+	</tr>
+</table>
+<h2>Version 0.7 - 16/06/2011</h2>
+Release for preview and feedback only. 
+
+<table cellspacing="0">
+	<tr>
+		<td>Added</td>
+		<td>Support for AutoCAD 2012</td>
+	</tr>
+	<tr>
+		<td>Added</td>
+		<td>Support for x64 Windows</td>
+	</tr>
+	<tr>
+		<td>Added</td>
+		<td>Show in explorer option for search results</td>
+	</tr>
+	<tr>
+		<td>Changed</td>
+		<td>Help to Microsoft help format (chm)</td>
+	</tr>
+	<tr>
+		<td>Changed</td>
+		<td>Improved print preview functionality</td>
+	</tr>
+	<tr>
+		<td>Fixed</td>
+		<td>Minor UI and documentation errors</td>
+	</tr>
+</table>
+<h2>Version 0.6 - 24/5/2011</h2>
+Release for preview and feedback only. 
+
+<table cellspacing="0">
+<tr>
+<td>Added</td>
+<td>Clear button on search page</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Comments field to the database for general comments</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>First and last page buttons in the Raw View</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Remove drawing record feature (via gui)</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Minor Improvements to column chooser (TypeConverter for Bindings)</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Printing functionality for search results (A3/A4 P/L)</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Edit drawing mode so that it requires explicit action to enable editing of fields.  Designed to encourage editing in autocad instead.</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>All Drawing object property names so that they are compliant with .net naming convention (database field names remain the same).</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Ignore Autocad autosave filenames (.sv$)</td>
+</tr>
+<tr>
+<td>Removed</td>
+<td>'Working' status</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Enable printing of results</td>
+</tr>
+</table>
+
+<h2>Version 0.5.1 - 15/5/2011</h2>
+Release for preview and feedback only.  Please uninstall all previous versions before installing.
+
+<table cellspacing="0">
+<tr>
+<td>Changed</td>
+<td>To manual assembly versioning due to bug in .net framework which caused GUI crash when loaded from AutoCAD</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Refactored whole bunch of code out to Utils lib</td>
+</tr>
+</table>
+
+<h2>Version 0.5.0 - 13/5/2011</h2>
+Release for preview and feedback only.  Version 0.4.4 and below will no longer work due to database changes.
+
+<table cellspacing="0">
+<tr>
+<td>Added</td>
+<td>Dynamic title block to allowed title blocks</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Sheet size synchronizing (including dynamic and anonymous blocks)</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Selectable columns in search window</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Sortable columns in search window</td>
+</tr>
+<tr>
+<td>Fixed</td>
+<td>Minor UI bugs</td>
+</tr>
+<tr>
+<td>Fixed</td>
+<td>Drawing not found error in AutoCAD Plugin</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>More database fields renamed for consistency
+</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Refactor useful code out to Utils library</td>
+</tr>
+</table>
+
+<h2>Version 0.4.4 - 12/05/2011</h2>
+Release for preview and feedback only.  Version 0.3 and below will no longer work due to database changes.
+<table cellspacing="0">
+<tr>
+<td>Added</td>
+<td>Substation Browser</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Ability to add/remove AutoCAD plugin from GUI instead of reg file</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Installer</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Help</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Drawing auto number (automatically determine next free drawing number)</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>ELECTRONIC, LEGACY_DRAWING, CONSULTANT fields in database</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Various field names in database to make them more consistent with one another</td>
+</tr>
+<tr>
+<td>Fixed</td>
+<td>Only get/put data from blocks with correct name</td>
+</tr>
+</table>
+
+<h2>Version 0.3 - 17/02/2011</h2>
+Release for preview and feedback only
+<table cellspacing="0">
+<tr>
+<td>Added</td>
+<td>Commands to update/fetch all the blocks in a layout or a drawing</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Raw, unfiltered database viewer (non editable)</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Database fully populated out to Revision G</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Extensive code refactoring</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Improve error handling</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Add remaining custom fields</td>
+</tr>
+</table>
+
+<h2>Version 0.2 - 17/12/2010</h2>
+Release for preview and feedback only.  Version 0.1 will no longer work due to database changes.
+
+<table cellspacing="0">
+<tr>
+<td>Changed</td>
+<td>Changed from using QueryBuilder API to Dynamic LINQ</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Using a page layout/navigation system for searches to allow going back to previous searches
+</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Using LINQ to SQL instead of manual queries</td>
+</tr>
+<tr>
+<td>Changed</td>
+<td>Changed database data type for dates to datetime2 type</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Really advanced search expander, which allow entering text LINQs directly</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Add drawing functionality</td>
+</tr>
+<tr>
+<td>Added</td>
+<td>Edit drawing functionality</td>
+</tr>
+<tr>
+<td>Removed</td>
+<td>Advanced search expander, this will be reinstated later</td>
+</tr>
+<tr>
+<td>Issue</td>
+<td>Full text searching not supported by LINQ to SQL so this will not be implemented</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Populate database columns out to revision G</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Improve error handling</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Reinstate Advanced search</td>
+</tr>
+</table>
+
+<h2>Version 0.1 - 23/11/2010</h2>
+Initial Release for preview and feedback only; allows basic searching, Acad get/put commands fully functional.  Database only supports up to revision A at present.
+
+<table cellspacing="0">
+<tr>
+<td>Issue</td>
+<td>Strict Search check box is not functional</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Populate database columns out to revision G</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Improve error handling</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Add Drawing function</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Edit Drawing function</td>
+</tr>
+<tr>
+<td>Todo</td>
+<td>Add full text searching (Google style search)</td>
+</tr>
+</table>
+</BODY>
+</HTML>
