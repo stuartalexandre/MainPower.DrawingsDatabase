@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MainPower.DrawingsDatabase.DatabaseHelper;
-using System.Linq.Dynamic;
+using MainPower.DrawingsDatabase.Gui.Properties;
 using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 
 namespace MainPower.DrawingsDatabase.Gui
@@ -19,7 +12,7 @@ namespace MainPower.DrawingsDatabase.Gui
     /// <summary>
     /// Interaction logic for SubBrowser.xaml
     /// </summary>
-    public sealed partial class SubBrowser : Window
+    public sealed partial class SubBrowser
     {
         public SubBrowser()
         {
@@ -29,10 +22,10 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string[] subs = Properties.Settings.Default.Substations.Split(new char[]{';'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] subs = Settings.Default.Substations.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
             foreach (string str in subs)
             {
-                TreeViewItem tvi = new TreeViewItem();
+                var tvi = new TreeViewItem();
                 tvi.Header = str;
                 treeView1.Items.Add(tvi);
             }
@@ -41,19 +34,20 @@ namespace MainPower.DrawingsDatabase.Gui
             {
                 DrawingsDataContext dc = DBCommon.NewDC;
 
-                var drawings = from d in dc.Drawings where d.ProjectTitle.Contains((string)tvi.Header) select d;
+                IQueryable<Drawing> drawings = from d in dc.Drawings
+                                               where d.ProjectTitle.Contains((string) tvi.Header)
+                                               select d;
 
                 foreach (MPDrawing d in drawings)
                 {
                     tvi.Items.Add(d);
                 }
-                
             }
         }
 
         private void treeView1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MPDrawing d = treeView1.SelectedItem as MPDrawing;
+            var d = treeView1.SelectedItem as MPDrawing;
 
             if (d != null)
             {
@@ -65,7 +59,7 @@ namespace MainPower.DrawingsDatabase.Gui
                 {
                     DBCommon.OpenAutoCadDrawing(d.FileName);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }

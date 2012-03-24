@@ -1,49 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
-using MainPower.DrawingsDatabase.DatabaseHelper.Properties;
-using System.Collections;
 using System.Diagnostics;
-using System.IO;
-using System.Linq.Expressions;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace MainPower.DrawingsDatabase.DatabaseHelper
 {
     /// <summary>
     /// Contains methods for communicating with the drawings database.
     /// </summary>
-    public  static class DBCommon
+    public static class DBCommon
     {
-       public static DrawingsDataContext NewDC { get { return new DrawingsDataContext(); } }
+        public static DrawingsDataContext NewDC
+        {
+            get { return new DrawingsDataContext(); }
+        }
 
         /// <summary>
         /// Gets the next free drawing number
         /// </summary>
         /// <returns></returns>
-       public static string GetNextDrawingNumber()
-       {
-           int nextNum = 0;
+        public static string GetNextDrawingNumber()
+        {
+            int nextNum = 0;
 
-           DrawingsDataContext dc = NewDC;
-           //couldnt really work out how to do this with linq, this is nicer anyways
-           var dwgs = dc.ExecuteQuery<Drawing>("select top 1 * from Drawings where (CONSULTANT='' OR CONSULTANT IS NULL) AND ISNUMERIC(NUMBER) != 0 order by  CAST(NUMBER AS INT) desc");
+            DrawingsDataContext dc = NewDC;
+            //couldnt really work out how to do this with linq, this is nicer anyways
+            IEnumerable<Drawing> dwgs =
+                dc.ExecuteQuery<Drawing>(
+                    "select top 1 * from Drawings where (CONSULTANT='' OR CONSULTANT IS NULL) AND ISNUMERIC(NUMBER) != 0 order by  CAST(NUMBER AS INT) desc");
 
-           try
-           {
-               Drawing d2 = dwgs.First();
-               nextNum = int.Parse(d2.Number, CultureInfo.InvariantCulture) + 1;
-           }
-           catch
-           {
-               nextNum++;
-           }
+            try
+            {
+                Drawing d2 = dwgs.First();
+                nextNum = int.Parse(d2.Number, CultureInfo.InvariantCulture) + 1;
+            }
+            catch
+            {
+                nextNum++;
+            }
 
-           if (nextNum < 4000) nextNum = 4000; //start series at 4000
-           return nextNum.ToString(CultureInfo.InvariantCulture);
-       }
+            if (nextNum < 4000) nextNum = 4000; //start series at 4000
+            return nextNum.ToString(CultureInfo.InvariantCulture);
+        }
 
         public static void DeleteDrawing(int id)
         {
@@ -53,42 +54,6 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             dc.SubmitChanges();
         }
 
-        #region LINQ AndAlso/OrElse Extension Methods
-
-        public static Func<T, bool> AndAlso<T>(this Func<T, bool> predicate1, Func<T, bool> predicate2)
-        {
-            return arg => predicate1(arg) && predicate2(arg);
-        }
-
-        public static Func<T, bool> OrElse<T>(this Func<T, bool> predicate1, Func<T, bool> predicate2)
-        {
-            return arg => predicate1(arg) || predicate2(arg);
-        }
-
-        public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
-        {
-            var param = Expression.Parameter(typeof(T), "x");
-            var body = Expression.AndAlso(
-                    Expression.Invoke(left, param),
-                    Expression.Invoke(right, param)
-                );
-            var lambda = Expression.Lambda<Func<T, bool>>(body, param);
-            return lambda;
-        }
-
-        public static Expression<Func<T, bool>> OrElse<T>(this Expression<Func<T, bool>> left, Expression<Func<T, bool>> right)
-        {
-            var param = Expression.Parameter(typeof(T), "x");
-            var body = Expression.OrElse(
-                    Expression.Invoke(left, param),
-                    Expression.Invoke(right, param)
-                );
-            var lambda = Expression.Lambda<Func<T, bool>>(body, param);
-            return lambda;
-        }
-
-        #endregion
-        
         /// <summary>
         /// Determine if a drawing number/sheet number combo exists (for new drawings)
         /// </summary>
@@ -99,11 +64,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         {
             if (number == null || sheet == null)
                 return true;
-            var res = from d in NewDC.Drawings where d.Number == number && d.Sheet == sheet select d;
-            if (res.Count() == 0)
-                return false;
-            else
-                return true;
+            IQueryable<Drawing> res = from d in NewDC.Drawings where d.Number == number && d.Sheet == sheet select d;
+            return res.Any();
         }
 
         /// <summary>
@@ -117,11 +79,10 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         {
             if (number == null || sheet == null)
                 return true;
-            var res = from d in NewDC.Drawings where d.Number == number && d.Sheet == sheet && d.Id != id select d;
-            if (res.Count() == 0)
-                return false;
-            else
-                return true;
+            IQueryable<Drawing> res = from d in NewDC.Drawings
+                                      where d.Number == number && d.Sheet == sheet && d.Id != id
+                                      select d;
+            return res.Any();
         }
 
         /// <summary>
@@ -131,7 +92,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         /// <returns></returns>
         public static Drawing CreateDefaultDrawing()
         {
-            Drawing d = new Drawing();
+            var d = new Drawing();
             d.DrawnDate = DateTime.Now;
             d.Number = GetNextDrawingNumber();
             d.Sheet = "1";
@@ -146,13 +107,49 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             //if (!File.Exists(launcherPath)) throw new FileNotFoundException("Cannot find autocad launcher!");
             if (string.IsNullOrEmpty(fileName))
                 throw new FileNotFoundException("There is no file associated with this drawing.");
-            if (!File.Exists(fileName)) 
+            if (!File.Exists(fileName))
                 throw new FileNotFoundException("Cannot find the drawing: " + fileName);
 
             //Process.Start(launcherPath, "/O + \"" + fileName + "\"");
             Process.Start(fileName);
         }
 
-        
+        #region LINQ AndAlso/OrElse Extension Methods
+
+        public static Func<T, bool> AndAlso<T>(this Func<T, bool> predicate1, Func<T, bool> predicate2)
+        {
+            return arg => predicate1(arg) && predicate2(arg);
+        }
+
+        public static Func<T, bool> OrElse<T>(this Func<T, bool> predicate1, Func<T, bool> predicate2)
+        {
+            return arg => predicate1(arg) || predicate2(arg);
+        }
+
+        public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> left,
+                                                           Expression<Func<T, bool>> right)
+        {
+            ParameterExpression param = Expression.Parameter(typeof (T), "x");
+            BinaryExpression body = Expression.AndAlso(
+                Expression.Invoke(left, param),
+                Expression.Invoke(right, param)
+                );
+            Expression<Func<T, bool>> lambda = Expression.Lambda<Func<T, bool>>(body, param);
+            return lambda;
+        }
+
+        public static Expression<Func<T, bool>> OrElse<T>(this Expression<Func<T, bool>> left,
+                                                          Expression<Func<T, bool>> right)
+        {
+            ParameterExpression param = Expression.Parameter(typeof (T), "x");
+            BinaryExpression body = Expression.OrElse(
+                Expression.Invoke(left, param),
+                Expression.Invoke(right, param)
+                );
+            Expression<Func<T, bool>> lambda = Expression.Lambda<Func<T, bool>>(body, param);
+            return lambda;
+        }
+
+        #endregion
     }
 }

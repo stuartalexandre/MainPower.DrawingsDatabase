@@ -1,33 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MainPower.DrawingsDatabase.DatabaseHelper;
-using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
-using HC.Utils.Controls;
-using System.Globalization;
-using System.Reflection;
-using System.IO;
 using HC.Utils;
+using HC.Utils.Controls;
+using MainPower.DrawingsDatabase.DatabaseHelper;
 using MainPower.DrawingsDatabase.Gui.Properties;
+using Microsoft.Win32;
 
 namespace MainPower.DrawingsDatabase.Gui
 {
     /// <summary>
     /// Interaction logic for PageWindow.xaml
     /// </summary>
-    public sealed partial class MainWindow : Window
+    public sealed partial class MainWindow
     {
         private int _searchNumber = 1;
-     
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,10 +33,10 @@ namespace MainPower.DrawingsDatabase.Gui
         /// <param name="args"></param>
         private void CloseTab(object source, RoutedEventArgs args)
         {
-            TabItem tabItem = args.Source as TabItem;
+            var tabItem = args.Source as TabItem;
             if (tabItem != null)
             {
-                TabControl tabControl = tabItem.Parent as TabControl;
+                var tabControl = tabItem.Parent as TabControl;
                 if (tabControl != null)
                     tabControl.Items.Remove(tabItem);
             }
@@ -53,9 +46,10 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             try
             {
-                System.Diagnostics.Process.Start(Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName + "\\" + "DrawingsDatabase.chm");
+                Process.Start(Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName + "\\" +
+                              "DrawingsDatabase.chm");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
@@ -71,11 +65,11 @@ namespace MainPower.DrawingsDatabase.Gui
         /// </summary>
         private void AddSearchTab()
         {
-            CloseableTabItem cti = new CloseableTabItem();
+            var cti = new CloseableTabItem();
             cti.Header = "New Search " + _searchNumber.ToString(CultureInfo.CurrentCulture);
             _searchNumber++;
-            Grid g = new Grid();
-            Frame f = new Frame();
+            var g = new Grid();
+            var f = new Frame();
             f.Navigate(new SearchPage());
             g.Children.Add(f);
 
@@ -113,22 +107,22 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             try
             {
-                string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
+                const string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
 
                 //DESCRIPTION
-                string description = "Drawings database helper";
+                const string description = "Drawings database helper";
                 //LOADER
                 string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
                 //LOADCTRLS
-                int loadCtrls = 2;
+                const int loadCtrls = 2;
                 //MANAGED
-                int managed = 1;
+                const int managed = 1;
 
 
-                Microsoft.Win32.Registry.SetValue(rootPath, "DESCRIPTION", description);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADER", loader);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, Microsoft.Win32.RegistryValueKind.DWord);
-                Microsoft.Win32.Registry.SetValue(rootPath, "MANAGED", managed, Microsoft.Win32.RegistryValueKind.DWord);
+                Registry.SetValue(rootPath, "DESCRIPTION", description);
+                Registry.SetValue(rootPath, "LOADER", loader);
+                Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, RegistryValueKind.DWord);
+                Registry.SetValue(rootPath, "MANAGED", managed, RegistryValueKind.DWord);
             }
             catch (Exception ex)
             {
@@ -146,7 +140,8 @@ namespace MainPower.DrawingsDatabase.Gui
             try
             {
                 //TODO: test this remove plugin code
-                Microsoft.Win32.Registry.CurrentUser.DeleteSubKey("Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB");
+                Registry.CurrentUser.DeleteSubKey(
+                    "Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB");
             }
             catch (Exception ex)
             {
@@ -162,14 +157,14 @@ namespace MainPower.DrawingsDatabase.Gui
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //event handler to tell the parent tab control to close the tab
-            this.AddHandler(CloseableTabItem.CloseTabEvent, new RoutedEventHandler(this.CloseTab));
+            AddHandler(CloseableTabItem.CloseTabEvent, new RoutedEventHandler(CloseTab));
             AddSearchTab();
         }
 
         private void mnuPrintResults_Click(object sender, RoutedEventArgs e)
         {
-            Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
-            SearchPage sp = f.Content as SearchPage;
+            var f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
+            var sp = f.Content as SearchPage;
             new PrintPreview(sp.CreateXps, Settings.Default.PageSize, Settings.Default.PageOrientation).ShowDialog();
         }
 
@@ -178,7 +173,8 @@ namespace MainPower.DrawingsDatabase.Gui
             try
             {
                 //TODO: test this remove plugin code
-                Microsoft.Win32.Registry.CurrentUser.DeleteSubKey("Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB");
+                Registry.CurrentUser.DeleteSubKey(
+                    "Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB");
             }
             catch (Exception ex)
             {
@@ -190,22 +186,22 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             try
             {
-                string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
+                const string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
 
                 //DESCRIPTION
-                string description = "Drawings database helper";
+                const string description = "Drawings database helper";
                 //LOADER
                 string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
                 //LOADCTRLS
-                int loadCtrls = 2;
+                const int loadCtrls = 2;
                 //MANAGED
-                int managed = 1;
+                const int managed = 1;
 
 
-                Microsoft.Win32.Registry.SetValue(rootPath, "DESCRIPTION", description);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADER", loader);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, Microsoft.Win32.RegistryValueKind.DWord);
-                Microsoft.Win32.Registry.SetValue(rootPath, "MANAGED", managed, Microsoft.Win32.RegistryValueKind.DWord);
+                Registry.SetValue(rootPath, "DESCRIPTION", description);
+                Registry.SetValue(rootPath, "LOADER", loader);
+                Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, RegistryValueKind.DWord);
+                Registry.SetValue(rootPath, "MANAGED", managed, RegistryValueKind.DWord);
             }
             catch (Exception ex)
             {
@@ -215,10 +211,10 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void mnuColumnsLayoutSave_Click(object sender, RoutedEventArgs e)
         {
-            CloseableTabItem cti = tabControl1.SelectedItem as CloseableTabItem;
-            Grid g = cti.Content as Grid;
-            Frame f = g.Children[0] as Frame;
-            SearchPage sp = f.Content as SearchPage;
+            var cti = tabControl1.SelectedItem as CloseableTabItem;
+            var g = cti.Content as Grid;
+            var f = g.Children[0] as Frame;
+            var sp = f.Content as SearchPage;
 
             sp.PersistColumnLayout();
         }
@@ -227,6 +223,5 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             AddSearchTab();
         }
-        
     }
 }

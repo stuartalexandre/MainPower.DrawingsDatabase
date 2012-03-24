@@ -1,49 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
-using System.IO;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Windows;
 using MainPower.DrawingsDatabase.DatabaseHelper;
+using Microsoft.Win32;
 using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 
 namespace MainPower.DrawingsDatabase.DrawingNameGrabber
 {
-
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
+        private readonly ObservableCollection<DrawingInfo> _drawings = new ObservableCollection<DrawingInfo>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private ObservableCollection<DrawingInfo> _drawings = new ObservableCollection<DrawingInfo>();
-
-        public ObservableCollection<DrawingInfo> Drawings { get { return _drawings; } }
+        public IEnumerable<DrawingInfo> Drawings
+        {
+            get { return _drawings; }
+        }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                OpenFileDialog d = new OpenFileDialog();
+                var d = new OpenFileDialog();
 
-                if (d.ShowDialog() ?? false)
+                if ((bool) d.ShowDialog())
                 {
-                    DirectoryInfo di = new DirectoryInfo(d.FileName);
+                    var di = new DirectoryInfo(d.FileName);
                     txtPath.Text = di.Parent.FullName;
                 }
             }
@@ -51,7 +43,6 @@ namespace MainPower.DrawingsDatabase.DrawingNameGrabber
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void btnScan_Click(object sender, RoutedEventArgs e)
@@ -59,10 +50,9 @@ namespace MainPower.DrawingsDatabase.DrawingNameGrabber
             try
             {
                 _drawings.Clear();
-                DirectoryInfo di = new DirectoryInfo(txtPath.Text);
+                var di = new DirectoryInfo(txtPath.Text);
 
                 ScanDirectory(di);
-
             }
             catch (Exception ex)
             {
@@ -75,16 +65,16 @@ namespace MainPower.DrawingsDatabase.DrawingNameGrabber
             FileInfo[] fis = dir.GetFiles();
             foreach (FileInfo fi in fis)
             {
-
-                if (fi.Extension.ToLower() == ".dwg" || fi.Extension.ToLower() == ".pdf" || fi.Extension.ToLower() == ".tif" || fi.Extension.ToLower() == ".xls" || fi.Extension.ToLower() == ".xlsx")
+                if (fi.Extension.ToLower() == ".dwg" || fi.Extension.ToLower() == ".pdf" ||
+                    fi.Extension.ToLower() == ".tif" || fi.Extension.ToLower() == ".xls" ||
+                    fi.Extension.ToLower() == ".xlsx")
                 {
-                    DrawingInfo dri = new DrawingInfo();
+                    var dri = new DrawingInfo();
                     dri.Name = fi.Name.Substring(0, fi.Name.Length - 4);
                     dri.Path = fi.FullName;
                     dri.Include = true;
                     _drawings.Add(dri);
                 }
-
             }
 
             if (chkRecursive.IsChecked ?? false)
@@ -101,11 +91,12 @@ namespace MainPower.DrawingsDatabase.DrawingNameGrabber
             try
             {
                 DrawingsDataContext dc = DBCommon.NewDC;
-                var selectedDrawings = (from d in _drawings where d.Include == true select d);
+                IEnumerable<DrawingInfo> selectedDrawings = (from d in _drawings where d.Include select d);
 
                 foreach (DrawingInfo di in selectedDrawings)
                 {
-                    var dwgs = (from MPDrawing d in dc.Drawings where d.Number.ToLower() == di.Name.ToLower() select d);
+                    IQueryable<Drawing> dwgs =
+                        (from MPDrawing d in dc.Drawings where d.Number.ToLower() == di.Name.ToLower() select d);
                     foreach (MPDrawing dwg in dwgs)
                     {
                         dwg.FileName = di.Path;

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.Windows.Data;
 using System.Globalization;
+using System.Windows.Data;
 
 namespace MainPower.DrawingsDatabase.DatabaseHelper
 {
@@ -13,6 +9,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
     /// </summary>
     public class DrawingStatusConverter : IValueConverter
     {
+        #region IValueConverter Members
+
         /// <summary>
         /// Convert DrawingStatus to sring
         /// </summary>
@@ -21,11 +19,11 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DrawingStatus && targetType == typeof(string))
+            if (value is DrawingStatus && targetType == typeof (string))
             {
-                DrawingStatus status = (DrawingStatus)value;
+                var status = (DrawingStatus) value;
 
                 switch (status)
                 {
@@ -54,11 +52,11 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return DrawingStatus.Undefined;
-            string str = value as string;
+            var str = value as string;
             if (str == null)
                 return null;
             switch (str.ToUpperInvariant())
@@ -77,5 +75,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                     return DrawingStatus.Undefined;
             }
         }
+
+        #endregion
     }
 }

@@ -1,31 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using MainPower.DrawingsDatabase.DatabaseHelper;
-using System.Data.SqlClient;
-using System.Reflection;
-using System.ComponentModel;
-using System.Linq.Dynamic;
-using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
-using System.Data.Linq.Mapping;
-using System.IO;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using HC.Utils.Controls;
-using HC.Utils;
 using System.Windows.Xps;
 using System.Windows.Xps.Packaging;
-using System.Windows.Markup;
+using HC.Utils;
+using HC.Utils.Controls;
+using MainPower.DrawingsDatabase.DatabaseHelper;
+using MainPower.DrawingsDatabase.Gui.Properties;
+using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 
 
 namespace MainPower.DrawingsDatabase.Gui
@@ -33,7 +27,7 @@ namespace MainPower.DrawingsDatabase.Gui
     /// <summary>
     /// Interaction logic for SearchDB.xaml
     /// </summary>
-    public sealed partial class SearchPage : Page, IListViewPrinter
+    public sealed partial class SearchPage : IListViewPrinter
     {
         #region Printing Code
 
@@ -41,8 +35,8 @@ namespace MainPower.DrawingsDatabase.Gui
 
         public XpsDocument CreateXps(double pageWidth, double pageHeight, string tmpFileName)
         {
-            FlowDocument flowDoc = new FlowDocument();
-            Table table1 = new Table();
+            var flowDoc = new FlowDocument();
+            var table1 = new Table();
             flowDoc.Blocks.Add(table1);
             // Set some global formatting properties for the table.
             table1.CellSpacing = 5;
@@ -59,7 +53,7 @@ namespace MainPower.DrawingsDatabase.Gui
 
             foreach (ColumnInfo g in pi.Columns)
             {
-                table1.Columns.Add(new TableColumn() { Width = new GridLength(g.Width / sumOfColumnWidths * pageWidth) });
+                table1.Columns.Add(new TableColumn {Width = new GridLength(g.Width/sumOfColumnWidths*pageWidth)});
             }
             // Create and add an empty TableRowGroup to hold the table's Rows.
             table1.RowGroups.Add(new TableRowGroup());
@@ -68,7 +62,7 @@ namespace MainPower.DrawingsDatabase.Gui
             // Global formatting for the title row.
             currentRow.Background = Brushes.Silver;
             currentRow.FontSize = 20;
-            currentRow.FontWeight = System.Windows.FontWeights.Bold;
+            currentRow.FontWeight = FontWeights.Bold;
             // Add the header row with content, 
             currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Drawings database search results"))));
             // and set the row to span all 6 columns.
@@ -84,7 +78,7 @@ namespace MainPower.DrawingsDatabase.Gui
 
             foreach (ColumnInfo g in pi.Columns)
             {
-                Run r = new Run(g.Header);
+                var r = new Run(g.Header);
                 currentRow.Cells.Add(new TableCell(new Paragraph(r)));
             }
             //add rows
@@ -101,11 +95,11 @@ namespace MainPower.DrawingsDatabase.Gui
                 foreach (ColumnInfo g in pi.Columns)
                 {
                     // Add cells with content to the third row.
-                    object obj = typeof(MPDrawing).GetProperty(g.Header).GetValue(d, null);
+                    object obj = typeof (MPDrawing).GetProperty(g.Header).GetValue(d, null);
                     string text = "";
                     if (obj is DateTime)
                     {
-                        text = ((DateTime)obj).ToShortDateString();
+                        text = ((DateTime) obj).ToShortDateString();
                     }
                     else if (obj != null)
                     {
@@ -113,10 +107,9 @@ namespace MainPower.DrawingsDatabase.Gui
                     }
                     currentRow.Cells.Add(new TableCell(new Paragraph(new Run(text))));
                 }
-
             }
 
-            DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDoc).DocumentPaginator;
+            DocumentPaginator paginator = ((IDocumentPaginatorSource) flowDoc).DocumentPaginator;
             paginator.PageSize = new Size(pageWidth, pageHeight);
             flowDoc.PagePadding = new Thickness(25);
             flowDoc.ColumnWidth = double.PositiveInfinity;
@@ -124,7 +117,7 @@ namespace MainPower.DrawingsDatabase.Gui
             try
             {
                 // write the XPS document
-                using (XpsDocument doc = new XpsDocument(tmpFileName, FileAccess.ReadWrite))
+                using (var doc = new XpsDocument(tmpFileName, FileAccess.ReadWrite))
                 {
                     XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
                     writer.Write(paginator);
@@ -132,32 +125,79 @@ namespace MainPower.DrawingsDatabase.Gui
 
                 // Read the XPS document into a dynamically generated
                 // preview Window 
-                XpsDocument document = new XpsDocument(tmpFileName, FileAccess.Read);
+                var document = new XpsDocument(tmpFileName, FileAccess.Read);
 
                 return document;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
-    
+
         #endregion
 
-        private ObservableCollection<MPDrawing> _searchresults = new ObservableCollection<MPDrawing>();
-        public ObservableCollection<MPDrawing> SearchResults { get { return _searchresults; } }
+        private readonly ObservableCollection<MPDrawing> _searchresults = new ObservableCollection<MPDrawing>();
 
         public SearchPage()
         {
             InitializeComponent();
         }
 
+        public IEnumerable<MPDrawing> SearchResults
+        {
+            get { return _searchresults; }
+        }
+
         private void AddSortBinding()
         {
-            GridView gv = (GridView)listView1.View;
+            var gv = (GridView) listView1.View;
 
             for (int i = 1; i <= gv.Columns.Count; i++)
             {
                 GridViewColumn col = gv.Columns[i - 1];
-                ListViewSorter.SetSortBindingMember(col, new Binding((string)col.Header));
+                ListViewSorter.SetSortBindingMember(col, new Binding((string) col.Header));
             }
+        }
+
+        //TODO: should rename this to persistGUIsettings or something...
+        internal void PersistColumnLayout()
+        {
+            Settings.Default.SearchColumns = XamlWriter.Save(((GridView) listView1.View).Columns);
+            //make up a string in the format
+            //"1,1,0,1,0,1,0,0,0,1,0,1,1,0,1" which is the status of the checkboxes.
+            Settings.Default.Save();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            string xaml = Settings.Default.SearchColumns;
+            if (!String.IsNullOrEmpty(xaml))
+            {
+                //listView1.View = XamlReader.Parse(xaml) as GridView;
+
+                var savedCols = XamlReader.Parse(xaml) as GridViewColumnCollection;
+
+                GridViewColumnCollection cols = ((GridView) listView1.View).Columns;
+
+                var theCols = new List<GridViewColumn>();
+
+                foreach (GridViewColumn col in savedCols)
+                {
+                    theCols.Add(col);
+                }
+
+                cols.Clear();
+                savedCols.Clear();
+
+                foreach (GridViewColumn col in theCols)
+                {
+                    col.HeaderTemplate = listView1.TryFindResource("HeaderTemplateSortNon") as DataTemplate;
+                    cols.Add(col);
+                }
+            }
+
+            AddSortBinding();
         }
 
         #region Search Code
@@ -168,14 +208,18 @@ namespace MainPower.DrawingsDatabase.Gui
             {
                 _searchresults.Clear();
                 DrawingsDataContext dc = DBCommon.NewDC;
-                TextSearchOption options = (TextSearchOption)cmbTextMatch.SelectedIndex;
+                var options = (TextSearchOption) cmbTextMatch.SelectedIndex;
                 IQueryable<MPDrawing> query = dc.Drawings;
 
                 if (!String.IsNullOrEmpty(txtDrawingNumber.Text))
                 {
                     if (chkLegacyNumbers.IsChecked ?? false)
                     {
-                        query = query.Where(d => d.Number.Contains(txtDrawingNumber.Text) || d.LegacyDrawing.Contains(txtDrawingNumber.Text));
+                        query =
+                            query.Where(
+                                d =>
+                                d.Number.Contains(txtDrawingNumber.Text) ||
+                                d.LegacyDrawing.Contains(txtDrawingNumber.Text));
                     }
                     else
                     {
@@ -198,7 +242,9 @@ namespace MainPower.DrawingsDatabase.Gui
                 {
                     if (!String.IsNullOrEmpty(txtTitle1.Text))
                     {
-                        query = query.Where(SearchAssistant.SearchText(txtTitle1.Text, options, d => d.TitleLine1, d => d.TitleLine2, d => d.TitleLine3));
+                        query =
+                            query.Where(SearchAssistant.SearchText(txtTitle1.Text, options, d => d.TitleLine1,
+                                                                   d => d.TitleLine2, d => d.TitleLine3));
                     }
                 }
                 else
@@ -218,7 +264,6 @@ namespace MainPower.DrawingsDatabase.Gui
                 }
                 if (!chkCategoryAll.IsChecked ?? false)
                 {
-
                     Expression<Func<MPDrawing, bool>> w = (d => d.Category == DrawingCategory.Undefined);
 
                     if (chkComms.IsChecked ?? false)
@@ -280,7 +325,11 @@ namespace MainPower.DrawingsDatabase.Gui
                 }
                 if (chkDate.IsChecked ?? false)
                 {
-                    query = query.Where(d => d.DrawnDate > DateTime.Parse(txtDateFrom.Text) && d.DrawnDate < DateTime.Parse(txtDateTo.Text));
+                    query =
+                        query.Where(
+                            d =>
+                            d.DrawnDate > DateTime.Parse(txtDateFrom.Text) &&
+                            d.DrawnDate < DateTime.Parse(txtDateTo.Text));
                 }
 
                 foreach (MPDrawing d in query.ToList())
@@ -339,12 +388,13 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void mnuChooseColumns(object sender, RoutedEventArgs e)
         {
-            Dictionary<Type, IValueConverter> dict = new Dictionary<Type, IValueConverter>();
-            dict.Add(typeof(DateTime), new DateConverter());
-            dict.Add(typeof(DrawingCategory), new DrawingCategoryConverter());
-            dict.Add(typeof(DateTime?), new DateConverter());
-            dict.Add(typeof(DrawingStatus), new DrawingStatusConverter());
-            ColumnChooser c = new ColumnChooser(typeof(MPDrawing), listView1, (DataTemplate)FindResource("HeaderTemplateSortNon"), dict);
+            var dict = new Dictionary<Type, IValueConverter>();
+            dict.Add(typeof (DateTime), new DateConverter());
+            dict.Add(typeof (DrawingCategory), new DrawingCategoryConverter());
+            dict.Add(typeof (DateTime?), new DateConverter());
+            dict.Add(typeof (DrawingStatus), new DrawingStatusConverter());
+            var c = new ColumnChooser(typeof (MPDrawing), listView1,
+                                      (DataTemplate) FindResource("HeaderTemplateSortNon"), dict);
             c.ShowDialog();
             AddSortBinding();
         }
@@ -361,7 +411,7 @@ namespace MainPower.DrawingsDatabase.Gui
             chkDate.IsChecked = false;
             chkCategoryAll.IsChecked = true;
             chkStatusAll.IsChecked = true;
-            cmbTextMatch.SelectedIndex = 1;//must contain all words
+            cmbTextMatch.SelectedIndex = 1; //must contain all words
             chkOneTitle.IsChecked = false;
         }
 
@@ -373,7 +423,7 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             try
             {
-                MPDrawing d = (MPDrawing)listView1.SelectedItem;
+                var d = (MPDrawing) listView1.SelectedItem;
                 DBCommon.OpenAutoCadDrawing(d.FileName);
             }
             catch (Exception ex)
@@ -385,7 +435,7 @@ namespace MainPower.DrawingsDatabase.Gui
         private void listView1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (listView1.SelectedItem == null) return;
-            ViewDrawingWindow win = new ViewDrawingWindow((MPDrawing)listView1.SelectedItem, listView1.Items.Refresh);
+            var win = new ViewDrawingWindow((MPDrawing) listView1.SelectedItem, listView1.Items.Refresh);
             win.Show();
             //set this to true, otherwise someone else will mess with our popup window... (im looking at you listview)
             e.Handled = true;
@@ -393,7 +443,7 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void mnuOpenInExplorer_Click(object sender, RoutedEventArgs e)
         {
-            MPDrawing dwg = listView1.SelectedItem as MPDrawing;
+            var dwg = listView1.SelectedItem as MPDrawing;
             if (dwg != null)
             {
                 Process.Start("explorer.exe", "/select,\"" + dwg.FileName + "\"");
@@ -404,67 +454,30 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             if (Keyboard.Modifiers == ModifierKeys.Shift)
             {
-                mnuDeleteDrawing.Visibility = System.Windows.Visibility.Visible;
+                mnuDeleteDrawing.Visibility = Visibility.Visible;
             }
             else
             {
-                mnuDeleteDrawing.Visibility = System.Windows.Visibility.Collapsed;
+                mnuDeleteDrawing.Visibility = Visibility.Collapsed;
             }
         }
 
         private void mnuDeleteDrawing_Click(object sender, RoutedEventArgs e)
         {
-            MPDrawing dwg = listView1.SelectedItem as MPDrawing;
+            var dwg = listView1.SelectedItem as MPDrawing;
             if (dwg != null)
             {
-                if (MessageBox.Show("Deleting a drawing cannot be undone.  Are you sure you want to do this?", "Willy nilly drawing deleting is bad.", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (
+                    MessageBox.Show("Deleting a drawing cannot be undone.  Are you sure you want to do this?",
+                                    "Willy nilly drawing deleting is bad.", MessageBoxButton.YesNo) ==
+                    MessageBoxResult.Yes)
                 {
                     DBCommon.DeleteDrawing(dwg.Id);
                     _searchresults.Remove(dwg);
                 }
             }
         }
+
         #endregion
-
-
-        //TODO: should rename this to persistGUIsettings or something...
-        internal void PersistColumnLayout()
-        {
-            Properties.Settings.Default.SearchColumns = XamlWriter.Save(((GridView)listView1.View).Columns);
-            //make up a string in the format
-            //"1,1,0,1,0,1,0,0,0,1,0,1,1,0,1" which is the status of the checkboxes.
-            Properties.Settings.Default.Save();
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            string xaml = Properties.Settings.Default.SearchColumns;
-            if (!String.IsNullOrEmpty(xaml))
-            {
-                //listView1.View = XamlReader.Parse(xaml) as GridView;
-
-                GridViewColumnCollection savedCols = XamlReader.Parse(xaml) as GridViewColumnCollection;
-
-                GridViewColumnCollection cols = ((GridView)listView1.View).Columns;
-
-                List<GridViewColumn> theCols = new List<GridViewColumn>();
-
-                foreach (GridViewColumn col in savedCols)
-                {
-                    theCols.Add(col);
-                }
-                
-                cols.Clear();
-                savedCols.Clear();
-
-                foreach (GridViewColumn col in theCols)
-                {
-                    col.HeaderTemplate = listView1.TryFindResource("HeaderTemplateSortNon") as DataTemplate;
-                    cols.Add(col);
-                }
-            }
-            
-            AddSortBinding();
-        }
     }
 }

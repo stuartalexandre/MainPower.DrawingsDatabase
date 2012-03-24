@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.Windows.Data;
 using System.Globalization;
+using System.Windows.Data;
 
 namespace MainPower.DrawingsDatabase.DatabaseHelper
 {
@@ -13,6 +9,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
     /// </summary>
     public class DrawingCategoryConverter : IValueConverter
     {
+        #region IValueConverter Members
+
         /// <summary>
         /// Convert DrawingCategory to string
         /// </summary>
@@ -21,11 +19,11 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DrawingCategory && targetType == typeof(string))
+            if (value is DrawingCategory && targetType == typeof (string))
             {
-                DrawingCategory cat = (DrawingCategory)value;
+                var cat = (DrawingCategory) value;
 
                 switch (cat)
                 {
@@ -58,11 +56,11 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         /// <param name="parameter"></param>
         /// <param name="culture"></param>
         /// <returns></returns>
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return DrawingCategory.Undefined;
-            string str = value as string;
+            var str = value as string;
             if (str == null)
                 return null;
             switch (str.ToUpperInvariant())
@@ -83,5 +81,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                     return DrawingCategory.Undefined;
             }
         }
+
+        #endregion
     }
 }

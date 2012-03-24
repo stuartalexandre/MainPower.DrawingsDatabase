@@ -1,18 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using MainPower.DrawingsDatabase.DatabaseHelper;
-using MainPower.DrawingsDatabase.Gui;
-using System.Data.SqlClient;
-using Autodesk.AutoCAD.Runtime;
+using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
-using System.Reflection;
-using Autodesk.AutoCAD.ApplicationServices;
-using System.Collections;
-using System.Windows;
-
+using MainPower.DrawingsDatabase.DatabaseHelper;
+using MainPower.DrawingsDatabase.Gui;
 
 namespace MainPower.DrawingsDatabase.AutoCad
 {
@@ -21,11 +16,10 @@ namespace MainPower.DrawingsDatabase.AutoCad
     /// </summary>
     public class DrawingCommands
     {
-        private Editor _ed = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
-        private Database _db = HostApplicationServices.WorkingDatabase;
-
-        private List<string> _blockNames = new List<string>() { "E-A3-L", "ENGINEERING - DYNAMIC TITLE BLOCK" };
-        private List<string> _sheetSizes = new List<string>() { "A2P", "A3L", "A2L" };
+        private readonly List<string> _blockNames = new List<string> {"E-A3-L", "ENGINEERING - DYNAMIC TITLE BLOCK"};
+        private readonly Database _db = HostApplicationServices.WorkingDatabase;
+        private readonly Editor _ed = Application.DocumentManager.MdiActiveDocument.Editor;
+        private readonly List<string> _sheetSizes = new List<string> {"A2P", "A3L", "A2L"};
 
         #region Command Functions
 
@@ -34,14 +28,14 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = GetDrawingBlocks(tr, OpenMode.ForWrite);
+                IEnumerable<BlockReference> blocks = GetDrawingBlocks(tr, OpenMode.ForWrite);
                 foreach (BlockReference block in blocks)
                 {
                     DatabaseToBlock(block, tr);
                 }
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.Message);
             }
@@ -56,14 +50,14 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForWrite);
+                IEnumerable<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForWrite);
                 foreach (BlockReference block in blocks)
                 {
                     DatabaseToBlock(block, tr);
                 }
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.Message);
             }
@@ -78,14 +72,14 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = PromptForBlock(tr);
+                IEnumerable<BlockReference> blocks = PromptForBlock(tr);
                 foreach (BlockReference blkRef in blocks)
                 {
                     DatabaseToBlock(blkRef, tr);
                 }
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(("Exception in DatabaseToBlock(): " + ex.Message + ex.StackTrace));
             }
@@ -100,7 +94,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = GetDrawingBlocks(tr, OpenMode.ForRead);
+                IEnumerable<BlockReference> blocks = GetDrawingBlocks(tr, OpenMode.ForRead);
                 foreach (BlockReference block in blocks)
                 {
                     BlockToDatabase(block, tr);
@@ -108,7 +102,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
 
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.Message);
             }
@@ -123,14 +117,14 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForRead);
+                IEnumerable<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForRead);
                 foreach (BlockReference block in blocks)
                 {
                     BlockToDatabase(block, tr);
                 }
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.Message);
             }
@@ -145,14 +139,14 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = PromptForBlock(tr);
+                IEnumerable<BlockReference> blocks = PromptForBlock(tr);
                 foreach (BlockReference blkRef in blocks)
                 {
                     BlockToDatabase(blkRef, tr);
                 }
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(("Exception: " + ex.Message));
             }
@@ -168,115 +162,106 @@ namespace MainPower.DrawingsDatabase.AutoCad
             // Start the transaction
             try
             {
-                List<BlockReference> blocks = PromptForBlock(tr);
+                IEnumerable<BlockReference> blocks = PromptForBlock(tr);
 
                 foreach (BlockReference blkRef in blocks)
                 {
                     AttributeCollection attCol = blkRef.AttributeCollection;
                     foreach (ObjectId attId in attCol)
                     {
-                        AttributeReference attRef = (AttributeReference)tr.GetObject(attId, OpenMode.ForWrite);
+                        var attRef = (AttributeReference) tr.GetObject(attId, OpenMode.ForWrite);
                         _ed.WriteMessage(attRef.Tag + ": " + attRef.TextString + "\n");
                     }
                     _ed.WriteMessage("Name: " + blkRef.Name + "\n");
                     foreach (DynamicBlockReferenceProperty p in blkRef.DynamicBlockReferencePropertyCollection)
                     {
-                        _ed.WriteMessage(p.PropertyName + ": " + p.Value.ToString() + "\n");
+                        _ed.WriteMessage(p.PropertyName + ": " + p.Value + "\n");
                     }
-                    _ed.WriteMessage("IsDynamic: " + blkRef.IsDynamicBlock.ToString() + "\n");
-
+                    _ed.WriteMessage("IsDynamic: " + blkRef.IsDynamicBlock.ToString(CultureInfo.InvariantCulture) + "\n");
                 }
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(("Exception: " + ex.Message));
-
             }
             finally
             {
                 tr.Dispose();
             }
         }
-       
+
         public void NeedAnotherRevision()
         {
             Transaction tr = _db.TransactionManager.StartTransaction();
             // Start the transaction
-            try
+
+            // Build a filter list so that only block references are selected
+            var filList = new[] {new TypedValue((int) DxfCode.Start, "INSERT")};
+            var filter = new SelectionFilter(filList);
+            var opts = new PromptSelectionOptions {MessageForAdding = "Select block references: "};
+
+            PromptSelectionResult res = _ed.GetSelection(opts, filter);
+
+            // Do nothing if selection is unsuccessful
+            if (res.Status != PromptStatus.OK)
+                return;
+
+            SelectionSet selSet = res.Value;
+            ObjectId[] idArray = selSet.GetObjectIds();
+            foreach (ObjectId blkId in idArray)
             {
-                // Build a filter list so that only block references are selected
-                TypedValue[] filList = new TypedValue[1] { new TypedValue((int)DxfCode.Start, "INSERT") };
-                SelectionFilter filter = new SelectionFilter(filList);
-                PromptSelectionOptions opts = new PromptSelectionOptions();
-                opts.MessageForAdding = "Select block references: ";
+                var blkRef = (BlockReference) tr.GetObject(blkId, OpenMode.ForWrite);
+                //TODO: block validation here
+                AttributeCollection attCol = blkRef.AttributeCollection;
+                Dictionary<string, AttributeReference> attribs =
+                    (from ObjectId attId in attCol
+                     select (AttributeReference) tr.GetObject(attId, OpenMode.ForWrite)).ToDictionary(
+                         attRef => attRef.Tag);
 
-                PromptSelectionResult res = _ed.GetSelection(opts, filter);
+                attribs["REV-A"].TextString = attribs["REV-B"].TextString;
+                attribs["BY-A"].TextString = attribs["BY-B"].TextString;
+                attribs["DESCRIPTION-A"].TextString = attribs["DESCRIPTION-B"].TextString;
+                attribs["DATE-A"].TextString = attribs["DATE-B"].TextString;
+                attribs["APPRV-BY-A"].TextString = attribs["APPRV-BY-B"].TextString;
 
-                // Do nothing if selection is unsuccessful
-                if (res.Status != PromptStatus.OK)
-                    return;
+                attribs["REV-B"].TextString = attribs["REV-C"].TextString;
+                attribs["BY-B"].TextString = attribs["BY-C"].TextString;
+                attribs["DESCRIPTION-B"].TextString = attribs["DESCRIPTION-C"].TextString;
+                attribs["DATE-B"].TextString = attribs["DATE-C"].TextString;
+                attribs["APPRV-BY-B"].TextString = attribs["APPRV-BY-C"].TextString;
 
-                SelectionSet selSet = res.Value;
-                ObjectId[] idArray = selSet.GetObjectIds();
-                foreach (ObjectId blkId in idArray)
-                {
-                    BlockReference blkRef = (BlockReference)tr.GetObject(blkId, OpenMode.ForWrite);
-                    //TODO: block validation here
-                    AttributeCollection attCol = blkRef.AttributeCollection;
-                    Dictionary<string, AttributeReference> attribs = new Dictionary<string, AttributeReference>();
+                attribs["REV-C"].TextString = attribs["REV-D"].TextString;
+                attribs["BY-C"].TextString = attribs["BY-D"].TextString;
+                attribs["DESCRIPTION-C"].TextString = attribs["DESCRIPTION-D"].TextString;
+                attribs["DATE-C"].TextString = attribs["DATE-D"].TextString;
+                attribs["APPRV-BY-C"].TextString = attribs["APPRV-BY-D"].TextString;
 
-                    foreach (ObjectId attId in attCol)
-                    {
-                        AttributeReference attRef = (AttributeReference)tr.GetObject(attId, OpenMode.ForWrite);
-                        attribs.Add(attRef.Tag, attRef);
-                    }
+                attribs["REV-D"].TextString = attribs["REV-E"].TextString;
+                attribs["BY-D"].TextString = attribs["BY-E"].TextString;
+                attribs["DESCRIPTION-D"].TextString = attribs["DESCRIPTION-E"].TextString;
+                attribs["DATE-D"].TextString = attribs["DATE-E"].TextString;
+                attribs["APPRV-BY-D"].TextString = attribs["APPRV-BY-E"].TextString;
 
-                    attribs["REV-A"].TextString = attribs["REV-B"].TextString;
-                    attribs["BY-A"].TextString = attribs["BY-B"].TextString;
-                    attribs["DESCRIPTION-A"].TextString = attribs["DESCRIPTION-B"].TextString;
-                    attribs["DATE-A"].TextString = attribs["DATE-B"].TextString;
-                    attribs["APPRV-BY-A"].TextString = attribs["APPRV-BY-B"].TextString;
+                attribs["REV-E"].TextString = attribs["REV-F"].TextString;
+                attribs["BY-E"].TextString = attribs["BY-F"].TextString;
+                attribs["DESCRIPTION-E"].TextString = attribs["DESCRIPTION-F"].TextString;
+                attribs["DATE-E"].TextString = attribs["DATE-F"].TextString;
+                attribs["APPRV-BY-E"].TextString = attribs["APPRV-BY-F"].TextString;
 
-                    attribs["REV-B"].TextString = attribs["REV-C"].TextString;
-                    attribs["BY-B"].TextString = attribs["BY-C"].TextString;
-                    attribs["DESCRIPTION-B"].TextString = attribs["DESCRIPTION-C"].TextString;
-                    attribs["DATE-B"].TextString = attribs["DATE-C"].TextString;
-                    attribs["APPRV-BY-B"].TextString = attribs["APPRV-BY-C"].TextString;
+                attribs["REV-F"].TextString = attribs["REV-G"].TextString;
+                attribs["BY-F"].TextString = attribs["BY-G"].TextString;
+                attribs["DESCRIPTION-F"].TextString = attribs["DESCRIPTION-G"].TextString;
+                attribs["DATE-F"].TextString = attribs["DATE-G"].TextString;
+                attribs["APPRV-BY-F"].TextString = attribs["APPRV-BY-G"].TextString;
 
-                    attribs["REV-C"].TextString = attribs["REV-D"].TextString;
-                    attribs["BY-C"].TextString = attribs["BY-D"].TextString;
-                    attribs["DESCRIPTION-C"].TextString = attribs["DESCRIPTION-D"].TextString;
-                    attribs["DATE-C"].TextString = attribs["DATE-D"].TextString;
-                    attribs["APPRV-BY-C"].TextString = attribs["APPRV-BY-D"].TextString;
-
-                    attribs["REV-D"].TextString = attribs["REV-E"].TextString;
-                    attribs["BY-D"].TextString = attribs["BY-E"].TextString;
-                    attribs["DESCRIPTION-D"].TextString = attribs["DESCRIPTION-E"].TextString;
-                    attribs["DATE-D"].TextString = attribs["DATE-E"].TextString;
-                    attribs["APPRV-BY-D"].TextString = attribs["APPRV-BY-E"].TextString;
-
-                    attribs["REV-E"].TextString = attribs["REV-F"].TextString;
-                    attribs["BY-E"].TextString = attribs["BY-F"].TextString;
-                    attribs["DESCRIPTION-E"].TextString = attribs["DESCRIPTION-F"].TextString;
-                    attribs["DATE-E"].TextString = attribs["DATE-F"].TextString;
-                    attribs["APPRV-BY-E"].TextString = attribs["APPRV-BY-F"].TextString;
-
-                    attribs["REV-F"].TextString = attribs["REV-G"].TextString;
-                    attribs["BY-F"].TextString = attribs["BY-G"].TextString;
-                    attribs["DESCRIPTION-F"].TextString = attribs["DESCRIPTION-G"].TextString;
-                    attribs["DATE-F"].TextString = attribs["DATE-G"].TextString;
-                    attribs["APPRV-BY-F"].TextString = attribs["APPRV-BY-G"].TextString;
-
-                    attribs["REV-G"].TextString = "";
-                    attribs["BY-G"].TextString = "";
-                    attribs["DESCRIPTION-G"].TextString = "";
-                    attribs["DATE-G"].TextString = "";
-                    attribs["APPRV-BY-G"].TextString = "";
-                }
-                tr.Commit();
+                attribs["REV-G"].TextString = "";
+                attribs["BY-G"].TextString = "";
+                attribs["DESCRIPTION-G"].TextString = "";
+                attribs["DATE-G"].TextString = "";
+                attribs["APPRV-BY-G"].TextString = "";
             }
-            catch { }
+            tr.Commit();
         }
 
         /// <summary>
@@ -288,7 +273,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             try
             {
-                List<BlockReference> blocks = PromptForBlock(tr);
+                IEnumerable<BlockReference> blocks = PromptForBlock(tr);
 
                 foreach (BlockReference blkRef in blocks)
                 {
@@ -304,7 +289,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
 
                 tr.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.Message + "\n");
             }
@@ -325,7 +310,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
                 DrawingsDataContext ddc = DBCommon.NewDC;
                 tr = _db.TransactionManager.StartTransaction();
 
-                List<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForRead);
+                IEnumerable<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForRead);
 
                 Drawing d = null;
 
@@ -333,32 +318,32 @@ namespace MainPower.DrawingsDatabase.AutoCad
                 {
                     if (d != null)
                         return;
-                    d = DrawingCommands.GetDrawingFromBlock(ddc, block, tr);
+                    d = GetDrawingFromBlock(ddc, block, tr);
                 }
 
                 if (d == null)
                     return;
 
-                ViewDrawingWindow w = new ViewDrawingWindow(d, null,enableEditByDefault);
+                var w = new ViewDrawingWindow(d, null, enableEditByDefault);
                 w.ShowDialog();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.ToString());
             }
             finally
             {
-                tr.Dispose();
+                if (tr != null) tr.Dispose();
             }
         }
 
         public void PrintVersion()
         {
-            _ed.WriteMessage("MainPower Drawings Database Version: " + this.GetType().Assembly.GetName().Version.ToString());
+            _ed.WriteMessage("MainPower Drawings Database Version: " + GetType().Assembly.GetName().Version);
         }
 
         #endregion
-        
+
         #region Helper Functions
 
         private bool BlockToDatabase(BlockReference block, Transaction tr)
@@ -377,7 +362,8 @@ namespace MainPower.DrawingsDatabase.AutoCad
                     PromptResult pr1 = _ed.GetString("Sheet Number:");
                     attribs["SHEET"].TextString = pr1.StringResult;
                 }
-                if (String.IsNullOrEmpty(attribs["DRAWING-NUMBER"].TextString) || String.IsNullOrEmpty(attribs["SHEET"].TextString))
+                if (String.IsNullOrEmpty(attribs["DRAWING-NUMBER"].TextString) ||
+                    String.IsNullOrEmpty(attribs["SHEET"].TextString))
                 {
                     _ed.WriteMessage("No drawing/sheet number forthcoming, returning.\n");
                     return false;
@@ -391,9 +377,9 @@ namespace MainPower.DrawingsDatabase.AutoCad
                     dc.Drawings.InsertOnSubmit(drawing);
                 }
 
-                foreach (KeyValuePair<string, AttributeReference> kvp in attribs)
+                foreach (var kvp in attribs)
                 {
-                    if (DrawingHelper.AttributeExists(kvp.Key))//only save the desired attributes
+                    if (DrawingHelper.AttributeExists(kvp.Key)) //only save the desired attributes
                         drawing.SetAttribute(kvp.Key, kvp.Value.TextString);
                 }
 
@@ -407,7 +393,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
                 else
                 {
                     drawing.FileName = _db.Filename;
-                    
+
                     //drawing.Filename = _db.OriginalFileName;
                 }
                 //If we're putting this in via the CAD, then it must be electronic
@@ -422,7 +408,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
                 _ed.WriteMessage("Data successfully written to the database from block " + block.Name + "\n");
                 return true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage(ex.Message);
                 return false;
@@ -444,9 +430,9 @@ namespace MainPower.DrawingsDatabase.AutoCad
                     return;
                 }
 
-                foreach (KeyValuePair<string, AttributeReference> kvp in attribs)
+                foreach (var kvp in attribs)
                 {
-                    if (DrawingHelper.AttributeExists(kvp.Key))//only save the desired attributes
+                    if (DrawingHelper.AttributeExists(kvp.Key)) //only save the desired attributes
                         kvp.Value.TextString = drawing.GetAttribute(kvp.Key);
                 }
 
@@ -454,7 +440,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
 
                 _ed.WriteMessage("Data successfully fetched from the database and put in block " + block.Name + "\n");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage("Exception at DatabaseToBlock(block, tr): " + ex.Message + ex.StackTrace + "\n");
             }
@@ -466,24 +452,32 @@ namespace MainPower.DrawingsDatabase.AutoCad
         /// <param name="tr"></param>
         /// <param name="mode"></param>
         /// <returns></returns>
-        private List<BlockReference> GetLayoutBlocks(Transaction tr, OpenMode mode)
+        private IEnumerable<BlockReference> GetLayoutBlocks(Transaction tr, OpenMode mode)
         {
-            List<BlockReference> blocks = new List<BlockReference>();
+            var blocks = new List<BlockReference>();
             //Get the drawings layout dictionary
-            DBDictionary layoutDict = tr.GetObject(_db.LayoutDictionaryId, OpenMode.ForRead) as DBDictionary;
             ObjectId curLayoutID = LayoutManager.Current.GetLayoutId(LayoutManager.Current.CurrentLayout);
-            Layout layout = curLayoutID.GetObject(OpenMode.ForRead) as Layout;
-            BlockTableRecord layoutRecord = tr.GetObject(layout.BlockTableRecordId, OpenMode.ForRead) as BlockTableRecord;
-            //Get the enumerator
-            BlockTableRecordEnumerator recordEnumerator = layoutRecord.GetEnumerator();
-            //Loop through all blocks in the block table
-            BlockReference oBr = null;
-            while (recordEnumerator.MoveNext())
+            var layout = curLayoutID.GetObject(OpenMode.ForRead) as Layout;
+            if (layout != null)
             {
-                Entity blcokEnt = tr.GetObject(recordEnumerator.Current, mode) as Entity;
-                if ((oBr = blcokEnt as BlockReference) != null)
+                if (tr != null)
                 {
-                    blocks.Add(oBr);
+                    var layoutRecord = tr.GetObject(layout.BlockTableRecordId, OpenMode.ForRead) as BlockTableRecord;
+                    //Get the enumerator
+                    if (layoutRecord != null)
+                    {
+                        BlockTableRecordEnumerator recordEnumerator = layoutRecord.GetEnumerator();
+                        //Loop through all blocks in the block table
+                        while (recordEnumerator.MoveNext())
+                        {
+                            var blcokEnt = tr.GetObject(recordEnumerator.Current, mode) as Entity;
+                            BlockReference oBr;
+                            if ((oBr = blcokEnt as BlockReference) != null)
+                            {
+                                blocks.Add(oBr);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -496,30 +490,35 @@ namespace MainPower.DrawingsDatabase.AutoCad
         /// <param name="tr"></param>
         /// <param name="mode"></param>
         /// <returns></returns>
-        private List<BlockReference> GetDrawingBlocks(Transaction tr, OpenMode mode)
+        private IEnumerable<BlockReference> GetDrawingBlocks(Transaction tr, OpenMode mode)
         {
-            List<BlockReference> blocks = new List<BlockReference>();
+            var blocks = new List<BlockReference>();
             //Get the drawings layout dictionary
-            DBDictionary layoutDict = tr.GetObject(_db.LayoutDictionaryId, OpenMode.ForRead) as DBDictionary;
-            foreach (DictionaryEntry id in layoutDict)
-            {
-                //Get the layout object
-                Layout layout = tr.GetObject((ObjectId)id.Value, OpenMode.ForRead) as Layout;
-                BlockTableRecord layoutRecord = tr.GetObject(layout.BlockTableRecordId, OpenMode.ForRead) as BlockTableRecord;
-                //Get the enumerator
-                BlockTableRecordEnumerator recordEnumerator = layoutRecord.GetEnumerator();
-                //Loop through all blocks in the block table
-                BlockReference oBr = null;
-
-                while (recordEnumerator.MoveNext())
+            var layoutDict = tr.GetObject(_db.LayoutDictionaryId, OpenMode.ForRead) as DBDictionary;
+            if (layoutDict != null)
+                foreach (DictionaryEntry id in layoutDict)
                 {
-                    Entity blcokEnt = tr.GetObject(recordEnumerator.Current, mode) as Entity;
-                    if ((oBr = blcokEnt as BlockReference) != null)
+                    //Get the layout object
+                    var layout = tr.GetObject((ObjectId) id.Value, OpenMode.ForRead) as Layout;
+                    if (layout == null) continue;
+                    var layoutRecord = tr.GetObject(layout.BlockTableRecordId, OpenMode.ForRead) as BlockTableRecord;
+                    //Get the enumerator
+                    if (layoutRecord != null)
                     {
-                        blocks.Add(oBr);
+                        BlockTableRecordEnumerator recordEnumerator = layoutRecord.GetEnumerator();
+                        //Loop through all blocks in the block table
+
+                        while (recordEnumerator.MoveNext())
+                        {
+                            var blcokEnt = tr.GetObject(recordEnumerator.Current, mode) as Entity;
+                            BlockReference oBr;
+                            if ((oBr = blcokEnt as BlockReference) != null)
+                            {
+                                blocks.Add(oBr);
+                            }
+                        }
                     }
                 }
-            }
 
             return blocks.Where(b => ValidateBlock(b, tr)).ToList();
         }
@@ -528,7 +527,9 @@ namespace MainPower.DrawingsDatabase.AutoCad
         {
             if (_blockNames.Contains(blkRef.Name))
                 return true;
-            if (_blockNames.Contains(((BlockTableRecord)(tr.GetObject(blkRef.DynamicBlockTableRecord, OpenMode.ForRead))).Name))
+            if (
+                _blockNames.Contains(
+                    ((BlockTableRecord) (tr.GetObject(blkRef.DynamicBlockTableRecord, OpenMode.ForRead))).Name))
                 return true;
 
             return false;
@@ -544,12 +545,14 @@ namespace MainPower.DrawingsDatabase.AutoCad
                     case "E-A3-L":
                         return "A3L";
                     case "ENGINEERING - DYNAMIC TITLE BLOCK":
-                        return (from DynamicBlockReferenceProperty d in blkRef.DynamicBlockReferencePropertyCollection where d.PropertyName == "Visibility1" select d).First().Value.ToString();
+                        return (from DynamicBlockReferenceProperty d in blkRef.DynamicBlockReferencePropertyCollection
+                                where d.PropertyName == "Visibility1"
+                                select d).First().Value.ToString();
                     default:
                         return "";
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage("Unexpected error in GetSheetSizeFromBlock" + "\n" + ex.Message + "\n");
                 return "";
@@ -566,12 +569,15 @@ namespace MainPower.DrawingsDatabase.AutoCad
                 switch (blkRef.GetBlockName(tr))
                 {
                     case "ENGINEERING - DYNAMIC TITLE BLOCK":
-                        var p = (from DynamicBlockReferenceProperty d in blkRef.DynamicBlockReferencePropertyCollection where d.PropertyName == "Visibility1" select d).First();
+                        DynamicBlockReferenceProperty p =
+                            (from DynamicBlockReferenceProperty d in blkRef.DynamicBlockReferencePropertyCollection
+                             where d.PropertyName == "Visibility1"
+                             select d).First();
                         p.Value = sheetSize;
                         break;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _ed.WriteMessage("Unexpected error in SetBlockSheetSize()" + "\n" + ex.Message + "\n");
             }
@@ -579,8 +585,10 @@ namespace MainPower.DrawingsDatabase.AutoCad
 
         private static Drawing GetDrawingFromBlock(DrawingsDataContext dc, BlockReference blkRef, Transaction tr)
         {
-             Dictionary<string, AttributeReference> attribs = GetBlockAttributes(blkRef, tr);
-             return dc.Drawings.Where(d=>d.Number == attribs["DRAWING-NUMBER"].TextString && d.Sheet == attribs["SHEET"].TextString).FirstOrDefault();
+            Dictionary<string, AttributeReference> attribs = GetBlockAttributes(blkRef, tr);
+            return
+                dc.Drawings.FirstOrDefault(
+                    d => d.Number == attribs["DRAWING-NUMBER"].TextString && d.Sheet == attribs["SHEET"].TextString);
         }
 
         /// <summary>
@@ -588,13 +596,12 @@ namespace MainPower.DrawingsDatabase.AutoCad
         /// </summary>
         /// <param name="tr"></param>
         /// <returns></returns>
-        private List<BlockReference> PromptForBlock(Transaction tr)
+        private IEnumerable<BlockReference> PromptForBlock(Transaction tr)
         {
-            List<BlockReference> blocks = new List<BlockReference>();
-            TypedValue[] filList = new TypedValue[1] { new TypedValue((int)DxfCode.Start, "INSERT") };
-            SelectionFilter filter = new SelectionFilter(filList);
-            PromptSelectionOptions opts = new PromptSelectionOptions();
-            opts.MessageForAdding = "Select block references: ";
+            var blocks = new List<BlockReference>();
+            var filList = new[] {new TypedValue((int) DxfCode.Start, "INSERT")};
+            var filter = new SelectionFilter(filList);
+            var opts = new PromptSelectionOptions {MessageForAdding = "Select block references: "};
 
             PromptSelectionResult res = _ed.GetSelection(opts, filter);
 
@@ -602,14 +609,9 @@ namespace MainPower.DrawingsDatabase.AutoCad
             {
                 SelectionSet selSet = res.Value;
                 ObjectId[] idArray = selSet.GetObjectIds();
-                foreach (ObjectId blkId in idArray)
-                {
-                    BlockReference blkRef = (BlockReference)tr.GetObject(blkId, OpenMode.ForWrite);
-                    if (ValidateBlock(blkRef, tr))
-                    {
-                        blocks.Add(blkRef);
-                    }
-                }
+                blocks.AddRange(
+                    idArray.Select(blkId => (BlockReference) tr.GetObject(blkId, OpenMode.ForWrite)).Where(
+                        blkRef => ValidateBlock(blkRef, tr)));
             }
             return blocks;
         }
@@ -617,33 +619,22 @@ namespace MainPower.DrawingsDatabase.AutoCad
         private static Dictionary<string, AttributeReference> GetBlockAttributes(BlockReference blkRef, Transaction tr)
         {
             AttributeCollection attCol = blkRef.AttributeCollection;
-            Dictionary<string, AttributeReference> attribs = new Dictionary<string, AttributeReference>();
 
-            foreach (ObjectId attId in attCol)
-            {
-                AttributeReference attRef = (AttributeReference)tr.GetObject(attId, OpenMode.ForWrite);
-                attribs.Add(attRef.Tag, attRef);
-            }
-
-            return attribs;
+            return
+                (from ObjectId attId in attCol select (AttributeReference) tr.GetObject(attId, OpenMode.ForWrite)).
+                    ToDictionary(attRef => attRef.Tag);
         }
 
         private static Drawing GetDrawing(DrawingsDataContext dc, string drawingNumber, string sheetNumber)
         {
-            var drawings = (from d in dc.Drawings where d.Number ==  drawingNumber && d.Sheet == sheetNumber select d);
-            if (drawings.Count() == 0)
-            {
-                return null;
-            }
-            else
-            {
-                return drawings.First();
-            }
+            IQueryable<Drawing> drawings =
+                (from d in dc.Drawings where d.Number == drawingNumber && d.Sheet == sheetNumber select d);
+            return !drawings.Any() ? null : drawings.First();
         }
-        
+
         #endregion
     }
-        
+
     /// <summary>
     /// Various Extension Methods
     /// </summary>
@@ -657,15 +648,10 @@ namespace MainPower.DrawingsDatabase.AutoCad
         /// <returns></returns>
         public static string GetBlockName(this BlockReference blockRef, Transaction transaction)
         {
-            if (blockRef.IsDynamicBlock)
-            {
-                return ((BlockTableRecord)(transaction.GetObject(blockRef.DynamicBlockTableRecord, OpenMode.ForRead))).Name;
-            }
-            else
-            {
-                return blockRef.Name;
-            }
-
+            return blockRef.IsDynamicBlock
+                       ? ((BlockTableRecord) (transaction.GetObject(blockRef.DynamicBlockTableRecord, OpenMode.ForRead)))
+                             .Name
+                       : blockRef.Name;
         }
     }
 }

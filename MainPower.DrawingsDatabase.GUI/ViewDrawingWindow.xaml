@@ -1,22 +1,27 @@
 ﻿<Window x:Class="MainPower.DrawingsDatabase.Gui.ViewDrawingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:wpg="clr-namespace:HC.Utils.Controls;assembly=HC.Utils"
-        
-        Title="View/Edit Drawing" Loaded="Window_Loaded" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="588" Width="703" Name="ViewPage" Closing="ViewPage_Closing" Icon="/DrawingsDatabaseGUI;component/Images/MainPowerIconGreen.png">
-    <Grid>
-        <DockPanel LastChildFill="True">
-            <Label Name="lblEditMessage" DockPanel.Dock="Top" Content="IMPORTANT: All fields visible in cad should be modified in cad only, so that the title blocks remain in sync" Visibility="Collapsed" Foreground="White" Background="#FFD14B26" />
-            <Button DockPanel.Dock="Bottom" Content="Enable Editing..." Click="Button_Click" Height="23" VerticalAlignment="Bottom" Name="btnSave" IsDefault="True" />
-            <wpg:PropertyGrid  DockPanel.Dock="Top" Name="propGrid" AllowDrop="True" IsEnabled="True" IsReadOnly="True" AutomaticlyExpandObjects="False">
-                <wpg:PropertyGrid.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <ResourceDictionary Source="/HC.Utils;component/PropertyGrid/Themes/Generic.xaml" />
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </wpg:PropertyGrid.Resources>
-            </wpg:PropertyGrid>   
-        </DockPanel>
-    </Grid>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:wpg="clr-namespace:HC.Utils.Controls;assembly=HC.Utils"
+        Title="View/Edit Drawing" Loaded="WindowLoaded" mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="588" Width="703" Name="ViewPage"
+        Closing="ViewPageClosing" Icon="/DrawingsDatabaseGUI;component/Images/MainPowerIconGreen.png">
+  <Grid>
+    <DockPanel LastChildFill="True">
+      <Label Name="lblEditMessage" DockPanel.Dock="Top"
+             Content="IMPORTANT: All fields visible in cad should be modified in cad only, so that the title blocks remain in sync"
+             Visibility="Collapsed" Foreground="White" Background="#FFD14B26" />
+      <Button DockPanel.Dock="Bottom" Content="Enable Editing..." Click="ButtonClick" Height="23"
+              VerticalAlignment="Bottom" Name="btnSave" IsDefault="True" />
+      <wpg:PropertyGrid DockPanel.Dock="Top" Name="propGrid" AllowDrop="True" IsEnabled="True" IsReadOnly="True"
+                        AutomaticlyExpandObjects="False">
+        <wpg:PropertyGrid.Resources>
+          <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+              <ResourceDictionary Source="/HC.Utils;component/PropertyGrid/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+          </ResourceDictionary>
+        </wpg:PropertyGrid.Resources>
+      </wpg:PropertyGrid>
+    </DockPanel>
+  </Grid>
 </Window>
