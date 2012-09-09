@@ -157,22 +157,21 @@
     <Compile Include="RawViewer.xaml.cs">
       <DependentUpon>RawViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RelayCommand.cs" />
     <Compile Include="SearchAssistant.cs" />
     <Compile Include="SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SearchView.xaml.cs">
+    <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SearchViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="SubBrowser.xaml.cs">
       <DependentUpon>SubBrowser.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewDrawingWindow.xaml.cs">
       <DependentUpon>ViewDrawingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -201,7 +200,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SearchView.xaml">
+    <Page Include="Views\SearchView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -277,6 +276,8 @@
     <Resource Include="Images\MainPowerIconGreen.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Models\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +287,10 @@
     <ProjectReference Include="..\MainPower.DrawingsDatabase.DatabaseHelper\MainPower.DrawingsDatabase.DatabaseHelper.csproj">
       <Project>{8A886CD4-4C87-4502-8E35-B8755CF199F6}</Project>
       <Name>MainPower.DrawingsDatabase.DatabaseHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MicroMvvm\MicroMvvm.csproj">
+      <Project>{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}</Project>
+      <Name>MicroMvvm</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

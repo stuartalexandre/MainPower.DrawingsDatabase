@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace MainPower.DrawingsDatabase.Gui
+namespace MainPower.DrawingsDatabase.Gui.ViewModels
 {
     public class ViewModelBase :INotifyPropertyChanged, IDisposable
     {

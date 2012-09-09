@@ -1,13 +1,16 @@
-﻿<Page x:Class="MainPower.DrawingsDatabase.Gui.SearchView"
+﻿<Page x:Class="MainPower.DrawingsDatabase.Gui.Views.SearchView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:MainPower.DrawingsDatabase.Gui"
+        xmlns:viewmodels="clr-namespace:MainPower.DrawingsDatabase.Gui.ViewModels"
         xmlns:db="clr-namespace:MainPower.DrawingsDatabase.DatabaseHelper;assembly=DatabaseHelper"
         xmlns:utilControls="clr-namespace:HC.Utils.Controls;assembly=HC.Utils"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Search Database" Loaded="Page_Loaded">
+        Title="Search Database">
+    <Page.DataContext>
+        <viewmodels:SearchViewModel />
+    </Page.DataContext>
+    
     <Page.Resources>
-        
         <DataTemplate x:Key="HeaderTemplateSortAsc" >
             <Grid Height ="15" x:Name="HeaderTemplateSortAscGrid">
                 <Grid.ColumnDefinitions >
@@ -39,7 +42,7 @@
             <local:InverseBooleanConverter x:Key="InvBool" />
         </Grid.Resources>
         <DockPanel Margin="0,0,0,0">
-            <Expander Header="Search" Name="expSearch" IsExpanded="True" DockPanel.Dock="Top" Expanded="expSearch_Expanded" AllowDrop="True">
+            <Expander Header="Search" Name="expSearch" IsExpanded="True" DockPanel.Dock="Top"  AllowDrop="True">
                 <Grid Height="253" AllowDrop="True">
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="137,17,0,0" Name="txtDrawingNumber" VerticalAlignment="Top" Width="270" />
                     <Label Content="Drawing Number" Height="28" HorizontalAlignment="Left" Margin="14,12,0,0" VerticalAlignment="Top" />
@@ -51,7 +54,7 @@
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="137,104,0,0" Name="txtTitle2" VerticalAlignment="Top" Width="270" IsEnabled="{Binding ElementName=chkOneTitle, Path=IsChecked, Converter={StaticResource InvBool}}" />
                     <Label Content="Title 3" Height="28" HorizontalAlignment="Left" Margin="14,131,0,0" VerticalAlignment="Top" />
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="137,133,0,0" Name="txtTitle3" VerticalAlignment="Top" Width="270" IsEnabled="{Binding ElementName=chkOneTitle, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <Button Content="Search!" Margin="6,220,0,0" Name="btnSearch" Click="btnSearch_Click" Height="23" VerticalAlignment="Top" IsDefault="True" HorizontalAlignment="Left" Width="75" />
+                    <Button Content="Search!" Margin="6,220,0,0" Name="btnSearch" Height="23" VerticalAlignment="Top" IsDefault="True" HorizontalAlignment="Left" Width="75" />
                     <Label Content="Category:" Height="28" HorizontalAlignment="Left" Margin="413,46,0,0" VerticalAlignment="Top" Width="83"/>
                     <CheckBox Content="Overhead" Height="16" HorizontalAlignment="Left" Margin="428,122,0,0" Name="chkOverhead" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
                     <CheckBox Content="Underground" Height="16" HorizontalAlignment="Left" Margin="428,188,0,0" Name="chkUnderground" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
@@ -77,16 +80,16 @@
                         <ComboBoxItem Content="Must contain all words" />
                         <ComboBoxItem Content="Can contain any words" />
                     </ComboBox>
-                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="6,191,0,0" Name="btnClear" VerticalAlignment="Top" Width="75" Click="btnClear_Click" />
+                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="6,191,0,0" Name="btnClear" VerticalAlignment="Top" Width="75" Command="{Binding ClearSearch}" />
                     <CheckBox Content="Electronic" Height="16" HorizontalAlignment="Left" Margin="669,78,0,0" Name="chkElectronic" VerticalAlignment="Top" />
                     <CheckBox Content="Not Electronic" Height="16" HorizontalAlignment="Left" Margin="669,100,0,0" Name="chkNotElectronic" VerticalAlignment="Top" />
                     <CheckBox Content="Include Legacy Numbers" Height="16" HorizontalAlignment="Left" Margin="428,20,0,0" Name="chkLegacyNumbers" VerticalAlignment="Top" />
                 </Grid>
             </Expander>
-            <Expander Header="Really Advanced Search" Name="expReallyAdvcSearch" ExpandDirection="Down" DockPanel.Dock="Top" Expanded="expReallyAdvcSearch_Expanded" FontWeight="Normal" FontSize="12">
+            <Expander Header="Really Advanced Search" Name="expReallyAdvcSearch" ExpandDirection="Down" DockPanel.Dock="Top" FontWeight="Normal" FontSize="12">
                 <Grid>
                     <TextBox Text='Number.Contains("13") OR (Status== "CURRENT" AND Category== "ZONESUBSTATION")' Height="130" Margin="0,31,0,35" Name="txtAdvSearch" AcceptsReturn="True" />
-                    <Button Content="Really Advanced Search" HorizontalAlignment="Left" Margin="6,0,0,6" Name="btnReallyAdvSearch" Width="135" Height="23" VerticalAlignment="Bottom" Click="btnReallyAdvSearch_Click" IsDefault="True" />
+                    <Button Content="Really Advanced Search" HorizontalAlignment="Left" Margin="6,0,0,6" Name="btnReallyAdvSearch" Width="135" Height="23" VerticalAlignment="Bottom" Command="{Binding AdvancedSearch}" IsDefault="True" />
                     <Label Content="Enter a LINQ Query here:" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" VerticalAlignment="Top" />
                 </Grid>
                 <Expander.BorderBrush>
@@ -98,25 +101,23 @@
             </Expander>
             <ListView utilControls:ListViewSorter.IsListviewSortable="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Name="listView1" SelectionMode="Single" ItemsSource="{Binding SearchResults}" Grid.Column="1" DockPanel.Dock="Bottom">
                 <ListView.Resources>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <EventSetter Event="MouseDoubleClick" Handler="listView1_MouseDoubleClick" />
-                    </Style>
+                    
                     <db:DrawingCategoryConverter x:Key="catCon" />
                     <db:DrawingStatusConverter x:Key="statCon" />
                     <db:DateConverter x:Key="dateCon" />
                 </ListView.Resources>
                 <ListView.ContextMenu>
-                    <ContextMenu Opened="ContextMenu_Opened">
-                        <MenuItem Header="Open Drawing" Click="mnuOpenDrawing_Click" />
-                        <MenuItem Header="Show in explorer" Click="mnuOpenInExplorer_Click" />
-                        <MenuItem Name="mnuDeleteDrawing" Header="Delete" Click="mnuDeleteDrawing_Click" Visibility="Collapsed" />
+                    <ContextMenu>
+                        <MenuItem Header="Open Drawing" />
+                        <MenuItem Header="Show in explorer"/>
+                        <MenuItem Name="mnuDeleteDrawing" Header="Delete" Visibility="Collapsed" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
                     <GridView>
                         <GridView.ColumnHeaderContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Choose Columns..." Click="mnuChooseColumns" />
+                                <MenuItem Header="Choose Columns..." />
                             </ContextMenu>
                         </GridView.ColumnHeaderContextMenu>
                         <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"  Width="70" Header="Number" DisplayMemberBinding="{Binding Number}" />
