@@ -110,6 +110,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcadVersion.cs" />
     <Compile Include="DateConverter.cs" />
     <Compile Include="DrawingStatus.cs" />
     <Compile Include="DrawingCategory.cs" />

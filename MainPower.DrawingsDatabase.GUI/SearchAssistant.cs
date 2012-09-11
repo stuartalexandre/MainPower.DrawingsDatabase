@@ -11,7 +11,7 @@ using System.Reflection;
 namespace MainPower.DrawingsDatabase.Gui
 {
     /// <summary>
-    /// Search options which specifiy to search the
+    /// Search options which specifiy to search the 
     /// target
     /// </summary>
     public enum TextSearchOption

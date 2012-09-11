@@ -153,6 +153,57 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             Process.Start(fileName);
         }
 
+        public static void InstallPlugin(AcadVersion version)
+        {
+            string rootPath = "";
+
+            switch (version)
+            {
+                case AcadVersion.ACAD2010:
+
+                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
+                    break;
+                case AcadVersion.ACAD2012:
+                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
+                    break;
+                default:
+                    throw new ArgumentException("Version not supported");
+            }
+            //DESCRIPTION
+            string description = "Drawings database helper";
+            //LOADER
+            string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
+            //LOADCTRLS
+            int loadCtrls = 2;
+            //MANAGED
+            int managed = 1;
+
+
+            Microsoft.Win32.Registry.SetValue(rootPath, "DESCRIPTION", description);
+            Microsoft.Win32.Registry.SetValue(rootPath, "LOADER", loader);
+            Microsoft.Win32.Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, Microsoft.Win32.RegistryValueKind.DWord);
+            Microsoft.Win32.Registry.SetValue(rootPath, "MANAGED", managed, Microsoft.Win32.RegistryValueKind.DWord);
+        }
+
+        public static void RemovePlugin(AcadVersion version)
+        {
+            string rootPath = "";
+
+            switch (version)
+            {
+                case AcadVersion.ACAD2010:
+
+                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
+                    break;
+                case AcadVersion.ACAD2012:
+                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
+                    break;
+                default:
+                    throw new ArgumentException("Version not supported");
+            }
+            Microsoft.Win32.Registry.CurrentUser.DeleteSubKey(rootPath);
+        }
+
         
     }
 }

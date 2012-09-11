@@ -20,6 +20,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
     using System.Linq.Expressions;
     using System.ComponentModel;
     using System;
+    using System.Runtime.Serialization;
 
 
     [global::System.Data.Linq.Mapping.DatabaseAttribute(Name = "Drawings")]
@@ -69,7 +70,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
     }
 
     [global::System.Data.Linq.Mapping.TableAttribute(Name = "dbo.Drawings")]
-    public partial class Drawing : INotifyPropertyChanging, INotifyPropertyChanged
+    [Serializable]
+    public partial class Drawing : INotifyPropertyChanging, INotifyPropertyChanged, ICloneable
     {
 
         private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1541,6 +1543,11 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

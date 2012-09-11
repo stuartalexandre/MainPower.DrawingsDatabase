@@ -1,0 +1,29 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="MainPower.DrawingsDatabase.Gui.Views.AddTemplateDrawingView"
+        xmlns:viewmodels="clr-namespace:MainPower.DrawingsDatabase.Gui.ViewModels"
+        xmlns:mvvm="clr-namespace:MicroMvvm;assembly=MicroMvvm"
+        mvvm:WindowClosingBehavior.Closing="{Binding Closing}"
+        Title="AddTemplateDrawingView">
+    <Window.DataContext>
+        <viewmodels:AddTemplateDrawingViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid>
+        <Label Content="Recent Templates:" HorizontalAlignment="Left" Margin="0,211.76,0,0" VerticalAlignment="Top"/>
+        
+        <xctk:PropertyGrid SelectedObject="{Binding SelectedTemplate.Drawing}" Margin="187.041,10,10,10"/>
+        
+        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" Margin="10,237.72,0,10" HorizontalAlignment="Left" Width="172.041"/>
+        <Button Command="{Binding AddTemplate}" Content="Add new template" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="172.041"/>
+        <Button Command="{Binding AddExistingTemplate}" Content="Add existing template" HorizontalAlignment="Left" Margin="10,36.96,0,0" VerticalAlignment="Top" Width="172.041"/>
+        <Button Command="{Binding SaveTemplate}" Content="Save template" HorizontalAlignment="Left" Margin="10,63.92,0,0" VerticalAlignment="Top" Width="172.041"/>
+        <Button Command="{Binding SaveTemplateAs}" Content="Save template as.." HorizontalAlignment="Left" Margin="10,90.88,0,0" VerticalAlignment="Top" Width="172.041"/>
+        <Button Command="{Binding ResetTemplate}" Content="Reset Template" HorizontalAlignment="Left" Margin="10,117.84,0,0" VerticalAlignment="Top" Width="172.041"/>
+        <Button Command="{Binding DeleteTemplate}" Content="Delete Template" HorizontalAlignment="Left" Margin="10,144.8,0,0" VerticalAlignment="Top" Width="172.041"/>
+        <Button Command="{Binding AddDrawing}" Content="Add Drawing to DB" Margin="10,171.76,0,0" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="172.041" />
+    </Grid>
+</Window>

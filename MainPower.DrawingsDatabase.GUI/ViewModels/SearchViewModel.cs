@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,326 +20,297 @@ using HC.Utils.Controls;
 using MainPower.DrawingsDatabase.DatabaseHelper;
 using Drawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 using MicroMvvm;
+using MainPower.DrawingsDatabase.Gui.Models;
 
 namespace MainPower.DrawingsDatabase.Gui.ViewModels
 {
-    public class SearchViewModel : ViewModelBase//, IListViewPrinter
+    public class SearchViewModel : ViewModelBase
     {
-
+        
 #region Fields
-
         private ObservableCollection<Drawing> _searchresults = new ObservableCollection<Drawing>();
-
-        private string _drawingNumber;
-        private string _title1;
-        private string _title2;
-        private string _title3;
-        private string _projectTitle;
-        private DateTime _startDate;
-        private DateTime _endDate;
-        private TextSearchOption _searchType;
-        private bool _includeElectronic;
-        private bool _includeNonElectronic;
-        private bool _searchAllTitles;
-        private bool _includeLegacyNumbers;
-        private bool _searchDateRange;
-        private bool _categoryAll;
-        private bool _categoryMiscellaneous;
-        private bool _categoryOverhead;
-        private bool _categoryGXPSubstation;
-        private bool _categoryZoneSubstation;
-        private bool _categoryUnderground;
-        private bool _categoryCommunications;
-        private bool _categoryGeneration;
-        private bool _statusAll;
-        private bool _statusAsBuilt;
-        private bool _statusCancelled;
-        private bool _statusSuperseded;
-        private bool _statusPlanned;
-        private bool _statusCurrent;
+        private DrawingSearchModel _searchFields = new DrawingSearchModel();
         private Drawing _selectedDrawing;
-        private string _advancedSearchQuery;
 #endregion
 
 #region Properties
-
         public string DrawingNumber
         {
-            get { return _drawingNumber; }
+            get { return _searchFields.DrawingNumber; }
             set
             {
                 if (DrawingNumber == value) return;
-                _drawingNumber = value;
+                _searchFields.DrawingNumber = value;
                 OnPropertyChanged("DrawingNumber");
             }
         }
         public string Title1
         {
-            get { return _title1; }
+            get { return _searchFields.Title1; }
             set
             {
                 if (Title1 == value) return;
-                _title1 = value;
+                _searchFields.Title1 = value;
                 OnPropertyChanged("Title1");
             }
         }
         public string Title2
         {
-            get { return _title2; }
+            get { return _searchFields.Title2; }
             set
             {
                 if (Title2 == value) return;
-                _title2 = value;
+                _searchFields.Title2 = value;
                 OnPropertyChanged("Title2");
             }
         }
         public string Title3
         {
-            get { return _title3; }
+            get { return _searchFields.Title3; }
             set
             {
                 if (Title3 == value) return;
-                _title3 = value;
+                _searchFields.Title3 = value;
                 OnPropertyChanged("Title3");
             }
         }
         public string ProjectTitle
         {
-            get { return _projectTitle; }
+            get { return _searchFields.ProjectTitle; }
             set
             {
                 if (ProjectTitle == value) return;
-                _projectTitle = value;
+                _searchFields.ProjectTitle = value;
                 OnPropertyChanged("ProjectTitle");
             }
         }
         public DateTime StartDate
         {
-            get { return _startDate; }
+            get { return _searchFields.StartDate; }
             set
             {
                 if (StartDate == value) return;
-                _startDate = value;
+                _searchFields.StartDate = value;
                 OnPropertyChanged("StartDate");
             }
         }
         public DateTime EndDate
         {
-            get { return _endDate; }
+            get { return _searchFields.EndDate; }
             set
             {
                 if (EndDate == value) return;
-                _endDate = value;
+                _searchFields.EndDate = value;
                 OnPropertyChanged("EndDate");
             }
         }
         public TextSearchOption SearchType
         {
-            get { return _searchType; }
+            get { return _searchFields.SearchType; }
             set
             {
                 if (SearchType == value) return;
-                _searchType = value;
+                _searchFields.SearchType = value;
                 OnPropertyChanged("SearchType");
             }
         }
         public bool IncludeElectronic
         {
-            get { return _includeElectronic; }
+            get { return _searchFields.IncludeElectronic; }
             set
             {
                 if (IncludeElectronic == value) return;
-                _includeElectronic = value;
+                _searchFields.IncludeElectronic = value;
                 OnPropertyChanged("IncludeElectronic");
             }
         }
         public bool IncludeNonElectronic
         {
-            get { return _includeNonElectronic; }
+            get { return _searchFields.IncludeNonElectronic; }
             set
             {
                 if (IncludeNonElectronic == value) return;
-                _includeNonElectronic = value;
+                _searchFields.IncludeNonElectronic = value;
                 OnPropertyChanged("IncludeNonElectronic");
             }
         }
         public bool SearchAllTitles
         {
-            get { return _searchAllTitles; }
+            get { return _searchFields.SearchAllTitles; }
             set
             {
                 if (SearchAllTitles == value) return;
-                _searchAllTitles = value;
+                _searchFields.SearchAllTitles = value;
                 OnPropertyChanged("SearchAllTitles");
             }
         }
         public bool IncludeLegacyNumbers
         {
-            get { return _includeLegacyNumbers; }
+            get { return _searchFields.IncludeLegacyNumbers; }
             set
             {
                 if (IncludeLegacyNumbers == value) return;
-                _includeLegacyNumbers = value;
+                _searchFields.IncludeLegacyNumbers = value;
                 OnPropertyChanged("IncludeLegacyNumbers");
             }
         }
         public bool SearchDateRange
         {
-            get { return _searchDateRange; }
+            get { return _searchFields.SearchDateRange; }
             set
             {
                 if (SearchDateRange == value) return;
-                _searchDateRange = value;
+                _searchFields.SearchDateRange = value;
                 OnPropertyChanged("SearchDateRange");
             }
         }
         public bool CategoryAll 
         {
-            get { return _categoryAll; }
+            get { return _searchFields.CategoryAll; }
             set
             {
                 if (CategoryAll == value) return;
-                _categoryAll = value;
+                _searchFields.CategoryAll = value;
                 OnPropertyChanged("CategoryAll");
             }
         }
         public bool CategoryMiscellaneous 
         {
-            get { return _categoryMiscellaneous; }
+            get { return _searchFields.CategoryMiscellaneous; }
             set
             {
                 if (CategoryMiscellaneous == value) return;
-                _categoryMiscellaneous = value;
+                _searchFields.CategoryMiscellaneous = value;
                 OnPropertyChanged("CategoryMiscellaneous");
             }
         }
         public bool CategoryOverhead
         {
-            get { return _categoryOverhead; }
+            get { return _searchFields.CategoryOverhead; }
             set
             {
                 if (CategoryOverhead == value) return;
-                _categoryOverhead = value;
+                _searchFields.CategoryOverhead = value;
                 OnPropertyChanged("CategoryOverhead");
             }
         }
         public bool CategoryGXPSubstation
         {
-            get { return _categoryGXPSubstation; }
+            get { return _searchFields.CategoryGXPSubstation; }
             set
             {
                 if (CategoryGXPSubstation == value) return;
-                _categoryGXPSubstation = value;
+                _searchFields.CategoryGXPSubstation = value;
                 OnPropertyChanged("CategoryGXPSubstation");
             }
         }
         public bool CategoryZoneSubstation
-        { 
-            get { return _categoryZoneSubstation; }
+        {
+            get { return _searchFields.CategoryZoneSubstation; }
             set
             {
                 if (CategoryZoneSubstation == value) return;
-                _categoryZoneSubstation = value;
+                _searchFields.CategoryZoneSubstation = value;
                 OnPropertyChanged("CategoryZoneSubstation");
             }
         }
         public bool CategoryUnderground
         {
-            get { return _categoryUnderground; }
+            get { return _searchFields.CategoryUnderground; }
             set
             {
                 if (CategoryUnderground == value) return;
-                _categoryUnderground = value;
+                _searchFields.CategoryUnderground = value;
                 OnPropertyChanged("CategoryUnderground");
             }
         }
         public bool CategoryCommunications
         {
-            get { return _categoryCommunications; }
+            get { return _searchFields.CategoryCommunications; }
             set
             {
                 if (CategoryCommunications == value) return;
-                _categoryCommunications = value;
+                _searchFields.CategoryCommunications = value;
                 OnPropertyChanged("CategoryCommunications");
             }
         }
         public bool CategoryGeneration
         {
-            get { return _categoryGeneration; }
+            get { return _searchFields.CategoryGeneration; }
             set
             {
                 if (CategoryGeneration == value) return;
-                _categoryGeneration = value;
+                _searchFields.CategoryGeneration = value;
                 OnPropertyChanged("CategoryGeneration");
             }
         }
         public bool StatusAll
         {
-            get { return _statusAll; }
+            get { return _searchFields.StatusAll; }
             set
             {
                 if (StatusAll == value) return;
-                _statusAll = value;
+                _searchFields.StatusAll = value;
                 OnPropertyChanged("StatusAll");
             }
         }
         public bool StatusAsBuilt
         {
-            get { return _statusAsBuilt; }
+            get { return _searchFields.StatusAsBuilt; }
             set
             {
                 if (StatusAsBuilt == value) return;
-                _statusAsBuilt = value;
+                _searchFields.StatusAsBuilt = value;
                 OnPropertyChanged("StatusAsBuilt");
             }
         }
         public bool StatusCancelled
         {
-            get { return _statusCancelled; }
+            get { return _searchFields.StatusCancelled; }
             set
             {
                 if (StatusCancelled == value) return;
-                _statusCancelled = value;
+                _searchFields.StatusCancelled = value;
                 OnPropertyChanged("StatusCancelled");
             }
         }
         public bool StatusSuperseded
         {
-            get { return _statusSuperseded; }
+            get { return _searchFields.StatusSuperseded; }
             set
             {
                 if (StatusSuperseded == value) return;
-                _statusSuperseded = value;
+                _searchFields.StatusSuperseded = value;
                 OnPropertyChanged("StatusSuperseded");
             }
         }
         public bool StatusPlanned
         {
-            get { return _statusPlanned; }
+            get { return _searchFields.StatusPlanned; }
             set
             {
                 if (StatusPlanned == value) return;
-                _statusPlanned = value;
+                _searchFields.StatusPlanned = value;
                 OnPropertyChanged("StatusPlanned");
             }
         }
         public bool StatusCurrent
         {
-            get { return _statusCurrent; }
+            get { return _searchFields.StatusCurrent; }
             set
             {
                 if (StatusCurrent == value) return;
-                _statusCurrent = value;
+                _searchFields.StatusCurrent = value;
                 OnPropertyChanged("StatusCurrent");
             }
         }
         public String AdvancedSearchQuery
         {
-            get { return _advancedSearchQuery; }
+            get { return _searchFields.AdvancedSearchQuery; }
             set
             {
                 if (AdvancedSearchQuery == value) return;
-                _advancedSearchQuery= value;
+                _searchFields.AdvancedSearchQuery  = value;
                 OnPropertyChanged("AdvancedSearchQuery");
             }
         }
@@ -626,7 +598,6 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 {
                     _searchresults.Add(d);
                 }
-                //if (listView1.Items.Count > 0) listView1.ScrollIntoView(listView1.Items.GetItemAt(0));
             }
 
             catch (Exception ex)

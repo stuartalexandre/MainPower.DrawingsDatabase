@@ -5,6 +5,7 @@
         xmlns:viewmodels="clr-namespace:MainPower.DrawingsDatabase.Gui.ViewModels"
         xmlns:db="clr-namespace:MainPower.DrawingsDatabase.DatabaseHelper;assembly=DatabaseHelper"
         xmlns:utilControls="clr-namespace:HC.Utils.Controls;assembly=HC.Utils"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         Title="Search Database">
     <Page.DataContext>
         <viewmodels:SearchViewModel />
@@ -36,6 +37,11 @@
                 <TextBlock HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" VerticalAlignment ="Center" TextWrapping ="Wrap" Text="{Binding }" ToolTipService.ToolTip ="{Binding}" />
             </DockPanel>
         </DataTemplate>
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="TextSearchEnumValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:TextSearchOption" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </Page.Resources>
     <Grid>
         <Grid.Resources>
@@ -44,52 +50,52 @@
         <DockPanel Margin="0,0,0,0">
             <Expander Header="Search" Name="expSearch" IsExpanded="True" DockPanel.Dock="Top"  AllowDrop="True">
                 <Grid Height="253" AllowDrop="True">
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="137,17,0,0" Name="txtDrawingNumber" VerticalAlignment="Top" Width="270" />
                     <Label Content="Drawing Number" Height="28" HorizontalAlignment="Left" Margin="14,12,0,0" VerticalAlignment="Top" />
                     <Label Content="Project Title" Height="28" HorizontalAlignment="Left" Margin="14,44,0,0" VerticalAlignment="Top" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="137,46,0,0" Name="txtProjectTitle" VerticalAlignment="Top" Width="270" />
                     <Label Content="Title 1" Height="28" HorizontalAlignment="Left" Margin="14,73,0,0" VerticalAlignment="Top" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="137,75,0,0" Name="txtTitle1" VerticalAlignment="Top" Width="270" />
                     <Label Content="Title 2" Height="28" HorizontalAlignment="Left" Margin="14,102,0,0" VerticalAlignment="Top" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="137,104,0,0" Name="txtTitle2" VerticalAlignment="Top" Width="270" IsEnabled="{Binding ElementName=chkOneTitle, Path=IsChecked, Converter={StaticResource InvBool}}" />
                     <Label Content="Title 3" Height="28" HorizontalAlignment="Left" Margin="14,131,0,0" VerticalAlignment="Top" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="137,133,0,0" Name="txtTitle3" VerticalAlignment="Top" Width="270" IsEnabled="{Binding ElementName=chkOneTitle, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <Button Content="Search!" Margin="6,220,0,0" Name="btnSearch" Height="23" VerticalAlignment="Top" IsDefault="True" HorizontalAlignment="Left" Width="75" />
                     <Label Content="Category:" Height="28" HorizontalAlignment="Left" Margin="413,46,0,0" VerticalAlignment="Top" Width="83"/>
-                    <CheckBox Content="Overhead" Height="16" HorizontalAlignment="Left" Margin="428,122,0,0" Name="chkOverhead" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Underground" Height="16" HorizontalAlignment="Left" Margin="428,188,0,0" Name="chkUnderground" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Communications" Height="16" HorizontalAlignment="Left" Margin="428,210,0,0" Name="chkComms" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Generation" Height="16" HorizontalAlignment="Left" Margin="428,232,0,0" Name="chkGeneration" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Miscellaneous" Height="16" HorizontalAlignment="Left" Margin="428,100,0,0" Name="chkMisc" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Zone Substation" Height="16" HorizontalAlignment="Left" Margin="428,166,0,0" Name="chkZoneSub" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="GXP Substation" Height="16" HorizontalAlignment="Left" Margin="428,144,0,0" Name="chkGXP" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
                     <Label Content="Status:" Height="28" HorizontalAlignment="Left" Margin="568,46,0,0" VerticalAlignment="Top" />
-                    <CheckBox Content="As Built" Height="16" HorizontalAlignment="Left" Margin="568,100,0,0" Name="chkAsBuilt" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Cancelled" Height="16" HorizontalAlignment="Left" Margin="568,122,0,0" Name="chkCancelled" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Superseded" Height="16" HorizontalAlignment="Left" Margin="568,144,0,0" Name="chkSuperseded" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="Planned" Height="16" HorizontalAlignment="Left" Margin="568,166,0,0" Name="chkPlanned" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <CheckBox Content="All" Height="16" HorizontalAlignment="Left" Margin="568,78,0,0" Name="chkStatusAll" VerticalAlignment="Top" IsChecked="True" />
-                    <CheckBox Content="All" Height="16" HorizontalAlignment="Left" Margin="428,78,0,0" Name="chkCategoryAll" VerticalAlignment="Top" Width="41" IsEnabled="True" IsChecked="True"/>
-                    <CheckBox Content="Search the same keywords for all Title Lines" Height="16" HorizontalAlignment="Left" Margin="137,220,0,0" Name="chkOneTitle" VerticalAlignment="Top" />
-                    <CheckBox Content="Current" Height="16" HorizontalAlignment="Left" Margin="568,188,0,0" Name="chkCurrent" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="137,162,0,0" Name="txtDateFrom" VerticalAlignment="Top" Width="120" IsEnabled="{Binding ElementName=chkDate, Path=IsChecked}" Text="1/1/1969" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="287,162,0,0" Name="txtDateTo" VerticalAlignment="Top" Width="120" IsEnabled="{Binding ElementName=chkDate, Path=IsChecked}" Text="1/1/2011" />
-                    <CheckBox Content="Date Range" Height="16" HorizontalAlignment="Left" Margin="14,169,0,0" Name="chkDate" VerticalAlignment="Top" />
-                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="137,191,0,0" Name="cmbTextMatch" VerticalAlignment="Top" Width="270" SelectedIndex="1">
-                        <ComboBoxItem Content="Match exact text" />
-                        <ComboBoxItem Content="Must contain all words" />
-                        <ComboBoxItem Content="Can contain any words" />
-                    </ComboBox>
-                    <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="6,191,0,0" Name="btnClear" VerticalAlignment="Top" Width="75" Command="{Binding ClearSearch}" />
-                    <CheckBox Content="Electronic" Height="16" HorizontalAlignment="Left" Margin="669,78,0,0" Name="chkElectronic" VerticalAlignment="Top" />
-                    <CheckBox Content="Not Electronic" Height="16" HorizontalAlignment="Left" Margin="669,100,0,0" Name="chkNotElectronic" VerticalAlignment="Top" />
-                    <CheckBox Content="Include Legacy Numbers" Height="16" HorizontalAlignment="Left" Margin="428,20,0,0" Name="chkLegacyNumbers" VerticalAlignment="Top" />
+
+                    <TextBox Text="{Binding DrawingNumber, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="137,17,0,0" VerticalAlignment="Top" Width="270" />
+                    <TextBox Text="{Binding ProjectTitle, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="137,46,0,0" VerticalAlignment="Top" Width="270" />
+                    <TextBox Text="{Binding Title1, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="137,75,0,0" VerticalAlignment="Top" Width="270" />
+                    <TextBox Text="{Binding Title2, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="137,104,0,0" VerticalAlignment="Top" Width="270" IsEnabled="{Binding ElementName=chkOneTitle, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <TextBox Text="{Binding Title3, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="137,133,0,0" VerticalAlignment="Top" Width="270" IsEnabled="{Binding ElementName=chkOneTitle, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <TextBox Text="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="137,162,0,0" VerticalAlignment="Top" Width="120" IsEnabled="{Binding ElementName=chkDate, Path=IsChecked}" />
+                    <TextBox Text="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" Height="23" HorizontalAlignment="Left" Margin="287,162,0,0" VerticalAlignment="Top" Width="120" IsEnabled="{Binding ElementName=chkDate, Path=IsChecked}" />
+
+                    <CheckBox IsChecked="{Binding CategoryOverhead}" Content="Overhead" Height="16" HorizontalAlignment="Left" Margin="428,122,0,0" Name="chkOverhead" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding CategoryUnderground}" Content="Underground" Height="16" HorizontalAlignment="Left" Margin="428,188,0,0" Name="chkUnderground" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding CategoryCommunications}" Content="Communications" Height="16" HorizontalAlignment="Left" Margin="428,210,0,0" Name="chkComms" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding CategoryGeneration}" Content="Generation" Height="16" HorizontalAlignment="Left" Margin="428,232,0,0" Name="chkGeneration" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding CategoryMiscellaneous}" Content="Miscellaneous" Height="16" HorizontalAlignment="Left" Margin="428,100,0,0" Name="chkMisc" VerticalAlignment="Top" Width="95" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding CategoryZoneSubstation}" Content="Zone Substation" Height="16" HorizontalAlignment="Left" Margin="428,166,0,0" Name="chkZoneSub" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding CategoryGXPSubstation}" Content="GXP Substation" Height="16" HorizontalAlignment="Left" Margin="428,144,0,0" Name="chkGXP" VerticalAlignment="Top" Width="109" IsEnabled="{Binding ElementName=chkCategoryAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding StatusAsBuilt}" Content="As Built" Height="16" HorizontalAlignment="Left" Margin="568,100,0,0" Name="chkAsBuilt" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding StatusCancelled}" Content="Cancelled" Height="16" HorizontalAlignment="Left" Margin="568,122,0,0" Name="chkCancelled" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding StatusSuperseded}" Content="Superseded" Height="16" HorizontalAlignment="Left" Margin="568,144,0,0" Name="chkSuperseded" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding StatusPlanned}" Content="Planned" Height="16" HorizontalAlignment="Left" Margin="568,166,0,0" Name="chkPlanned" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding StatusAll}" Content="All" Height="16" HorizontalAlignment="Left" Margin="568,78,0,0" Name="chkStatusAll" VerticalAlignment="Top" />
+                    <CheckBox IsChecked="{Binding CategoryAll}" Content="All" Height="16" HorizontalAlignment="Left" Margin="428,78,0,0" Name="chkCategoryAll" VerticalAlignment="Top" Width="41" IsEnabled="True" />
+                    <CheckBox IsChecked="{Binding SearchAllTitles}" Content="Search the same keywords for all Title Lines" Height="16" HorizontalAlignment="Left" Margin="137,220,0,0" Name="chkOneTitle" VerticalAlignment="Top" />
+                    <CheckBox IsChecked="{Binding StatusCurrent}" Content="Current" Height="16" HorizontalAlignment="Left" Margin="568,188,0,0" Name="chkCurrent" VerticalAlignment="Top" IsEnabled="{Binding ElementName=chkStatusAll, Path=IsChecked, Converter={StaticResource InvBool}}" />
+                    <CheckBox IsChecked="{Binding SearchDateRange}" Content="Date Range" Height="16" HorizontalAlignment="Left" Margin="14,169,0,0" Name="chkDate" VerticalAlignment="Top" />
+                    <CheckBox IsChecked="{Binding IncludeElectronic}" Content="Electronic" Height="16" HorizontalAlignment="Left" Margin="669,78,0,0" Name="chkElectronic" VerticalAlignment="Top" />
+                    <CheckBox IsChecked="{Binding IncludeNonElectronic}" Content="Not Electronic" Height="16" HorizontalAlignment="Left" Margin="669,100,0,0" Name="chkNotElectronic" VerticalAlignment="Top" />
+                    <CheckBox IsChecked="{Binding IncludeLegacyNumbers}" Content="Include Legacy Numbers" Height="16" HorizontalAlignment="Left" Margin="428,20,0,0" Name="chkLegacyNumbers" VerticalAlignment="Top" />
+
+                    <ComboBox SelectedItem="{Binding SearchType}" Height="23" HorizontalAlignment="Left" Margin="137,191,0,0" Name="cmbTextMatch" VerticalAlignment="Top" Width="270" ItemsSource="{Binding Source={StaticResource TextSearchEnumValues}}" />
+                    
+                    <Button Command="{Binding ClearSearch}" Content="Clear" Height="23" HorizontalAlignment="Left" Margin="6,191,0,0" Name="btnClear" VerticalAlignment="Top" Width="75" />
+                    <Button Command="{Binding Search}" Content="Search!" Margin="6,220,0,0" Name="btnSearch" Height="23" VerticalAlignment="Top" IsDefault="True" HorizontalAlignment="Left" Width="75" />
                 </Grid>
             </Expander>
             <Expander Header="Really Advanced Search" Name="expReallyAdvcSearch" ExpandDirection="Down" DockPanel.Dock="Top" FontWeight="Normal" FontSize="12">
                 <Grid>
-                    <TextBox Text='Number.Contains("13") OR (Status== "CURRENT" AND Category== "ZONESUBSTATION")' Height="130" Margin="0,31,0,35" Name="txtAdvSearch" AcceptsReturn="True" />
-                    <Button Content="Really Advanced Search" HorizontalAlignment="Left" Margin="6,0,0,6" Name="btnReallyAdvSearch" Width="135" Height="23" VerticalAlignment="Bottom" Command="{Binding AdvancedSearch}" IsDefault="True" />
+                    <TextBox Text="{Binding AdvancedSearchQuery}" Height="130" Margin="0,31,0,35" Name="txtAdvSearch" AcceptsReturn="True" />
+                    <Button Command="{Binding AdvancedSearch}" Content="Really Advanced Search" HorizontalAlignment="Left" Margin="6,0,0,6" Name="btnReallyAdvSearch" Width="135" Height="23" VerticalAlignment="Bottom" IsDefault="True" />
                     <Label Content="Enter a LINQ Query here:" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" VerticalAlignment="Top" />
                 </Grid>
                 <Expander.BorderBrush>
@@ -99,18 +105,17 @@
                     <SolidColorBrush />
                 </Expander.Background>
             </Expander>
-            <ListView utilControls:ListViewSorter.IsListviewSortable="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Name="listView1" SelectionMode="Single" ItemsSource="{Binding SearchResults}" Grid.Column="1" DockPanel.Dock="Bottom">
+            <ListView SelectedItem="{Binding SelectedDrawing}" utilControls:ListViewSorter.IsListviewSortable="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Name="listView1" SelectionMode="Single" ItemsSource="{Binding SearchResults}" Grid.Column="1" DockPanel.Dock="Bottom">
                 <ListView.Resources>
-                    
                     <db:DrawingCategoryConverter x:Key="catCon" />
                     <db:DrawingStatusConverter x:Key="statCon" />
                     <db:DateConverter x:Key="dateCon" />
                 </ListView.Resources>
                 <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Open Drawing" />
-                        <MenuItem Header="Show in explorer"/>
-                        <MenuItem Name="mnuDeleteDrawing" Header="Delete" Visibility="Collapsed" />
+                        <MenuItem Command="{Binding OpenDrawing}" Header="Open Drawing" />
+                        <MenuItem Command="{Binding OpenDrawingInExplorer}" Header="Show in explorer"/>
+                        <MenuItem Command="{Binding DeleteDrawing}" Name="mnuDeleteDrawing" Header="Delete" Visibility="Collapsed" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>

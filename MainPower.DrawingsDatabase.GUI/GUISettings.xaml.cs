@@ -34,22 +34,22 @@ namespace MainPower.DrawingsDatabase.Gui
                 txtSubs.AppendText(sub + Environment.NewLine);
             }
 
-            if (Properties.Settings.Default.PageSize == PaperKind.A3)
-            {
-                radioA3.IsChecked = true;
-            }
-            else
-            {
-                radioA4.IsChecked = true;
-            }
-            if (Properties.Settings.Default.PageOrientation == PageOrientation.Portrait)
-            {
-                radioPortrait.IsChecked = true;
-            }
-            else
-            {
-                radioLandscape.IsChecked = true;
-            }
+            //if (Properties.Settings.Default.PageSize == PaperKind.A3)
+            //{
+            //    radioA3.IsChecked = true;
+            //}
+            //else
+            //{
+            //    radioA4.IsChecked = true;
+            //}
+            //if (Properties.Settings.Default.PageOrientation == PageOrientation.Portrait)
+            //{
+            //   radioPortrait.IsChecked = true;
+            //}
+            //else
+            //{
+            //    radioLandscape.IsChecked = true;
+            //}
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

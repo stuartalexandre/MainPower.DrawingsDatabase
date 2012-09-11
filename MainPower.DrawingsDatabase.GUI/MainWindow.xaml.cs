@@ -18,6 +18,7 @@ using System.Reflection;
 using System.IO;
 using HC.Utils;
 using MainPower.DrawingsDatabase.Gui.Properties;
+using MainPower.DrawingsDatabase.Gui.Views;
 
 namespace MainPower.DrawingsDatabase.Gui
 {
@@ -63,7 +64,8 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void mnuAdd_Click(object sender, RoutedEventArgs e)
         {
-            new AddDrawingWindow().Show();
+            //new AddDrawingWindow().Show();
+            new AddTemplateDrawingView().Show();
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace MainPower.DrawingsDatabase.Gui
             _searchNumber++;
             Grid g = new Grid();
             Frame f = new Frame();
-            f.Navigate(new SearchPage());
+            f.Navigate(new SearchView());
             g.Children.Add(f);
 
             cti.Content = g;
@@ -109,49 +111,9 @@ namespace MainPower.DrawingsDatabase.Gui
             new SubBrowser().Show();
         }
 
-        private void mnuInstallPlugin_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
-
-                //DESCRIPTION
-                string description = "Drawings database helper";
-                //LOADER
-                string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
-                //LOADCTRLS
-                int loadCtrls = 2;
-                //MANAGED
-                int managed = 1;
-
-
-                Microsoft.Win32.Registry.SetValue(rootPath, "DESCRIPTION", description);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADER", loader);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, Microsoft.Win32.RegistryValueKind.DWord);
-                Microsoft.Win32.Registry.SetValue(rootPath, "MANAGED", managed, Microsoft.Win32.RegistryValueKind.DWord);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void mnuNextDwgNo_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("The next available drawing number is: " + DBCommon.GetNextDrawingNumber());
-        }
-
-        private void mnuRemovePlugin_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //TODO: test this remove plugin code
-                Microsoft.Win32.Registry.CurrentUser.DeleteSubKey("Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void mnuGUISettings_Click(object sender, RoutedEventArgs e)
@@ -168,17 +130,40 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void mnuPrintResults_Click(object sender, RoutedEventArgs e)
         {
-            Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
-            SearchPage sp = f.Content as SearchPage;
-            new PrintPreview(sp.CreateXps, Settings.Default.PageSize, Settings.Default.PageOrientation).ShowDialog();
+            //Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
+            //SearchPage sp = f.Content as SearchPage;
+            //new PrintPreview(sp.CreateXps, Settings.Default.PageSize, Settings.Default.PageOrientation).ShowDialog();
+        }
+
+        private void mnuInstallPlugin2010_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.InstallPlugin(AcadVersion.ACAD2010);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+       
+        private void mnuInstallPlugin2012_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.RemovePlugin(AcadVersion.ACAD2012);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void mnuRemovePlugin2012_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //TODO: test this remove plugin code
-                Microsoft.Win32.Registry.CurrentUser.DeleteSubKey("Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB");
+                DBCommon.RemovePlugin(AcadVersion.ACAD2012);
             }
             catch (Exception ex)
             {
@@ -186,41 +171,16 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        private void mnuInstallPlugin2012_Click(object sender, RoutedEventArgs e)
+        private void mnuRemovePlugin2010_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
-
-                //DESCRIPTION
-                string description = "Drawings database helper";
-                //LOADER
-                string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
-                //LOADCTRLS
-                int loadCtrls = 2;
-                //MANAGED
-                int managed = 1;
-
-
-                Microsoft.Win32.Registry.SetValue(rootPath, "DESCRIPTION", description);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADER", loader);
-                Microsoft.Win32.Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, Microsoft.Win32.RegistryValueKind.DWord);
-                Microsoft.Win32.Registry.SetValue(rootPath, "MANAGED", managed, Microsoft.Win32.RegistryValueKind.DWord);
+                DBCommon.RemovePlugin(AcadVersion.ACAD2010);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void mnuColumnsLayoutSave_Click(object sender, RoutedEventArgs e)
-        {
-            CloseableTabItem cti = tabControl1.SelectedItem as CloseableTabItem;
-            Grid g = cti.Content as Grid;
-            Frame f = g.Children[0] as Frame;
-            SearchPage sp = f.Content as SearchPage;
-
-            sp.PersistColumnLayout();
         }
 
         private void NewTab_Executed(object sender, ExecutedRoutedEventArgs e)

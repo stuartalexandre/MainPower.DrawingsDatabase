@@ -135,6 +135,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\Reference\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -154,12 +157,15 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DrawingSearchModel.cs" />
+    <Compile Include="Models\TemplateDrawingModel.cs" />
     <Compile Include="RawViewer.xaml.cs">
       <DependentUpon>RawViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchAssistant.cs" />
-    <Compile Include="SearchPage.xaml.cs">
-      <DependentUpon>SearchPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\AddTemplateDrawingViewModel.cs" />
+    <Compile Include="Views\AddTemplateDrawingView.xaml.cs">
+      <DependentUpon>AddTemplateDrawingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
@@ -196,9 +202,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SearchPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\AddTemplateDrawingView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -275,11 +281,7 @@
   <ItemGroup>
     <Resource Include="Images\MainPowerIconGreen.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Models\" />
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="MainPowerIconGreen.ico" />
   </ItemGroup>

@@ -18,8 +18,8 @@
                 <MenuItem Header="Print Search Results" Click="mnuPrintResults_Click" />
                 <MenuItem Header="AutoCAD Plugin" >
                     <MenuItem Header="AutoCAD 2010">
-                        <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin_Click" />
-                        <MenuItem Header="Remove Autocad Plugin" Click="mnuRemovePlugin_Click" />
+                        <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2010_Click" />
+                        <MenuItem Header="Remove Autocad Plugin" Click="mnuRemovePlugin2010_Click" />
                     </MenuItem>
                     <MenuItem Header="AutoCAD 2012">
                         <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2012_Click" />
@@ -32,7 +32,7 @@
             <MenuItem Header="Options" >
                 <MenuItem Header="Database" Click="mnuEditDbConnection_Click" />
                 <MenuItem Header="GUI" Click="mnuGUISettings_Click" />
-                <MenuItem Header="Save Columns Layout" Click="mnuColumnsLayoutSave_Click" />
+                <MenuItem Header="Save Search Settings" />
                 
             </MenuItem>
             <MenuItem Header="Help" >
