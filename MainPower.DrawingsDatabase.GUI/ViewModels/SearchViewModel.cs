@@ -114,24 +114,34 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 OnPropertyChanged("SearchType");
             }
         }
-        public bool IncludeElectronic
+        public bool ElectronicOnly
         {
-            get { return _searchFields.IncludeElectronic; }
+            get { return _searchFields.ElectronicOnly; }
             set
             {
-                if (IncludeElectronic == value) return;
-                _searchFields.IncludeElectronic = value;
-                OnPropertyChanged("IncludeElectronic");
+                if (ElectronicOnly == value) return;
+                _searchFields.ElectronicOnly = value;
+                OnPropertyChanged("ElectronicOnly");
             }
         }
-        public bool IncludeNonElectronic
+        public bool NonElectronicOnly
         {
-            get { return _searchFields.IncludeNonElectronic; }
+            get { return _searchFields.NonElectronicOnly; }
             set
             {
-                if (IncludeNonElectronic == value) return;
-                _searchFields.IncludeNonElectronic = value;
-                OnPropertyChanged("IncludeNonElectronic");
+                if (NonElectronicOnly == value) return;
+                _searchFields.NonElectronicOnly = value;
+                OnPropertyChanged("NonElectronicOnly");
+            }
+        }
+        public bool StorageAgnostic
+        {
+            get { return _searchFields.StorageAgnostic; }
+            set
+            {
+                if (StorageAgnostic == value) return;
+                _searchFields.StorageAgnostic = value;
+                OnPropertyChanged("StorageAgnostic");
             }
         }
         public bool SearchAllTitles
@@ -328,6 +338,11 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
 
 #endregion
 
+        private void RefreshDrawings()
+        {
+            //TODO: fill this out it necessary, otherwise get rid of it
+        }
+
 #region Misc code to sort out
         /*public XpsDocument CreateXps(double pageWidth, double pageHeight, string tmpFileName)
         {
@@ -497,11 +512,11 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 {
                     query = query.Where(SearchAssistant.SearchText(ProjectTitle, SearchType, d => d.ProjectTitle));
                 }
-                if (IncludeElectronic)
+                if (ElectronicOnly)
                 {
                     query = query.Where(d => d.Electronic == true);
                 }
-                if (IncludeNonElectronic)
+                if (NonElectronicOnly)
                 {
                     query = query.Where(d => d.Electronic == false);
                 }
@@ -645,7 +660,7 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
 
         void DrawingDoubleClickExecute()
         {
-            
+            OpenDrawingExecute();
         }
 
         bool CanDrawingDoubleClickExecute()
@@ -658,8 +673,8 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         void ViewDrawingExecute()
         {
             if (SelectedDrawing == null) return;
-            //ViewDrawingWindow win = new ViewDrawingWindow(SelectedDrawing);
-            //win.Show();
+            ViewDrawingWindow win = new ViewDrawingWindow(SelectedDrawing, RefreshDrawings);
+            win.Show();
         }
 
         bool CanViewDrawingExecute()

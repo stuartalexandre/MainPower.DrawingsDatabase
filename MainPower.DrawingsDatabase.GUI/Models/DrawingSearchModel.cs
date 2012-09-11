@@ -47,12 +47,17 @@ namespace MainPower.DrawingsDatabase.Gui.Models
             get;
             set;
         }
-        public bool IncludeElectronic
+        public bool ElectronicOnly
         {
             get;
             set;
         }
-        public bool IncludeNonElectronic
+        public bool NonElectronicOnly
+        {
+            get;
+            set;
+        }
+        public bool StorageAgnostic
         {
             get;
             set;
@@ -154,9 +159,10 @@ namespace MainPower.DrawingsDatabase.Gui.Models
             EndDate = DateTime.Parse("1/1/2020");
             CategoryAll = true;
             StatusAll = true;
-            IncludeElectronic = true;
+            ElectronicOnly = false;
+            StorageAgnostic = true;
             IncludeLegacyNumbers = true;
-            IncludeNonElectronic = true;
+            NonElectronicOnly = false;
             AdvancedSearchQuery = "Number.Contains(\"13\") OR (Status== \"CURRENT\" AND Category== \"ZONESUBSTATION\")";
             SearchAllTitles = true;
             SearchType = TextSearchOption.SearchAllWords;

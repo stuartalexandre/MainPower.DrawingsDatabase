@@ -15,6 +15,7 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Customization;
 using System.Collections.Specialized;
 using System.IO;
+using MainPower.DrawingsDatabase.Gui.Views;
 
 namespace MainPower.DrawingsDatabase.AutoCad
 {
@@ -114,7 +115,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
         [CommandMethod("ddbadd")]
         public static void ShowAddDrawingWindow()
         {
-            new AddDrawingWindow().Show();
+            new AddTemplateDrawingView().Show();
         }
 
         [CommandMethod("ddbabout")]

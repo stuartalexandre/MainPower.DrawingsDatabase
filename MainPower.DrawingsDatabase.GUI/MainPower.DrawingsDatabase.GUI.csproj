@@ -147,9 +147,6 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddDrawingWindow.xaml.cs">
-      <DependentUpon>AddDrawingWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GUISettings.xaml.cs">
       <DependentUpon>GUISettings.xaml</DependentUpon>
     </Compile>
@@ -186,10 +183,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddDrawingWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="GUISettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
