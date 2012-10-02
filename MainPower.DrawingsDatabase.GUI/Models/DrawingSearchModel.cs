@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace MainPower.DrawingsDatabase.Gui.Models
 {
@@ -168,11 +170,31 @@ namespace MainPower.DrawingsDatabase.Gui.Models
             SearchType = TextSearchOption.SearchAllWords;
         }
 
+        /// <summary>
+        /// Deserialise a xml file into a DrawingSearchModel object.
+        /// </summary>
+        /// <param name="xmlPath"></param>
+        /// <returns></returns>
         public static DrawingSearchModel CreateFromXml(string xmlPath)
         {
-            throw new System.NotImplementedException();
-            //TODO:
-            //return new DrawingSearchModel();
+            StreamReader sr = new StreamReader(xmlPath);
+            XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
+            DrawingSearchModel d = xml.Deserialize(sr) as DrawingSearchModel;
+            return d;
+        }
+
+        /// <summary>
+        /// Deserialise a string of xml data into a DrawingSearchModel object.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static DrawingSearchModel CreateFromString(string str)
+        {
+            byte[] data = ASCIIEncoding.ASCII.GetBytes(str);
+            MemoryStream ms = new MemoryStream(data);
+            XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
+            DrawingSearchModel d = xml.Deserialize(ms) as DrawingSearchModel;
+            return d;
         }
     }
 }

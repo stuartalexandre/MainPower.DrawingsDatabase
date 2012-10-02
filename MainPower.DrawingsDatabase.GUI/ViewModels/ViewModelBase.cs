@@ -26,6 +26,11 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         {
             //Verify that the property name matches a real,
             //public instance property on this object
+            //an empty property name is ok, used to refresh all properties
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                return;
+            }
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {
                 string msg = "Invalid property name: " + propertyName;

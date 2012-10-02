@@ -34,6 +34,20 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
 #endregion
 
 #region Properties
+        public DrawingSearchModel Model
+        {
+            get
+            {
+                return _searchFields;
+            }
+
+            set
+            {
+                _searchFields = value;
+                //we have to notify all the events that the model has changed...
+                OnPropertyChanged(String.Empty);
+            }
+        }
         public string DrawingNumber
         {
             get { return _searchFields.DrawingNumber; }

@@ -32,7 +32,7 @@
             <MenuItem Header="Options" >
                 <MenuItem Header="Database" Click="mnuEditDbConnection_Click" />
                 <MenuItem Header="GUI" Click="mnuGUISettings_Click" />
-                <MenuItem Header="Save Search Settings" />
+                <MenuItem Header="Save Search Settings" Click="mnuSaveSearchSettings_Click" />
                 
             </MenuItem>
             <MenuItem Header="Help" >

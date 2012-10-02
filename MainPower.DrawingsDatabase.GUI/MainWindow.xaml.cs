@@ -19,6 +19,9 @@ using System.IO;
 using HC.Utils;
 using MainPower.DrawingsDatabase.Gui.Properties;
 using MainPower.DrawingsDatabase.Gui.Views;
+using MainPower.DrawingsDatabase.Gui.ViewModels;
+using System.Xml.Serialization;
+using MainPower.DrawingsDatabase.Gui.Models;
 
 namespace MainPower.DrawingsDatabase.Gui
 {
@@ -78,12 +81,25 @@ namespace MainPower.DrawingsDatabase.Gui
             _searchNumber++;
             Grid g = new Grid();
             Frame f = new Frame();
-            f.Navigate(new SearchView());
+            SearchView sv = new SearchView();
+            SearchViewModel svm = sv.DataContext as SearchViewModel;
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.SavedSearch))
+            {
+                MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(Properties.Settings.Default.SavedSearch));
+                XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
+                DrawingSearchModel dsm = xml.Deserialize(ms) as DrawingSearchModel;
+                svm.Model = dsm;
+            }
+
+            f.Navigate(sv);
             g.Children.Add(f);
 
             cti.Content = g;
             tabControl1.Items.Add(cti);
             tabControl1.SelectedItem = cti;
+
+            
         }
 
         private void mnuSearch_Click(object sender, RoutedEventArgs e)
@@ -186,6 +202,20 @@ namespace MainPower.DrawingsDatabase.Gui
         private void NewTab_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             AddSearchTab();
+        }
+
+        private void mnuSaveSearchSettings_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: trap and log errors here...
+            Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
+            SearchView sv = f.Content as SearchView;
+            SearchViewModel svm = sv.DataContext as SearchViewModel;
+
+            MemoryStream ms = new MemoryStream();
+            XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
+            xml.Serialize(ms, svm.Model);
+            Properties.Settings.Default.SavedSearch = Encoding.ASCII.GetString(ms.GetBuffer());
+            Properties.Settings.Default.Save();
         }
         
     }
