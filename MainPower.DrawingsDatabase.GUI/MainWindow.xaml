@@ -15,7 +15,6 @@
                 <MenuItem Header="Add Drawing" Click="mnuAdd_Click" />
                 <MenuItem Header="Raw Database Viewer" Click="mnuDbViewer_Click" />
                 <MenuItem Header="Sub Browser" Click="mnuSubBrowser_Click" />
-                <MenuItem Header="Print Search Results" Click="mnuPrintResults_Click" />
                 <MenuItem Header="AutoCAD Plugin" >
                     <MenuItem Header="AutoCAD 2010">
                         <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2010_Click" />

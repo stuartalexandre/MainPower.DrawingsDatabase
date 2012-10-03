@@ -57,7 +57,8 @@
     <StartupObject>MainPower.DrawingsDatabase.Gui.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>MainPowerIconGreen.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -147,6 +148,8 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BooleanToVisibilityConverter.cs" />
+    <Compile Include="GridViewSort.cs" />
     <Compile Include="GUISettings.xaml.cs">
       <DependentUpon>GUISettings.xaml</DependentUpon>
     </Compile>
@@ -236,6 +239,7 @@
     <None Include="DrawingsDatabase.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="GridViewBehaviours.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -275,9 +279,6 @@
     <Resource Include="Images\MainPowerIconGreen.ico" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="MainPowerIconGreen.ico" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MainPower.DrawingsDatabase.DatabaseHelper\MainPower.DrawingsDatabase.DatabaseHelper.csproj">
       <Project>{8A886CD4-4C87-4502-8E35-B8755CF199F6}</Project>

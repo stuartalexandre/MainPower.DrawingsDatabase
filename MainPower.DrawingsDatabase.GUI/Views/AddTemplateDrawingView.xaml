@@ -7,7 +7,7 @@
         xmlns:mvvm="clr-namespace:MicroMvvm;assembly=MicroMvvm"
         x:Class="MainPower.DrawingsDatabase.Gui.Views.AddTemplateDrawingView"    
         mvvm:WindowClosingBehavior.Closing="{Binding Closing}"
-        Title="AddTemplateDrawingView">
+        Title="AddTemplateDrawingView" Icon="/DrawingsDatabaseGui;component/Images/MainPowerIconGreen.ico">
     <Window.DataContext>
         <viewmodels:AddTemplateDrawingViewModel />
     </Window.DataContext>
@@ -15,17 +15,22 @@
         
     </Window.Resources>
     <Grid>
-        <Label Content="Recent Templates:" HorizontalAlignment="Left" Margin="0,211.76,0,0" VerticalAlignment="Top"/>
+        <Label Content="Recent Templates:" HorizontalAlignment="Left" Margin="0,103.92,0,0" VerticalAlignment="Top"/>
         
         <xctk:PropertyGrid SelectedObject="{Binding SelectedTemplate.Drawing}" Margin="187.041,10,10,10"/>
-        
-        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" Margin="10,237.72,0,10" HorizontalAlignment="Left" Width="172.041"/>
+
+        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" Margin="10,129.88,0,10" HorizontalAlignment="Left" Width="172.041">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Save" Command="{Binding SaveTemplate}" />
+                    <MenuItem Header="Save As..." Command="{Binding SaveTemplateAs}" />
+                    <MenuItem Header="Reset Template" Command="{Binding ResetTemplate}" />
+                    <MenuItem Header="Delete Template" Command="{Binding DeleteTemplate}" />
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
         <Button Command="{Binding AddTemplate}" Content="Add new template" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="172.041"/>
         <Button Command="{Binding AddExistingTemplate}" Content="Add existing template" HorizontalAlignment="Left" Margin="10,36.96,0,0" VerticalAlignment="Top" Width="172.041"/>
-        <Button Command="{Binding SaveTemplate}" Content="Save template" HorizontalAlignment="Left" Margin="10,63.92,0,0" VerticalAlignment="Top" Width="172.041"/>
-        <Button Command="{Binding SaveTemplateAs}" Content="Save template as.." HorizontalAlignment="Left" Margin="10,90.88,0,0" VerticalAlignment="Top" Width="172.041"/>
-        <Button Command="{Binding ResetTemplate}" Content="Reset Template" HorizontalAlignment="Left" Margin="10,117.84,0,0" VerticalAlignment="Top" Width="172.041"/>
-        <Button Command="{Binding DeleteTemplate}" Content="Delete Template" HorizontalAlignment="Left" Margin="10,144.8,0,0" VerticalAlignment="Top" Width="172.041"/>
-        <Button Command="{Binding AddDrawing}" Content="Add Drawing to DB" Margin="10,171.76,0,0" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="172.041" />
+        <Button Command="{Binding AddDrawing}" Content="Add Drawing to DB" Margin="10,63.92,0,0" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="172.041" />
     </Grid>
 </Window>

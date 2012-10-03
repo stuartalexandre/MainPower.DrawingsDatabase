@@ -468,37 +468,7 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 ListViewSorter.SetSortBindingMember(col, new Binding((string)col.Header));
             }
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            string xaml = Properties.Settings.Default.SearchColumns;
-            if (!String.IsNullOrEmpty(xaml))
-            {
-                //listView1.View = XamlReader.Parse(xaml) as GridView;
-
-                GridViewColumnCollection savedCols = XamlReader.Parse(xaml) as GridViewColumnCollection;
-
-                GridViewColumnCollection cols = ((GridView)listView1.View).Columns;
-
-                List<GridViewColumn> theCols = new List<GridViewColumn>();
-
-                foreach (GridViewColumn col in savedCols)
-                {
-                    theCols.Add(col);
-                }
-                
-                cols.Clear();
-                savedCols.Clear();
-
-                foreach (GridViewColumn col in theCols)
-                {
-                    col.HeaderTemplate = listView1.TryFindResource("HeaderTemplateSortNon") as DataTemplate;
-                    cols.Add(col);
-                }
-            }
-            
-            AddSortBinding();
-        }*/
+        */
 
 #endregion
 

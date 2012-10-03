@@ -209,6 +209,7 @@ namespace MainPower.DrawingsDatabase.Gui
             //TODO: trap and log errors here...
             Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
             SearchView sv = f.Content as SearchView;
+            sv.PersistColumns();
             SearchViewModel svm = sv.DataContext as SearchViewModel;
 
             MemoryStream ms = new MemoryStream();

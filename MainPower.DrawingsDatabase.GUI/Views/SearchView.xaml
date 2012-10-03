@@ -5,9 +5,10 @@
         xmlns:viewmodels="clr-namespace:MainPower.DrawingsDatabase.Gui.ViewModels"
         xmlns:db="clr-namespace:MainPower.DrawingsDatabase.DatabaseHelper;assembly=DatabaseHelper"
         xmlns:utilControls="clr-namespace:HC.Utils.Controls;assembly=HC.Utils"
+        xmlns:wpfUtil="clr-namespace:Wpf.Util"
         xmlns:mvvm="clr-namespace:MicroMvvm;assembly=MicroMvvm"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="Search Database">
+        Title="Search Database" Loaded="Page_Loaded">
     <Page.DataContext>
         <viewmodels:SearchViewModel />
     </Page.DataContext>
@@ -108,7 +109,15 @@
                     <SolidColorBrush />
                 </Expander.Background>
             </Expander>
-            <ListView SelectedItem="{Binding SelectedDrawing}" utilControls:ListViewSorter.IsListviewSortable="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Name="listView1" SelectionMode="Single" ItemsSource="{Binding SearchResults}" Grid.Column="1" DockPanel.Dock="Bottom">
+            <ListView SelectedItem="{Binding SelectedDrawing}" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                      Name="listView1" 
+                      SelectionMode="Single" 
+                      ItemsSource="{Binding SearchResults}" 
+                      Grid.Column="1" 
+                      DockPanel.Dock="Bottom"
+                      wpfUtil:GridViewSort.AutoSort="True">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <EventSetter Event="MouseDoubleClick" Handler="DrawingDoubleClick" />
@@ -116,6 +125,7 @@
                     <db:DrawingCategoryConverter x:Key="catCon" />
                     <db:DrawingStatusConverter x:Key="statCon" />
                     <db:DateConverter x:Key="dateCon" />
+                    <BooleanToVisibilityConverter x:Key="boolToVisCon" />
                 </ListView.Resources>
                 <ListView.ContextMenu>
                     <ContextMenu>
@@ -125,23 +135,60 @@
                         <MenuItem Command="{Binding DeleteDrawing}" Name="mnuDeleteDrawing" Header="Delete" Visibility="Collapsed" />
                     </ContextMenu>
                 </ListView.ContextMenu>
-                
                 <ListView.View>
+
                     <GridView>
+                        
                         <GridView.ColumnHeaderContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Choose Columns..." />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Number" Name="mnuColNumber" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Status" Name="mnuColStatus" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Catergory" Name="mnuColCategory" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Drawn Date" Name="mnuColDrawnDate" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Sheet Revision" Name="mnuColSheetRevision" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Sheet" Name="mnuColSheet" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Project Title" Name="mnuColProjectTitle" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Title Line 1" Name="mnuColTitleLine1" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="Title Line 2" Name="mnuColTitleLine2" />
+                                <MenuItem IsCheckable="True" IsChecked="False" Header="Title Line 3" Name="mnuColTitleLine3" />
+                                <MenuItem IsCheckable="True" IsChecked="True" Header="File Name" Name="mnuColFileName" />
+                                
                             </ContextMenu>
                         </GridView.ColumnHeaderContextMenu>
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"  Width="70" Header="Number" DisplayMemberBinding="{Binding Number}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="75" Header="Status" DisplayMemberBinding="{Binding Status, Converter={StaticResource statCon}}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="105" Header="Category" DisplayMemberBinding="{Binding Category, Converter={StaticResource catCon}}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="55" Header="DrawnDate" DisplayMemberBinding="{Binding DrawnDate, Converter={StaticResource dateCon}}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="25" Header="SheetRevision" DisplayMemberBinding="{Binding SheetRevision}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="25" Header="Sheet" DisplayMemberBinding="{Binding Sheet}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="140" Header="ProjectTitle" DisplayMemberBinding="{Binding ProjectTitle}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="140" Header="TitleLine1" DisplayMemberBinding="{Binding TitleLine1}" />
-                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}"   Width="140" Header="TitleLine2" DisplayMemberBinding="{Binding TitleLine2}" />
+
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="70" wpfUtil:GridViewSort.PropertyName="Number" DisplayMemberBinding="{Binding Number}" >
+                            <GridViewColumnHeader Content="Number" Visibility="{Binding ElementName=mnuColNumber, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="75" wpfUtil:GridViewSort.PropertyName="Status" DisplayMemberBinding="{Binding Status, Converter={StaticResource statCon}}" >
+                            <GridViewColumnHeader Content="Status" Visibility="{Binding ElementName=mnuColStatus, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="105" wpfUtil:GridViewSort.PropertyName="Category" DisplayMemberBinding="{Binding Category, Converter={StaticResource catCon}}" >
+                            <GridViewColumnHeader Content="Category" Visibility="{Binding ElementName=mnuColCategory, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="55" wpfUtil:GridViewSort.PropertyName="DrawnDate" DisplayMemberBinding="{Binding DrawnDate, Converter={StaticResource dateCon}}" >
+                            <GridViewColumnHeader Content="DrawnDate" Visibility="{Binding ElementName=mnuColDrawnDate, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="25" wpfUtil:GridViewSort.PropertyName="SheetRevision" DisplayMemberBinding="{Binding SheetRevision}" >
+                            <GridViewColumnHeader Content="SheetRevision" Visibility="{Binding ElementName=mnuColShetRevision, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="25" wpfUtil:GridViewSort.PropertyName="Sheet" DisplayMemberBinding="{Binding Sheet}" >
+                            <GridViewColumnHeader Content="Sheet" Visibility="{Binding ElementName=mnuColSheet, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="140" wpfUtil:GridViewSort.PropertyName="ProjectTitle" DisplayMemberBinding="{Binding ProjectTitle}" >
+                            <GridViewColumnHeader Content="ProjectTitle" Visibility="{Binding ElementName=mnuColProjectTitle, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="140" wpfUtil:GridViewSort.PropertyName="TitleLine1" DisplayMemberBinding="{Binding TitleLine1}" >
+                            <GridViewColumnHeader Content="TitleLine1" Visibility="{Binding ElementName=mnuColTitleLine1, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="140" wpfUtil:GridViewSort.PropertyName="TitleLine2" DisplayMemberBinding="{Binding TitleLine2}" >
+                            <GridViewColumnHeader Content="TitleLine2" Visibility="{Binding ElementName=mnuColTitleLine2, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="140" wpfUtil:GridViewSort.PropertyName="TitleLine3" DisplayMemberBinding="{Binding TitleLine3}" >
+                            <GridViewColumnHeader Content="TitleLine3" Visibility="{Binding ElementName=mnuColTitleLine3, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="140" wpfUtil:GridViewSort.PropertyName="FileName" DisplayMemberBinding="{Binding FileName}" >
+                            <GridViewColumnHeader Content="FileName" Visibility="{Binding ElementName=mnuColFileName, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

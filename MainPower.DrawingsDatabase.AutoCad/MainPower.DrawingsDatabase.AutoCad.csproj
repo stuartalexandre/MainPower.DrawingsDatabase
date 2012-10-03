@@ -131,6 +131,10 @@
       <Project>{B0AFAC27-17B7-49E3-9287-F5EE440B52C6}</Project>
       <Name>MainPower.DrawingsDatabase.Gui</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MicroMvvm\MicroMvvm.csproj">
+      <Project>{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}</Project>
+      <Name>MicroMvvm</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
