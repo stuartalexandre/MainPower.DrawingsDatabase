@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainPower.DrawingsDatabase.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainPower.DrawingsDatabase.DoublesFinder", "MainPower.DrawingsDatabase.DoublesFinder\MainPower.DrawingsDatabase.DoublesFinder.csproj", "{366EC8CB-A836-4C4C-9C8B-DDC8EB0A937F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroMvvm", "MicroMvvm\MicroMvvm.csproj", "{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +134,18 @@ Global
 		{366EC8CB-A836-4C4C-9C8B-DDC8EB0A937F}.Release|x64.ActiveCfg = Release|x86
 		{366EC8CB-A836-4C4C-9C8B-DDC8EB0A937F}.Release|x86.ActiveCfg = Release|x86
 		{366EC8CB-A836-4C4C-9C8B-DDC8EB0A937F}.Release|x86.Build.0 = Release|x86
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Release|x64.ActiveCfg = Release|Any CPU
+		{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

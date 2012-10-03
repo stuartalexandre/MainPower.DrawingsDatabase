@@ -57,7 +57,8 @@
     <StartupObject>MainPower.DrawingsDatabase.Gui.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>MainPowerIconGreen.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -135,6 +136,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\Reference\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -144,9 +148,8 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddDrawingWindow.xaml.cs">
-      <DependentUpon>AddDrawingWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="BooleanToVisibilityConverter.cs" />
+    <Compile Include="GridViewSort.cs" />
     <Compile Include="GUISettings.xaml.cs">
       <DependentUpon>GUISettings.xaml</DependentUpon>
     </Compile>
@@ -154,19 +157,27 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DrawingSearchModel.cs" />
+    <Compile Include="Models\TemplateDrawingModel.cs" />
     <Compile Include="RawViewer.xaml.cs">
       <DependentUpon>RawViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchAssistant.cs" />
-    <Compile Include="SearchPage.xaml.cs">
-      <DependentUpon>SearchPage.xaml</DependentUpon>
+    <Compile Include="ViewModels\AddTemplateDrawingViewModel.cs" />
+    <Compile Include="Views\AddTemplateDrawingView.xaml.cs">
+      <DependentUpon>AddTemplateDrawingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="SubBrowser.xaml.cs">
       <DependentUpon>SubBrowser.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewDrawingWindow.xaml.cs">
       <DependentUpon>ViewDrawingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,10 +186,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddDrawingWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="GUISettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,7 +198,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SearchPage.xaml">
+    <Page Include="Views\AddTemplateDrawingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -228,6 +239,7 @@
     <None Include="DrawingsDatabase.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="GridViewBehaviours.cs" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -266,16 +278,15 @@
   <ItemGroup>
     <Resource Include="Images\MainPowerIconGreen.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="MainPowerIconGreen.ico" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\MainPower.DrawingsDatabase.DatabaseHelper\MainPower.DrawingsDatabase.DatabaseHelper.csproj">
       <Project>{8A886CD4-4C87-4502-8E35-B8755CF199F6}</Project>
       <Name>MainPower.DrawingsDatabase.DatabaseHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MicroMvvm\MicroMvvm.csproj">
+      <Project>{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}</Project>
+      <Name>MicroMvvm</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

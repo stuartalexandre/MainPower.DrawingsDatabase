@@ -1,8 +1,21 @@
-﻿using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.Runtime;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using MainPower.DrawingsDatabase.DatabaseHelper;
 using MainPower.DrawingsDatabase.Gui;
-using Exception = System.Exception;
+using System.Data.SqlClient;
+using Autodesk.AutoCAD.Runtime;
+using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.EditorInput;
+using System.Reflection;
+using Autodesk.AutoCAD.ApplicationServices;
+using System.Collections;
+using Autodesk.AutoCAD.Geometry;
+using Autodesk.AutoCAD.Customization;
+using System.Collections.Specialized;
+using System.IO;
+using MainPower.DrawingsDatabase.Gui.Views;
 
 namespace MainPower.DrawingsDatabase.AutoCad
 {
@@ -14,64 +27,64 @@ namespace MainPower.DrawingsDatabase.AutoCad
         [CommandMethod("ddbmorerev")]
         public static void NeedAnotherRevision()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.NeedAnotherRevision();
         }
 
         [CommandMethod("ddbputd")]
         public static void DrawingToDatabase()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.DrawingToDatabase();
         }
 
         [CommandMethod("ddbputl")]
         public static void LayoutToDatabase()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.LayoutToDatabase();
         }
 
         [CommandMethod("ddbput")]
         public static void BlockToDatabase()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.BlockToDatabase();
         }
 
         [CommandMethod("ddbgetd")]
         public static void DatabaseToDrawing()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.DatabaseToDrawing();
         }
 
         [CommandMethod("ddbgetl")]
         public static void DatabaseToLayout()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.DatabaseToLayout();
         }
 
         [CommandMethod("ddbget")]
         public static void DatabaseToBlock()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.DatabaseToBlock();
         }
 
-
+     
         [CommandMethod("ddbnum")]
         public static void AutoNumberBlockThenSave()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.AutoNumberBlockThenSave();
         }
 
         [CommandMethod("ddbversion")]
         public static void PrintVersion()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.PrintVersion();
         }
 
@@ -81,7 +94,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
         [CommandMethod("ddbsettings")]
         public static void ShowSettingsWindow()
         {
-            var win = new SettingsWindow();
+            SettingsWindow win = new SettingsWindow();
             win.ShowDialog();
         }
 
@@ -90,32 +103,32 @@ namespace MainPower.DrawingsDatabase.AutoCad
         {
             try
             {
-                var mw = new MainWindow();
+                MainWindow mw = new MainWindow();
                 mw.Show();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage(ex.Message + ex.StackTrace);
+                Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor.WriteMessage(ex.Message + ex.StackTrace);
             }
         }
 
         [CommandMethod("ddbadd")]
         public static void ShowAddDrawingWindow()
         {
-            new AddDrawingWindow().Show();
+            new AddTemplateDrawingView().Show();
         }
 
         [CommandMethod("ddbabout")]
         public static void ShowAboutWindow()
         {
-            var mw = new AboutWindow();
+            AboutWindow mw = new AboutWindow();
             mw.ShowDialog();
         }
 
         [CommandMethod("ddbedit")]
         public static void ShowViewDrawingWindowThenUpdate()
         {
-            var dc = new DrawingCommands();
+            DrawingCommands dc = new DrawingCommands();
             dc.ShowViewDrawingWindow(true);
             dc.DatabaseToLayout();
         }
@@ -197,4 +210,5 @@ namespace MainPower.DrawingsDatabase.AutoCad
         }
         */
     }
+
 }

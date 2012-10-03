@@ -1,26 +1,37 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using HC.Utils;
-using HC.Utils.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using MainPower.DrawingsDatabase.DatabaseHelper;
+using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
+using HC.Utils.Controls;
+using System.Globalization;
+using System.Reflection;
+using System.IO;
+using HC.Utils;
 using MainPower.DrawingsDatabase.Gui.Properties;
-using Microsoft.Win32;
+using MainPower.DrawingsDatabase.Gui.Views;
+using MainPower.DrawingsDatabase.Gui.ViewModels;
+using System.Xml.Serialization;
+using MainPower.DrawingsDatabase.Gui.Models;
 
 namespace MainPower.DrawingsDatabase.Gui
 {
     /// <summary>
     /// Interaction logic for PageWindow.xaml
     /// </summary>
-    public sealed partial class MainWindow
+    public sealed partial class MainWindow : Window
     {
         private int _searchNumber = 1;
-
+     
         public MainWindow()
         {
             InitializeComponent();
@@ -33,10 +44,10 @@ namespace MainPower.DrawingsDatabase.Gui
         /// <param name="args"></param>
         private void CloseTab(object source, RoutedEventArgs args)
         {
-            var tabItem = args.Source as TabItem;
+            TabItem tabItem = args.Source as TabItem;
             if (tabItem != null)
             {
-                var tabControl = tabItem.Parent as TabControl;
+                TabControl tabControl = tabItem.Parent as TabControl;
                 if (tabControl != null)
                     tabControl.Items.Remove(tabItem);
             }
@@ -46,10 +57,9 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             try
             {
-                Process.Start(Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName + "\\" +
-                              "DrawingsDatabase.chm");
+                System.Diagnostics.Process.Start(Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName + "\\" + "DrawingsDatabase.chm");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
@@ -57,7 +67,8 @@ namespace MainPower.DrawingsDatabase.Gui
 
         private void mnuAdd_Click(object sender, RoutedEventArgs e)
         {
-            new AddDrawingWindow().Show();
+            //new AddDrawingWindow().Show();
+            new AddTemplateDrawingView().Show();
         }
 
         /// <summary>
@@ -65,17 +76,30 @@ namespace MainPower.DrawingsDatabase.Gui
         /// </summary>
         private void AddSearchTab()
         {
-            var cti = new CloseableTabItem();
+            CloseableTabItem cti = new CloseableTabItem();
             cti.Header = "New Search " + _searchNumber.ToString(CultureInfo.CurrentCulture);
             _searchNumber++;
-            var g = new Grid();
-            var f = new Frame();
-            f.Navigate(new SearchPage());
+            Grid g = new Grid();
+            Frame f = new Frame();
+            SearchView sv = new SearchView();
+            SearchViewModel svm = sv.DataContext as SearchViewModel;
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.SavedSearch))
+            {
+                MemoryStream ms = new MemoryStream(Encoding.ASCII.GetBytes(Properties.Settings.Default.SavedSearch));
+                XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
+                DrawingSearchModel dsm = xml.Deserialize(ms) as DrawingSearchModel;
+                svm.Model = dsm;
+            }
+
+            f.Navigate(sv);
             g.Children.Add(f);
 
             cti.Content = g;
             tabControl1.Items.Add(cti);
             tabControl1.SelectedItem = cti;
+
+            
         }
 
         private void mnuSearch_Click(object sender, RoutedEventArgs e)
@@ -103,50 +127,9 @@ namespace MainPower.DrawingsDatabase.Gui
             new SubBrowser().Show();
         }
 
-        private void mnuInstallPlugin_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                const string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
-
-                //DESCRIPTION
-                const string description = "Drawings database helper";
-                //LOADER
-                string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
-                //LOADCTRLS
-                const int loadCtrls = 2;
-                //MANAGED
-                const int managed = 1;
-
-
-                Registry.SetValue(rootPath, "DESCRIPTION", description);
-                Registry.SetValue(rootPath, "LOADER", loader);
-                Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, RegistryValueKind.DWord);
-                Registry.SetValue(rootPath, "MANAGED", managed, RegistryValueKind.DWord);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void mnuNextDwgNo_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("The next available drawing number is: " + DBCommon.GetNextDrawingNumber());
-        }
-
-        private void mnuRemovePlugin_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //TODO: test this remove plugin code
-                Registry.CurrentUser.DeleteSubKey(
-                    "Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void mnuGUISettings_Click(object sender, RoutedEventArgs e)
@@ -157,24 +140,46 @@ namespace MainPower.DrawingsDatabase.Gui
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //event handler to tell the parent tab control to close the tab
-            AddHandler(CloseableTabItem.CloseTabEvent, new RoutedEventHandler(CloseTab));
+            this.AddHandler(CloseableTabItem.CloseTabEvent, new RoutedEventHandler(this.CloseTab));
             AddSearchTab();
         }
 
         private void mnuPrintResults_Click(object sender, RoutedEventArgs e)
         {
-            var f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
-            var sp = f.Content as SearchPage;
-            new PrintPreview(sp.CreateXps, Settings.Default.PageSize, Settings.Default.PageOrientation).ShowDialog();
+            //Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
+            //SearchPage sp = f.Content as SearchPage;
+            //new PrintPreview(sp.CreateXps, Settings.Default.PageSize, Settings.Default.PageOrientation).ShowDialog();
+        }
+
+        private void mnuInstallPlugin2010_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.InstallPlugin(AcadVersion.ACAD2010);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+       
+        private void mnuInstallPlugin2012_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.RemovePlugin(AcadVersion.ACAD2012);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void mnuRemovePlugin2012_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //TODO: test this remove plugin code
-                Registry.CurrentUser.DeleteSubKey(
-                    "Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB");
+                DBCommon.RemovePlugin(AcadVersion.ACAD2012);
             }
             catch (Exception ex)
             {
@@ -182,46 +187,37 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        private void mnuInstallPlugin2012_Click(object sender, RoutedEventArgs e)
+        private void mnuRemovePlugin2010_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                const string rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
-
-                //DESCRIPTION
-                const string description = "Drawings database helper";
-                //LOADER
-                string loader = AppDomain.CurrentDomain.BaseDirectory + "AutoCADPlugin.dll";
-                //LOADCTRLS
-                const int loadCtrls = 2;
-                //MANAGED
-                const int managed = 1;
-
-
-                Registry.SetValue(rootPath, "DESCRIPTION", description);
-                Registry.SetValue(rootPath, "LOADER", loader);
-                Registry.SetValue(rootPath, "LOADCTRLS", loadCtrls, RegistryValueKind.DWord);
-                Registry.SetValue(rootPath, "MANAGED", managed, RegistryValueKind.DWord);
+                DBCommon.RemovePlugin(AcadVersion.ACAD2010);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void mnuColumnsLayoutSave_Click(object sender, RoutedEventArgs e)
-        {
-            var cti = tabControl1.SelectedItem as CloseableTabItem;
-            var g = cti.Content as Grid;
-            var f = g.Children[0] as Frame;
-            var sp = f.Content as SearchPage;
-
-            sp.PersistColumnLayout();
         }
 
         private void NewTab_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             AddSearchTab();
         }
+
+        private void mnuSaveSearchSettings_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: trap and log errors here...
+            Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
+            SearchView sv = f.Content as SearchView;
+            sv.PersistColumns();
+            SearchViewModel svm = sv.DataContext as SearchViewModel;
+
+            MemoryStream ms = new MemoryStream();
+            XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
+            xml.Serialize(ms, svm.Model);
+            Properties.Settings.Default.SavedSearch = Encoding.ASCII.GetString(ms.GetBuffer());
+            Properties.Settings.Default.Save();
+        }
+        
     }
 }
