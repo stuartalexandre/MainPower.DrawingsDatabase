@@ -23,10 +23,6 @@
     </ListView>
 
     <Button Content="Find Duplicates" Height="23" VerticalAlignment="Bottom" Click="btnFindDuplicates_Click" />
-    <Button Content="Delete Selected" Height="23" VerticalAlignment="Bottom" Grid.Column="1"
-            Click="btnDeleteSelected_Click">
-      <Button.Name>btnDeleteSelected</Button.Name>
-    </Button>
-
+    <Button Content="Delete Selected" Height="23" VerticalAlignment="Bottom" Grid.Column="1" Click="btnDeleteSelected_Click" Name="btnDeleteSelected" />
   </Grid>
 </Window>

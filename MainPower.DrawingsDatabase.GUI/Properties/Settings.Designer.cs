@@ -25,7 +25,9 @@ namespace MainPower.DrawingsDatabase.Gui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"Amberley;Balmoral;Bennetts;Oxford;Cheviot;Claverley;Cust;Greta;Hanmer;Hawarden;Leader;Leslie Hills;Lochiel;Ludstone;Marble Point;Mckenzies Road;Motunau;Mouse Point;Oaro;Omihi;Percival St;Rangiora North;Kaiapoi S1;Southbrook;Kaiapoi North;Pegasus;Swannanoa;Rangiora West;")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"
+        Amberley;Balmoral;Bennetts;Oxford;Cheviot;Claverley;Cust;Greta;Hanmer;Hawarden;Leader;Leslie Hills;Lochiel;Ludstone;Marble Point;Mckenzies Road;Motunau;Mouse Point;Oaro;Omihi;Percival St;Rangiora North;Kaiapoi S1;Southbrook;Kaiapoi North;Pegasus;Swannanoa;Rangiora West;
+      ")]
         public string Substations {
             get {
                 return ((string)(this["Substations"]));

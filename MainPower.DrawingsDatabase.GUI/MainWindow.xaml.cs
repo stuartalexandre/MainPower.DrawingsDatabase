@@ -12,11 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MainPower.DrawingsDatabase.DatabaseHelper;
 using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
-using HC.Utils.Controls;
 using System.Globalization;
 using System.Reflection;
 using System.IO;
-using HC.Utils;
 using MainPower.DrawingsDatabase.Gui.Properties;
 using MainPower.DrawingsDatabase.Gui.Views;
 using MainPower.DrawingsDatabase.Gui.ViewModels;
@@ -68,7 +66,14 @@ namespace MainPower.DrawingsDatabase.Gui
         private void mnuAdd_Click(object sender, RoutedEventArgs e)
         {
             //new AddDrawingWindow().Show();
-            new AddTemplateDrawingView().Show();
+            try
+            {
+                new AddTemplateDrawingView().Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>

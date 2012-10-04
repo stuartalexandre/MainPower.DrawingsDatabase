@@ -4,7 +4,6 @@
         xmlns:local="clr-namespace:MainPower.DrawingsDatabase.Gui"
         xmlns:viewmodels="clr-namespace:MainPower.DrawingsDatabase.Gui.ViewModels"
         xmlns:db="clr-namespace:MainPower.DrawingsDatabase.DatabaseHelper;assembly=DatabaseHelper"
-        xmlns:utilControls="clr-namespace:HC.Utils.Controls;assembly=HC.Utils"
         xmlns:wpfUtil="clr-namespace:Wpf.Util"
         xmlns:mvvm="clr-namespace:MicroMvvm;assembly=MicroMvvm"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"

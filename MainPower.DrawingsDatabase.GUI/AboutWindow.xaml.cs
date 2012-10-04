@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using HC.Utils;
 using MainPower.DrawingsDatabase.DatabaseHelper;
 //using System.Reflection;
 

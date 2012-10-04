@@ -16,6 +16,7 @@ using Autodesk.AutoCAD.Customization;
 using System.Collections.Specialized;
 using System.IO;
 using MainPower.DrawingsDatabase.Gui.Views;
+using MicroMvvm;
 
 namespace MainPower.DrawingsDatabase.AutoCad
 {
@@ -24,6 +25,25 @@ namespace MainPower.DrawingsDatabase.AutoCad
     /// </summary>
     public static class Commands
     {
+        static Commands()
+        {
+            //because ACAD loads the plugin, any assemblies that are referenced by the GUI,
+            //but not used by the plugin must be loaded manually
+
+            //there must be a better way to do this??
+            //perhaps though the config file or something.  meh
+            string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            UriBuilder uri = new UriBuilder(codeBase);
+            string path = Uri.UnescapeDataString(uri.Path);
+            string assPath = Path.GetDirectoryName(path);
+            try
+            {
+                Assembly.LoadFrom(assPath + "\\" + "WPFToolkit.Extended.dll");
+                Assembly.LoadFrom(assPath + "\\" + "MicroMvvm.dll");
+            }
+            catch { }
+        }
+
         [CommandMethod("ddbmorerev")]
         public static void NeedAnotherRevision()
         {
@@ -72,7 +92,6 @@ namespace MainPower.DrawingsDatabase.AutoCad
             DrawingCommands dc = new DrawingCommands();
             dc.DatabaseToBlock();
         }
-
      
         [CommandMethod("ddbnum")]
         public static void AutoNumberBlockThenSave()
@@ -86,6 +105,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
         {
             DrawingCommands dc = new DrawingCommands();
             dc.PrintVersion();
+            MicroMvvm.RelayCommand rc = new RelayCommand(PrintVersion);
         }
 
         //

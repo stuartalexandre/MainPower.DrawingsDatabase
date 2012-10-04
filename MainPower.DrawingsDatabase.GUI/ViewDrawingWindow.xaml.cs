@@ -14,8 +14,6 @@ using MainPower.DrawingsDatabase.DatabaseHelper;
 using System.Data.SqlClient;
 using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 using System.Collections.ObjectModel;
-using HC.Utils.Controls;
-using HC.Utils;
 
 namespace MainPower.DrawingsDatabase.Gui
 {
