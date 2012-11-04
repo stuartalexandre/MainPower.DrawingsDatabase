@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows;
 
-namespace MainPower.DrawingsDatabase.Gui.ViewModels
+namespace MicroMvvm
 {
-    public class ViewModelBase :INotifyPropertyChanged, IDisposable
+    public class ViewModelBase : DependencyObject, INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public bool ThrowOnInvalidPropertyName { get; set; }

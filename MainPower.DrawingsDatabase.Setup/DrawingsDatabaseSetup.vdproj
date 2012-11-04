@@ -15,24 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_08564705287A802AC1B31A315BBFEB50"
-        "OwnerKey" = "8:_A813E0CB4EFD4E1AA3F0611FB926BAD4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_08564705287A802AC1B31A315BBFEB50"
-        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_08564705287A802AC1B31A315BBFEB50"
-        "OwnerKey" = "8:_C2F9987948C22636CE66B66CED77083A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1CD3157CC1AE4342843B2D47C16228DC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -51,6 +33,48 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
+        "OwnerKey" = "8:_23D75D8C9F5A4B948B42E434AF604872"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
+        "OwnerKey" = "8:_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
+        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
+        "OwnerKey" = "8:_C91FF01B1B2B4542B9D067645259F3F0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
+        "OwnerKey" = "8:_A813E0CB4EFD4E1AA3F0611FB926BAD4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
+        "OwnerKey" = "8:_7B21481B80B541059CB63E6AAB80BB32"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
+        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7B21481B80B541059CB63E6AAB80BB32"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -59,30 +83,6 @@
         {
         "MsmKey" = "8:_A813E0CB4EFD4E1AA3F0611FB926BAD4"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BF93B7E001A13AFFC7C0DCF7F145BC05"
-        "OwnerKey" = "8:_A813E0CB4EFD4E1AA3F0611FB926BAD4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BF93B7E001A13AFFC7C0DCF7F145BC05"
-        "OwnerKey" = "8:_C2F9987948C22636CE66B66CED77083A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BF93B7E001A13AFFC7C0DCF7F145BC05"
-        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C2F9987948C22636CE66B66CED77083A"
-        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -101,6 +101,24 @@
         {
         "MsmKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBA618421DF0CEDEDB3EEB87B98077BE"
+        "OwnerKey" = "8:_A813E0CB4EFD4E1AA3F0611FB926BAD4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBA618421DF0CEDEDB3EEB87B98077BE"
+        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBA618421DF0CEDEDB3EEB87B98077BE"
+        "OwnerKey" = "8:_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,19 +160,37 @@
         "Entry"
         {
         "MsmKey" = "8:_F6A81AC487956BF1AD2972C07EE2D9B7"
-        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
+        "OwnerKey" = "8:_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F6A81AC487956BF1AD2972C07EE2D9B7"
-        "OwnerKey" = "8:_C2F9987948C22636CE66B66CED77083A"
+        "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DADBDF5947D04BB29FE61BA4E0C02DBC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DBA618421DF0CEDEDB3EEB87B98077BE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5A90110F017ABA6C18C6485FEB30146F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -196,12 +232,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C2F9987948C22636CE66B66CED77083A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_A813E0CB4EFD4E1AA3F0611FB926BAD4"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -209,18 +239,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F6A81AC487956BF1AD2972C07EE2D9B7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_08564705287A802AC1B31A315BBFEB50"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BF93B7E001A13AFFC7C0DCF7F145BC05"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -328,37 +346,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_08564705287A802AC1B31A315BBFEB50"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MicroMvvm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_08564705287A802AC1B31A315BBFEB50"
-                    {
-                    "Name" = "8:MicroMvvm.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:MicroMvvm.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_874B0DB8E779455FB18130B595C878D8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1CD3157CC1AE4342843B2D47C16228DC"
             {
             "SourcePath" = "8:..\\MainPower.DrawingsDatabase.GUI\\DrawingsDatabase.chm"
@@ -399,14 +386,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BF93B7E001A13AFFC7C0DCF7F145BC05"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5A90110F017ABA6C18C6485FEB30146F"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:DatabaseHelper, Version=0.10.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BF93B7E001A13AFFC7C0DCF7F145BC05"
+                    "_5A90110F017ABA6C18C6485FEB30146F"
                     {
                     "Name" = "8:DatabaseHelper.dll"
                     "Attributes" = "3:512"
@@ -430,14 +417,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C2F9987948C22636CE66B66CED77083A"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:DrawingsDatabaseGui, Version=0.10.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C2F9987948C22636CE66B66CED77083A"
+                    "_6045ED9CC9FD8BCB2A52DEF363EF5F8C"
                     {
                     "Name" = "8:DrawingsDatabaseGui.exe"
                     "Attributes" = "3:512"
@@ -489,6 +476,37 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DBA618421DF0CEDEDB3EEB87B98077BE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MicroMvvm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_DBA618421DF0CEDEDB3EEB87B98077BE"
+                    {
+                    "Name" = "8:MicroMvvm.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MicroMvvm.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_874B0DB8E779455FB18130B595C878D8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -642,7 +660,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DrawingsDatabase"
         "ProductCode" = "8:{7C172CB4-00C9-4CC9-8ABF-563EE206D1C0}"
-        "PackageCode" = "8:{9E7AF7E9-0ED9-4BAF-8AC5-90960B5FE9D0}"
+        "PackageCode" = "8:{82B30739-2710-47EC-AC2E-94AB4B0260BA}"
         "UpgradeCode" = "8:{BA40BBE8-DCBA-4235-9D26-2BCB1C18A85D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

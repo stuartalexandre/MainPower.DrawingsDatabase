@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml.Serialization;
 using MainPower.DrawingsDatabase.DatabaseHelper;
 using MainPower.DrawingsDatabase.Gui.ViewModels;
+using MicroMvvm;
 using Microsoft.Win32;
 
 namespace MainPower.DrawingsDatabase.Gui.Models

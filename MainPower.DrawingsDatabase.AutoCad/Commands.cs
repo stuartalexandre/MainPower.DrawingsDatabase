@@ -105,7 +105,6 @@ namespace MainPower.DrawingsDatabase.AutoCad
         {
             DrawingCommands dc = new DrawingCommands();
             dc.PrintVersion();
-            MicroMvvm.RelayCommand rc = new RelayCommand(PrintVersion);
         }
 
         //

@@ -52,6 +52,7 @@
     <Compile Include="PropertySupport.cs" />
     <Compile Include="RadioButtonExtended.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowClosingBehaviour.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -177,7 +177,6 @@
     <Compile Include="ViewDrawingWindow.xaml.cs">
       <DependentUpon>ViewDrawingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

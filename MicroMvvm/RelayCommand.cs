@@ -137,12 +137,12 @@ namespace MicroMvvm
         }
 
         [DebuggerStepThrough]
-        public Boolean CanExecute(Object parameter)
+        public Boolean CanExecute(object parameter)
         {
             return _canExecute == null || _canExecute();
         }
 
-        public void Execute(Object parameter)
+        public void Execute(object parameter)
         {
             _execute();
         }
