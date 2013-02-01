@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainPower.DrawingsDatabase.AutoCad", "MainPower.DrawingsDatabase.AutoCad\MainPower.DrawingsDatabase.AutoCad.csproj", "{3BDA8597-9F7E-4624-AC60-89D9E3E58E20}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B0AFAC27-17B7-49E3-9287-F5EE440B52C6} = {B0AFAC27-17B7-49E3-9287-F5EE440B52C6}
@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainPower.DrawingsDatabase.
 	ProjectSection(ProjectDependencies) = postProject
 		{8A886CD4-4C87-4502-8E35-B8755CF199F6} = {8A886CD4-4C87-4502-8E35-B8755CF199F6}
 	EndProjectSection
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MainPower.DrawingsDatabase.Setup", "MainPower.DrawingsDatabase.Setup\DrawingsDatabaseSetup.vdproj", "{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainPower.DrawingsDatabase.DrawingNameGrabber", "MainPower.DrawingsDatabase.DrawingNameGrabber\MainPower.DrawingsDatabase.DrawingNameGrabber.csproj", "{85BDCE9D-96A7-4F42-A13B-D1AB8AFAE498}"
 EndProject
@@ -84,14 +82,6 @@ Global
 		{B0AFAC27-17B7-49E3-9287-F5EE440B52C6}.Release|x64.Build.0 = Release|x64
 		{B0AFAC27-17B7-49E3-9287-F5EE440B52C6}.Release|x86.ActiveCfg = Release|x86
 		{B0AFAC27-17B7-49E3-9287-F5EE440B52C6}.Release|x86.Build.0 = Release|x86
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Debug|Any CPU.ActiveCfg = Debug
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Debug|x64.ActiveCfg = Debug
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Debug|x86.ActiveCfg = Debug
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Release|Any CPU.ActiveCfg = Release
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Release|Mixed Platforms.ActiveCfg = Release
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Release|x64.ActiveCfg = Release
-		{813CEAA9-B4BE-43F3-B801-9916DE1F61C4}.Release|x86.ActiveCfg = Release
 		{85BDCE9D-96A7-4F42-A13B-D1AB8AFAE498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{85BDCE9D-96A7-4F42-A13B-D1AB8AFAE498}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85BDCE9D-96A7-4F42-A13B-D1AB8AFAE498}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

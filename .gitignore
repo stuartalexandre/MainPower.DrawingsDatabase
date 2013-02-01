@@ -5,5 +5,7 @@ obj
 # mstest test results
 TestResults
 /Upgrade*
+/Output*
+*.suo
 _UpgradeReport_Files
 
