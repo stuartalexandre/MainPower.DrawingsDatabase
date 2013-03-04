@@ -7,7 +7,7 @@
         xmlns:mvvm="clr-namespace:MicroMvvm;assembly=MicroMvvm"
         x:Class="MainPower.DrawingsDatabase.Gui.Views.AddTemplateDrawingView"    
         mvvm:WindowClosingBehavior.Closing="{Binding Closing}"
-        Title="AddTemplateDrawingView" Icon="/DrawingsDatabaseGui;component/Images/MainPowerIconGreen.ico">
+        Title="Add new drawing" Icon="/DrawingsDatabaseGui;component/Images/MainPowerIconGreen.ico">
     <Window.DataContext>
         <viewmodels:AddTemplateDrawingViewModel />
     </Window.DataContext>

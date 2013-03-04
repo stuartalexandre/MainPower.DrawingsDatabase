@@ -10,18 +10,18 @@ namespace MainPower.DrawingsDatabase.Gui
     /// <summary>
     /// Gets assembly information for a specified type.
     /// </summary>
-    public class AssemblyInfoHelper
+    public  class AssemblyInfoHelper
     {
-        private static Assembly _assembly;
+        private Assembly _assembly;
 
-        public AssemblyInfoHelper(Type type)
+        public  AssemblyInfoHelper(Type type)
         {
             //Assertions.CheckObject("type", type);
             _assembly = Assembly.GetAssembly(type);
             //Assertions.CheckObject("_assembly", _assembly);
         }
 
-        private T CustomAttributes<T>()
+        private  T CustomAttributes<T>()
             where T : Attribute
         {
             object[] customAttributes = _assembly.GetCustomAttributes(typeof(T), false);
@@ -34,7 +34,7 @@ namespace MainPower.DrawingsDatabase.Gui
             throw new InvalidOperationException();
         }
 
-        public string Title
+        public  string Title
         {
             get
             {
@@ -42,7 +42,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string Description
+        public  string Description
         {
             get
             {
@@ -50,7 +50,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string Company
+        public  string Company
         {
             get
             {
@@ -58,7 +58,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string Product
+        public  string Product
         {
             get
             {
@@ -66,7 +66,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string Copyright
+        public  string Copyright
         {
             get
             {
@@ -74,7 +74,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string Trademark
+        public  string Trademark
         {
             get
             {
@@ -82,7 +82,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string AssemblyVersion
+        public  string AssemblyVersion
         {
             get
             {
@@ -90,7 +90,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string FileVersion
+        public  string FileVersion
         {
             get
             {
@@ -99,7 +99,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string Guid
+        public  string Guid
         {
             get
             {
@@ -107,7 +107,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string FileName
+        public  string FileName
         {
             get
             {
@@ -116,7 +116,7 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
-        public string FilePath
+        public  string FilePath
         {
             get
             {

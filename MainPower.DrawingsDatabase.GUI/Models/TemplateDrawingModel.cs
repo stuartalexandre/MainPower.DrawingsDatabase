@@ -87,7 +87,7 @@ namespace MainPower.DrawingsDatabase.Gui.Models
             {
                 _path = path;
                 _originalDrawing = d;
-                Drawing = _originalDrawing.Clone() as Drawing;
+                _drawing = _originalDrawing.Clone() as Drawing;
             }
         }
 
@@ -95,14 +95,18 @@ namespace MainPower.DrawingsDatabase.Gui.Models
         /// Create a drawing template from given drawing with the given path/title
         /// </summary>
         /// <param name="title"></param>
-        /// <param name="d"></param>
-        public TemplateDrawingModel(string title, Drawing d)
+        /// <param name="drawing"></param>
+        public TemplateDrawingModel(string title, Drawing drawing)
         {
+            if (drawing == null)
+            {
+                throw new ArgumentNullException("d");
+            }
             _path = title;
             //clone the drawing so subsequent changes effect only one copy
-            _originalDrawing = d.Clone() as Drawing;
+            _originalDrawing = drawing.Clone() as Drawing;
             //same here, clone the working copy.  Shallow copy ok as all members are value or immutable reference types.
-            Drawing = _originalDrawing.Clone() as Drawing;
+            _drawing = _originalDrawing.Clone() as Drawing;
         }
 
         /// <summary>
@@ -136,6 +140,7 @@ namespace MainPower.DrawingsDatabase.Gui.Models
             XmlSerializer xml = new XmlSerializer(typeof(Drawing));
             xml.Serialize(sw, Drawing);
             OriginalDrawing = Drawing.Clone() as Drawing;
+            sw.Dispose();
         }
 
         /// <summary>
@@ -151,6 +156,7 @@ namespace MainPower.DrawingsDatabase.Gui.Models
                 XmlSerializer xml = new XmlSerializer(typeof(Drawing));
                 xml.Serialize(sw, Drawing);
                 OriginalDrawing = Drawing.Clone() as Drawing;
+                sw.Dispose();
             }
         }
 

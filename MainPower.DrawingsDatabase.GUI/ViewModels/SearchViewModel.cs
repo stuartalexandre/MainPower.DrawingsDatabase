@@ -288,11 +288,11 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         }
         public bool StatusCancelled
         {
-            get { return _searchFields.StatusCancelled; }
+            get { return _searchFields.StatusCanceled; }
             set
             {
                 if (StatusCancelled == value) return;
-                _searchFields.StatusCancelled = value;
+                _searchFields.StatusCanceled = value;
                 OnPropertyChanged("StatusCancelled");
             }
         }

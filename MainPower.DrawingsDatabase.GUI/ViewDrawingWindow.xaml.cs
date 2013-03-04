@@ -33,14 +33,24 @@ namespace MainPower.DrawingsDatabase.Gui
         /// <param name="drawing">The drawing to edit</param>
         /// <param name="refresh">Some action to perform if the drawing is changed</param>
         /// <param name="dc"></param>
-        public ViewDrawingWindow(MPDrawing drawing, Action refresh, bool enableEditByDefualt = false)
+        public ViewDrawingWindow(MPDrawing drawing, Action refresh, bool enableEditByDefault) : this(drawing, refresh)
+        {
+            _enableEditByDefualt = enableEditByDefault;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="drawing">The drawing to edit</param>
+        /// <param name="refresh">Some action to perform if the drawing is changed</param>
+        /// <param name="dc"></param>
+        public ViewDrawingWindow(MPDrawing drawing, Action refresh)
         {
             InitializeComponent();
-            
+
             _refresh = refresh;
             _dc = DBCommon.NewDC;
             _d = (from dwg in _dc.Drawings where dwg.Id == drawing.Id select dwg).First();
-            _enableEditByDefualt = enableEditByDefualt;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -43,9 +43,17 @@ namespace MicroMvvm
             }
         }
 
+        protected virtual void Dispose(bool cleanManaged)
+        {
+            if (cleanManaged)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
         }
     }
 }

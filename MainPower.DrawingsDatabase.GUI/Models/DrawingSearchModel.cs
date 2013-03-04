@@ -129,7 +129,7 @@ namespace MainPower.DrawingsDatabase.Gui.Models
             get;
             set;
         }
-        public bool StatusCancelled
+        public bool StatusCanceled
         {
             get;
             set;

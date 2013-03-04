@@ -137,6 +137,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             d.Sheet = "1";
             d.ProjectTitle = "YOUR PROJECT TITLE HERE";
             d.TitleLine1 = "YOUR TITLE LINE 1 HERE";
+            d.Electronic = true;
             return d;
         }
 
