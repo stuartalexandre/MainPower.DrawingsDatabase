@@ -180,7 +180,7 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         {
             Drawing d = DBCommon.CreateDefaultDrawing();
             d.Number = "";
-            _recentTemplates.Add(new TemplateDrawingModel("<new template>", d));
+            _recentTemplates.Add(new TemplateDrawingModel("[new template]", d));
         }
 
         private bool CanAddTemplateExecute()
@@ -215,7 +215,11 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         {
             if (SelectedTemplate != null)
             {
-                SelectedTemplate.SaveTemplateAs();
+                var newTemplate = SelectedTemplate.SaveTemplateAs();
+                if (newTemplate != null)
+                {
+                    _recentTemplates.Add(newTemplate);
+                }
             }
         }
 

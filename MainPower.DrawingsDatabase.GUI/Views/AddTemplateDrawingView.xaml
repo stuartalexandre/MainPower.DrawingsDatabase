@@ -19,7 +19,7 @@
         
         <xctk:PropertyGrid SelectedObject="{Binding SelectedTemplate.Drawing}" Margin="187.041,10,10,10"/>
 
-        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" Margin="10,129.88,0,10" HorizontalAlignment="Left" Width="172.041">
+        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" DisplayMemberPath="FileName" Margin="10,129.88,0,10" HorizontalAlignment="Left" Width="172.041">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Save" Command="{Binding SaveTemplate}" />

@@ -41,6 +41,7 @@ namespace MainPower.DrawingsDatabase.Gui.Models
                 if (Path == value) return;
                 _path = value;
                 OnPropertyChanged("Path");
+                OnPropertyChanged("FileName");
             }
         }
         
@@ -127,14 +128,22 @@ namespace MainPower.DrawingsDatabase.Gui.Models
         }
 
         /// <summary>
-        /// Save the template.  If it doesnt already exist, then SaveFileDialog will be displayed.
+        /// Save the template.
+        /// If it doesnt already exist, then SaveFileDialog will be displayed unless the noPrompt parameter is set.
         /// </summary>
-        public void SaveTemplate()
+        public void SaveTemplate(bool noPrompt = false)
         {
-            if (!File.Exists(_path))
+            if (!File.Exists(_path) && !noPrompt)
             {
-                SaveTemplateAs();
-                return;
+                SaveFileDialog d = new SaveFileDialog();
+                if (d.ShowDialog() == true)
+                {
+                    Path = d.FileName;
+                }
+                else
+                {
+                    return;
+                }
             }
             StreamWriter sw = new StreamWriter(Path);
             XmlSerializer xml = new XmlSerializer(typeof(Drawing));
@@ -146,18 +155,27 @@ namespace MainPower.DrawingsDatabase.Gui.Models
         /// <summary>
         /// Show SaveFileDialog and save template
         /// </summary>
-        public void SaveTemplateAs()
+        public TemplateDrawingModel SaveTemplateAs()
         {
-            SaveFileDialog d = new SaveFileDialog();
-            if (d.ShowDialog() == true)
+            try
             {
-                Path = d.FileName;
-                StreamWriter sw = new StreamWriter(Path);
-                XmlSerializer xml = new XmlSerializer(typeof(Drawing));
-                xml.Serialize(sw, Drawing);
-                OriginalDrawing = Drawing.Clone() as Drawing;
-                sw.Dispose();
+                SaveFileDialog d = new SaveFileDialog();
+                if (d.ShowDialog() == true)
+                {
+                    var _newPath = d.FileName;
+                    TemplateDrawingModel _newModel = new TemplateDrawingModel(_newPath, Drawing.Clone() as Drawing);
+                    _newModel.SaveTemplate(true);
+                    return _newModel;
+                }
+                return null;
             }
+            catch (Exception ex)
+            {
+                if (ex is FileNotFoundException || ex is IOException)
+                    return null;
+                throw;
+            }
+            
         }
 
         /// <summary>

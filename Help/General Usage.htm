@@ -22,9 +22,14 @@ At this stage this feature is temporary and is used primarily for testing purpos
 <img src="advcSearchWindow.png" />
 
 <h2>Add a drawing (Tasks->Add Drawing)</h2>
-Use this to add a new drawing to the database (to do this you must have write permissions to the database).  The drawing number will be automatically populated with the next available drawing number.  Fill out remaining fields as necessary, and click Add Drawing.  The Drawing Number and Sheet Number combination must be unique before adding the drawing.
+Use this to add a new drawing to the database (to do this you must have write permissions to the database).  Drawings are added to the database manually by way of drawing templates.  Templates are designed to speed up the process of entering manufacturers drawings by automatically filling out common fields.
 <br />
-Drawing templates can be used to add manufacturers drawings more efficiently by creating a template of the drawing, so you don't have to
+<br/>
+<img src="addDrawing.png" />
+<br />
+The default drawing template always exists, if you delete it it will appear again the next time the window is opened.  Templates have two states, the state of the template that is stored on disk (the Original State) and the currently Edited State.  If you save the template, the Edited State is saved to disk and becomes the OriginalState.  You can reset the Edited State to the Original State by right clicking the template and selecting Reset.
+<br/>
+Templates can be saved, saved with a new name (leaving the original untouched), and deleted (removed from the list, by not deleted from disk).
 
 <h2>Edit a drawing</h2>
 Search for the drawing you wish to edit in the database, and then double click the entry in the list to edit the drawing.
