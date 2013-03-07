@@ -63,9 +63,9 @@ namespace MainPower.DrawingsDatabase.Gui
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             btnSave.Focus();//prop grid wont save unless it loses focus (which it wont if we press enter instead of click the button)
-            if (!propGrid.IsEnabled)
+            if (propGrid.IsReadOnly)
             {
-                propGrid.IsEnabled = true;
+                propGrid.IsReadOnly = false;
                 btnSave.Content = "Save and Close";
                 lblEditMessage.Visibility = System.Windows.Visibility.Visible;
             }

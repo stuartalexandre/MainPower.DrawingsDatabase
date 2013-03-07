@@ -8,7 +8,7 @@
         <DockPanel LastChildFill="True">
             <Label Name="lblEditMessage" DockPanel.Dock="Top" Content="IMPORTANT: All fields visible in cad should be modified in cad only, so that the title blocks remain in sync" Visibility="Collapsed" Foreground="White" Background="#FFD14B26" />
             <Button DockPanel.Dock="Bottom" Content="Enable Editing..." Click="Button_Click" Height="23" VerticalAlignment="Bottom" Name="btnSave" IsDefault="True" />
-            <xctk:PropertyGrid  DockPanel.Dock="Top" Name="propGrid" AllowDrop="True" IsEnabled="False" />
+            <xctk:PropertyGrid  DockPanel.Dock="Top" Name="propGrid" AllowDrop="True" IsReadOnly="True" />
         </DockPanel>
     </Grid>
 </Window>

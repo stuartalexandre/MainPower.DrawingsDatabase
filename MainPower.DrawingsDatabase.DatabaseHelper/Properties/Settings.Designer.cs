@@ -12,7 +12,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,8 +25,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\r\n        Data Source=Kiwi-2;Initial Catalog=Drawings;Integrated Security=True\r\n " +
-            "     ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=Kiwi-2;Initial Catalog=Drawings;Integrated Security=True")]
         public string DrawingsConnectionString {
             get {
                 return ((string)(this["DrawingsConnectionString"]));
