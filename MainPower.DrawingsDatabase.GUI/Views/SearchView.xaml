@@ -7,6 +7,8 @@
         xmlns:wpfUtil="clr-namespace:Wpf.Util"
         xmlns:mvvm="clr-namespace:MicroMvvm;assembly=MicroMvvm"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+        x:Name="SearchPage"
         Title="Search Database" Loaded="Page_Loaded">
     <Page.DataContext>
         <viewmodels:SearchViewModel />
@@ -116,6 +118,7 @@
                       ItemsSource="{Binding SearchResults}" 
                       Grid.Column="1" 
                       DockPanel.Dock="Bottom"
+                      Tag="{Binding RelativeSource={RelativeSource AncestorType=Page}}"
                       wpfUtil:GridViewSort.AutoSort="True">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
@@ -128,10 +131,15 @@
                 </ListView.Resources>
                 <ListView.ContextMenu>
                     <ContextMenu>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Opened">
+                                <i:InvokeCommandAction Command="{Binding RefreshDrawingDeletionStatus}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <MenuItem Command="{Binding OpenDrawing}" Header="Open Drawing" />
                         <MenuItem Command="{Binding OpenDrawingInExplorer}" Header="Show in explorer"/>
                         <MenuItem Command="{Binding ViewDrawing}" Header="View Details"/>
-                        <MenuItem Command="{Binding DeleteDrawing}" Name="mnuDeleteDrawing" Header="Delete" Visibility="Collapsed" />
+                        <MenuItem Command="{Binding DeleteDrawing}" Name="mnuDeleteDrawing" Header="Delete" Visibility="{Binding Path=CanDeleteDrawing}" />
                     </ContextMenu>
                 </ListView.ContextMenu>
                 <ListView.View>
@@ -168,7 +176,7 @@
                             <GridViewColumnHeader Content="DrawnDate" Visibility="{Binding ElementName=mnuColDrawnDate, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
                         </GridViewColumn>
                         <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="25" wpfUtil:GridViewSort.PropertyName="SheetRevision" DisplayMemberBinding="{Binding SheetRevision}" >
-                            <GridViewColumnHeader Content="SheetRevision" Visibility="{Binding ElementName=mnuColShetRevision, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
+                            <GridViewColumnHeader Content="SheetRevision" Visibility="{Binding ElementName=mnuColSheetRevision, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>
                         </GridViewColumn>
                         <GridViewColumn HeaderTemplate="{StaticResource HeaderTemplateSortNon}" Width="25" wpfUtil:GridViewSort.PropertyName="Sheet" DisplayMemberBinding="{Binding Sheet}" >
                             <GridViewColumnHeader Content="Sheet" Visibility="{Binding ElementName=mnuColSheet, Path=IsChecked, Converter={StaticResource boolToVisCon}}" local:GridViewBehaviours.CollapseableColumn="True"/>

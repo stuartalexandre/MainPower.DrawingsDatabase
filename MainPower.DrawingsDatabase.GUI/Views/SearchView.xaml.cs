@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,6 +30,8 @@ namespace MainPower.DrawingsDatabase.Gui.Views
             dc.DrawingDoubleClick.Execute(null);
             
         }
+
+
 
         /// <summary>
         /// When the page is loaded, retrieve the persisted column layout

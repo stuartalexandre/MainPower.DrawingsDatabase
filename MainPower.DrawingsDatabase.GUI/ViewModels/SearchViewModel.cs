@@ -32,6 +32,18 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
 #endregion
 
 #region Properties
+
+        public Visibility CanDeleteDrawing
+        {
+            get
+            {
+                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                    return Visibility.Visible;
+                else
+                    return Visibility.Collapsed;
+            }
+        }
+
         public DrawingSearchModel Model
         {
             get
@@ -666,6 +678,18 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
 
         public ICommand ViewDrawing { get { return new RelayCommand(ViewDrawingExecute, CanViewDrawingExecute); } }
 
+        void RefreshDrawingDeletionStatusExecute()
+        {
+            OnPropertyChanged("CanDeleteDrawing");
+        }
+
+        bool CanRefreshDrawingDeletionStatusExecute()
+        {
+            return true;
+        }
+
+        public ICommand RefreshDrawingDeletionStatus { get { return new RelayCommand(RefreshDrawingDeletionStatusExecute, CanRefreshDrawingDeletionStatusExecute); } }
+        
         void OpenDrawingExecute()
         {
             try
