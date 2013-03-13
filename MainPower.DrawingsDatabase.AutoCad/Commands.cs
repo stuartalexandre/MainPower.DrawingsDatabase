@@ -38,8 +38,9 @@ namespace MainPower.DrawingsDatabase.AutoCad
             string assPath = Path.GetDirectoryName(path);
             try
             {
-                Assembly.LoadFrom(assPath + "\\" + "WPFToolkit.Extended.dll");
+                Assembly.LoadFrom(assPath + "\\" + "Xceed.Wpf.Toolkit.dll");
                 Assembly.LoadFrom(assPath + "\\" + "MicroMvvm.dll");
+                Assembly.LoadFrom(assPath + "\\" + "System.Windows.Interactivity.dll");
             }
             catch { }
         }

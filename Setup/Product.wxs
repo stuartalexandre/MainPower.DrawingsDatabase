@@ -1,30 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+Notes:
+Change upgrade guid for major versions, ie series of products that can be upgraded
+For minor upgrades, change package guid, and version number
+For major upgrades, change package guid, version number and product guid, set OnlyDetect to no.  Will auto uninstall old version
+-->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Setup" Language="1033" Version="1.0.0.0" Manufacturer="MainPower" UpgradeCode="b86d7b50-aca6-42dc-9386-3263893fe244">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <Product Id="2D5063DE-5EF3-4E2A-801A-AB1C79F43CE2" Name="MainPower Drawings Database" Language="1033" Version="0.10.3.0" Manufacturer="MainPower" UpgradeCode="406C9771-B0DE-408B-8E10-D63EE135CA43">
+    <Package Id="*" InstallerVersion="200" InstallScope="perMachine" Description="MainPower Drawings Database Installer" Comments='Made by Raggles' Manufacturer='MainPower NZ Ltd' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+    <Property Id="ARPPRODUCTICON" Value="DrawingsDatabaseGui.exe" />
+    
+    <Upgrade Id='406C9771-B0DE-408B-8E10-D63EE135CA43'>
+      <UpgradeVersion OnlyDetect='yes' Property='SELFFOUND'
+        Minimum='0.10.3' IncludeMinimum='yes'
+        Maximum='0.10.3' IncludeMaximum='yes' />
+      <UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
+        Minimum='0.10.3' IncludeMinimum='no' />
+    </Upgrade>
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    <CustomAction Id='NoDowngrade' Error='A later version of [ProductName] is already installed.' />
 
-		<Feature Id="ProductFeature" Title="Setup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+    <InstallExecuteSequence>
+      <Custom Action='NoDowngrade' After='FindRelatedProducts'>NEWERFOUND</Custom>
+    </InstallExecuteSequence>
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Setup" />
-			</Directory>
-		</Directory>
-	</Fragment>
+    <Media Id='1' Cabinet='Setup.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />
+    <Property Id='DiskPrompt' Value="MPNZ Drawings Database Installation [1]" />
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-		</ComponentGroup>
-	</Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id='MainPower' Name='MainPower'>
+          <Directory Id="INSTALLFOLDER" Name="DrawingsDatabase 0.10" >
+            <Component Id="MainExecutable" Guid="94F17E72-C95A-4D6D-8E08-03F321E8566E">
+              <File Id='MainExecutable' Name='DrawingsDatabaseGui.exe' DiskId='1' Source='..\Output\AnyCPU\Release\DrawingsDatabaseGui.exe' KeyPath='yes'>
+                <Shortcut Id="startmenuDb" Directory="ProgramMenuDir" Name="Drawings Database" WorkingDirectory='INSTALLDIR' Icon="DrawingsDatabaseGui.exe" IconIndex="0" Advertise="yes" />
+                <Shortcut Id="desktopDb" Directory="DesktopFolder" Name="Drawings Database" WorkingDirectory='INSTALLDIR' Icon="DrawingsDatabaseGui.exe" IconIndex="0" Advertise="yes" />
+              </File>
+            </Component>
+            <Component Id="HelpFile" Guid="9925EC66-F93E-4396-B0A7-1A380765986D">
+              <File Id='HelpFile' Name='DrawingsDatabase.chm' DiskId='1' Source='..\Output\AnyCPU\Release\DrawingsDatabase.chm' KeyPath='yes'/>
+            </Component>
+            <Component Id="AutocadPlugin" Guid="3DC152BF-7DC1-4EAC-A7D9-E8E8B2EBC7FD">
+              <File Id='AutocadPlugin' Name='AutocadPlugin.dll' DiskId='1' Source='..\Output\AnyCPU\Release\AutocadPlugin.dll' KeyPath='yes'/>
+            </Component>
+            <Component Id="DatabaseHelper" Guid="D854841E-119F-45EE-8971-3393F275259A">
+              <File Id='DatabaseHelper' Name='DatabaseHelper.dll' DiskId='1' Source='..\Output\AnyCPU\Release\DatabaseHelper.dll' KeyPath='yes'/>
+            </Component>
+            <Component Id="Mvvm" Guid="458B094E-DB84-4A5D-B560-242F2ABA89AF">
+              <File Id='Mvvm' Name='MicroMvvm.dll' DiskId='1' Source='..\Output\AnyCPU\Release\MicroMvvm.dll' KeyPath='yes'/>
+            </Component>
+            <Component Id="WindowsInteractivity" Guid="91139CB3-5693-4CB6-AB42-04D44A717394">
+              <File Id='WindowsInteractivity' Name='System.Windows.Interactivity.dll' DiskId='1' Source='..\Output\AnyCPU\Release\System.Windows.Interactivity.dll' KeyPath='yes'/>
+            </Component>
+            <Component Id="WpfToolkit" Guid="A698C193-14C8-4643-9A2E-2DF821D6B555">
+              <File Id='WpfToolkit' Name='Xceed.Wpf.Toolkit.dll' DiskId='1' Source='..\Output\AnyCPU\Release\Xceed.Wpf.Toolkit.dll' KeyPath='yes'/>
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="MainPower">
+          <Component Id="ProgramMenuDir" Guid="{3F6C8DBB-7B9B-49C9-804D-C6A5594B6BB0}">
+            <RemoveFolder Id='ProgramMenuDir' On='uninstall' />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+    <Feature Id='Complete' Level='1'>
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='HelpFile' />
+      <ComponentRef Id='AutocadPlugin' />
+      <ComponentRef Id='DatabaseHelper' />
+      <ComponentRef Id='Mvvm' />
+      <ComponentRef Id='WindowsInteractivity' />
+      <ComponentRef Id='WpfToolkit' />
+      <ComponentRef Id='ProgramMenuDir' />
+    </Feature>
+
+    <Icon Id="DrawingsDatabaseGui.exe" SourceFile="..\Output\AnyCPU\Release\DrawingsDatabaseGui.exe" />
+    
+  </Product>
 </Wix>

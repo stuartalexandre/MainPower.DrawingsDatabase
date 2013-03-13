@@ -183,7 +183,7 @@ namespace MainPower.DrawingsDatabase.Gui
         {
             try
             {
-                DBCommon.RemovePlugin(AcadVersion.ACAD2012);
+                DBCommon.InstallPlugin(AcadVersion.ACAD2012);
             }
             catch (Exception ex)
             {

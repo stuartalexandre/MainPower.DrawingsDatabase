@@ -16,10 +16,6 @@
                 <MenuItem Header="Raw Database Viewer" Click="mnuDbViewer_Click" />
                 <MenuItem Header="Sub Browser" Click="mnuSubBrowser_Click" />
                 <MenuItem Header="AutoCAD Plugin" >
-                    <MenuItem Header="AutoCAD 2010">
-                        <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2010_Click" />
-                        <MenuItem Header="Remove Autocad Plugin" Click="mnuRemovePlugin2010_Click" />
-                    </MenuItem>
                     <MenuItem Header="AutoCAD 2012">
                         <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2012_Click" />
                         <MenuItem Header="Remove Autocad Plugin" Click="mnuRemovePlugin2012_Click" />
