@@ -17,6 +17,7 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
     {
         private ObservableCollection<TemplateDrawingModel> _recentTemplates;
         private TemplateDrawingModel _selectedTemplate;
+        private string _statusMessage;
 
         #region Properties
         
@@ -31,6 +32,20 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 if (SelectedTemplate == value) return;
                 _selectedTemplate = value;
                 OnPropertyChanged("SelectedTemplate");
+            }
+        }
+
+        /// <summary>
+        /// The currently selected template
+        /// </summary>
+        public string StatusMessage
+        {
+            get { return _statusMessage; }
+            set
+            {
+                if (StatusMessage == value) return;
+                _statusMessage = DateTime.Now.ToShortTimeString() + ": " + value;
+                OnPropertyChanged("StatusMessage");
             }
         }
 
@@ -139,6 +154,7 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 if (SelectedTemplate != null)
                 {
                     SelectedTemplate.AddDrawingToDatabase();
+                    StatusMessage = "Added drawing " + SelectedTemplate.Drawing.Number + " to the database.";
                 }
             }
             catch (Exception ex)

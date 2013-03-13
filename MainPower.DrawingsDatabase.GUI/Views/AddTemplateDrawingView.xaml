@@ -17,9 +17,9 @@
     <Grid>
         <Label Content="Recent Templates:" HorizontalAlignment="Left" Margin="0,103.92,0,0" VerticalAlignment="Top"/>
         
-        <xctk:PropertyGrid SelectedObject="{Binding SelectedTemplate.Drawing}" Margin="187.041,10,10,10"/>
+        <xctk:PropertyGrid SelectedObject="{Binding SelectedTemplate.Drawing}" Margin="187,10,10,28"/>
 
-        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" DisplayMemberPath="FileName" Margin="10,129.88,0,10" HorizontalAlignment="Left" Width="172.041">
+        <ListBox SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding RecentTemplates}" DisplayMemberPath="FileName" Margin="10,130,0,28" HorizontalAlignment="Left" Width="172">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Save" Command="{Binding SaveTemplate}" />
@@ -32,5 +32,8 @@
         <Button Command="{Binding AddTemplate}" Content="Add new template" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="172.041"/>
         <Button Command="{Binding AddExistingTemplate}" Content="Add existing template" HorizontalAlignment="Left" Margin="10,36.96,0,0" VerticalAlignment="Top" Width="172.041"/>
         <Button Command="{Binding AddDrawing}" Content="Add Drawing to DB" Margin="10,63.92,0,0" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="172.041" />
+        <StatusBar Height="24" Margin="0,482,0,0" VerticalAlignment="Bottom">
+            <Label Margin="0,-5,0,0" Content="{Binding StatusMessage}" VerticalAlignment="Top" Height="30"  />
+        </StatusBar>
     </Grid>
 </Window>
