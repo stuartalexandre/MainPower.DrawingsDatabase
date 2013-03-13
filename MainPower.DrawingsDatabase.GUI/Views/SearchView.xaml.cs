@@ -28,10 +28,7 @@ namespace MainPower.DrawingsDatabase.Gui.Views
             //this is not very mvvm ish, but we dont have dynamic available to us in .net35
             SearchViewModel dc = DataContext as SearchViewModel;
             dc.DrawingDoubleClick.Execute(null);
-            
         }
-
-
 
         /// <summary>
         /// When the page is loaded, retrieve the persisted column layout

@@ -51,6 +51,17 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
+        public SearchView ActiveSearch
+        {
+            get
+            {
+                Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
+                return f.Content as SearchView;
+                
+            }
+        }
+
+
         private void mnuHelp_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -212,16 +223,24 @@ namespace MainPower.DrawingsDatabase.Gui
         private void mnuSaveSearchSettings_Click(object sender, RoutedEventArgs e)
         {
             //TODO: trap and log errors here...
-            Frame f = (tabControl1.SelectedContent as Grid).Children[0] as Frame;
-            SearchView sv = f.Content as SearchView;
-            sv.PersistColumns();
-            SearchViewModel svm = sv.DataContext as SearchViewModel;
+            if (ActiveSearch == null)
+                return;
+            ActiveSearch.PersistColumns();
+            SearchViewModel svm = ActiveSearch.DataContext as SearchViewModel;
 
             MemoryStream ms = new MemoryStream();
             XmlSerializer xml = new XmlSerializer(typeof(DrawingSearchModel));
             xml.Serialize(ms, svm.Model);
             Properties.Settings.Default.SavedSearch = Encoding.ASCII.GetString(ms.GetBuffer());
             Properties.Settings.Default.Save();
+        }
+
+        private void mnuExportSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (ActiveSearch == null)
+                return;
+            var svm = ActiveSearch.DataContext as SearchViewModel;
+            svm.ExportSearch.Execute(null);
         }
         
     }

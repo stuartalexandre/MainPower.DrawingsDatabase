@@ -27,6 +27,7 @@
                 </MenuItem>
                 
                 <MenuItem Header="Get Next Avail Dwg No" Click="mnuNextDwgNo_Click" />
+                <MenuItem Header="Export Search Results" Click="mnuExportSearch_Click" />
             </MenuItem>
             <MenuItem Header="Options" >
                 <MenuItem Header="Database" Click="mnuEditDbConnection_Click" />

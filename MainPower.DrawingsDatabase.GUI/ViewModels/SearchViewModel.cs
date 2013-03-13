@@ -19,6 +19,7 @@ using MainPower.DrawingsDatabase.DatabaseHelper;
 using Drawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 using MicroMvvm;
 using MainPower.DrawingsDatabase.Gui.Models;
+using Microsoft.Win32;
 
 namespace MainPower.DrawingsDatabase.Gui.ViewModels
 {
@@ -651,6 +652,166 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         }
 
         public ICommand AdvancedSearch { get { return new RelayCommand(AdvancedSearchExecute, CanAdvancedSearchExecute); } }
+
+        void ExportSearchExecute()
+        {
+            try
+            {
+                SaveFileDialog d = new SaveFileDialog();
+                if (d.ShowDialog() == true)
+                {
+                    using (StreamWriter sw = new StreamWriter(d.FileName))
+                    {
+                        sw.WriteLine("Approved By," +
+                            "ApprovedByA," +
+                            "ApprovedByB," +
+                            "ApprovedByC," +
+                            "ApprovedByD," +
+                            "ApprovedByE," +
+                            "ApprovedByF," +
+                            "ApprovedByG," +
+                            "ApprovedDate," +
+                            "Category," +
+                            "CheckedBy," +
+                            "CheckedDate," +
+                            "Comments," +
+                            "Consultant," +
+                            "DateRevA," +
+                            "DateRevB," +
+                            "DateRevC," +
+                            "DateRevD," +
+                            "DateRevE," +
+                            "DateRevF," +
+                            "DateRevG," +
+                            "DescriptionRevA," +
+                            "DescriptionRevB," +
+                            "DescriptionRevC," +
+                            "DescriptionRevD," +
+                            "DescriptionRevE," +
+                            "DescriptionRevF," +
+                            "DescriptionRevG," +
+                            "DrawnBy," +
+                            "DrawnByRevA," +
+                            "DrawnByRevB," +
+                            "DrawnByRevC," +
+                            "DrawnByRevD," +
+                            "DrawnByRevE," +
+                            "DrawnByRevF," +
+                            "DrawnByRevG," +
+                            "DrawnDate," +
+                            "Electronic," +
+                            "FileName," +
+                            "Id," +
+                            "LegacyDrawing," +
+                            "Number," +
+                            "ProjectTitle," +
+                            "RevA," +
+                            "RevB," +
+                            "RevC," +
+                            "RevD," +
+                            "RevE," +
+                            "RevF," +
+                            "RevG," +
+                            "Scale," +
+                            "Sheet," +
+                            "SheetRevision," +
+                            "SheetSize," +
+                            "Status," +
+                            "TitleLine1," +
+                            "TitleLine2," +
+                            "TitleLine3," +
+                            "TitleLine4" 
+                            );
+                        foreach (Drawing dw in _searchresults)
+                        {
+                            sw.WriteLine(string.Join(",", new string[]{
+                                SwapNullForString(dw.ApprovedBy),
+                                SwapNullForString(dw.ApprovedByRevA),
+                                SwapNullForString(dw.ApprovedByRevB),
+                                SwapNullForString(dw.ApprovedByRevC),
+                                SwapNullForString(dw.ApprovedByRevD),
+                                SwapNullForString(dw.ApprovedByRevE),
+                                SwapNullForString(dw.ApprovedByRevF),
+                                SwapNullForString(dw.ApprovedByRevG),
+                                dw.ApprovedDate == null ? "" :dw.ApprovedDate.Value.ToShortDateString(),
+                                Enum.GetName(typeof(DrawingCategory), dw.Category),
+                                SwapNullForString(dw.CheckedBy),
+                                dw.CheckedDate == null ? "" :dw.CheckedDate.Value.ToShortDateString(),
+                                SwapNullForString(dw.Comments),
+                                SwapNullForString(dw.Consultant),
+                                dw.DateRevA == null ? "" : dw.DateRevA.Value.ToShortDateString(),
+                                dw.DateRevB == null ? "" : dw.DateRevB.Value.ToShortDateString(),
+                                dw.DateRevC == null ? "" : dw.DateRevC.Value.ToShortDateString(),
+                                dw.DateRevD == null ? "" : dw.DateRevD.Value.ToShortDateString(),
+                                dw.DateRevE == null ? "" : dw.DateRevE.Value.ToShortDateString(),
+                                dw.DateRevF == null ? "" : dw.DateRevF.Value.ToShortDateString(),
+                                dw.DateRevG == null ? "" : dw.DateRevG.Value.ToShortDateString(),
+                                SwapNullForString(dw.DescriptionRevA),
+                                SwapNullForString(dw.DescriptionRevB),
+                                SwapNullForString(dw.DescriptionRevC),
+                                SwapNullForString(dw.DescriptionRevD),
+                                SwapNullForString(dw.DescriptionRevE),
+                                SwapNullForString(dw.DescriptionRevF),
+                                SwapNullForString(dw.DescriptionRevG),
+                                SwapNullForString(dw.DrawnBy),
+                                SwapNullForString(dw.DrawnByRevA),
+                                SwapNullForString(dw.DrawnByRevB),
+                                SwapNullForString(dw.DrawnByRevC),
+                                SwapNullForString(dw.DrawnByRevD),
+                                SwapNullForString(dw.DrawnByRevE),
+                                SwapNullForString(dw.DrawnByRevF),
+                                SwapNullForString(dw.DrawnByRevG),
+                                dw.DrawnDate == null ? "" :dw.DrawnDate.Value.ToShortDateString(),
+                                dw.Electronic.ToString(),
+                                SwapNullForString(dw.FileName),
+                                dw.Id.ToString(),
+                                SwapNullForString(dw.LegacyDrawing),
+                                SwapNullForString(dw.Number),
+                                SwapNullForString(dw.ProjectTitle),
+                                SwapNullForString(dw.RevA),
+                                SwapNullForString(dw.RevB),
+                                SwapNullForString(dw.RevC),
+                                SwapNullForString(dw.RevD),
+                                SwapNullForString(dw.RevE),
+                                SwapNullForString(dw.RevF),
+                                SwapNullForString(dw.RevG),
+                                SwapNullForString(dw.Scale),
+                                SwapNullForString(dw.Sheet),
+                                SwapNullForString(dw.SheetRevision),
+                                SwapNullForString(dw.SheetSize),
+                                Enum.GetName(typeof(DrawingStatus), dw.Status),
+                                SwapNullForString(dw.TitleLine1),
+                                SwapNullForString(dw.TitleLine2),
+                                SwapNullForString(dw.TitleLine3),
+                                SwapNullForString(dw.TitleLine4)
+                            }));
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        string SwapNullForString(string str)
+        {
+            if (String.IsNullOrEmpty(str))
+            {
+                return "";
+            }
+            return str;
+        }
+
+        bool CanExportSearchExecute()
+        {
+            return true;
+        }
+
+        public ICommand ExportSearch { get { return new RelayCommand(ExportSearchExecute, CanExportSearchExecute); } }
+
 
         void DrawingDoubleClickExecute()
         {
