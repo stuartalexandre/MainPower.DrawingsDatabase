@@ -156,6 +156,14 @@ namespace MainPower.DrawingsDatabase.Gui
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //event handler to tell the parent tab control to close the tab
+
+            if (Settings.Default.CallUpgrade)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.CallUpgrade = false;
+                Settings.Default.Save();
+
+            }
             this.AddHandler(CloseableTabItem.CloseTabEvent, new RoutedEventHandler(this.CloseTab));
             AddSearchTab();
         }

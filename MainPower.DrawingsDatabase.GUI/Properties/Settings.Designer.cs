@@ -12,7 +12,7 @@ namespace MainPower.DrawingsDatabase.Gui.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,20 +20,6 @@ namespace MainPower.DrawingsDatabase.Gui.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"
-        Amberley;Balmoral;Bennetts;Oxford;Cheviot;Claverley;Cust;Greta;Hanmer;Hawarden;Leader;Leslie Hills;Lochiel;Ludstone;Marble Point;Mckenzies Road;Motunau;Mouse Point;Oaro;Omihi;Percival St;Rangiora North;Kaiapoi S1;Southbrook;Kaiapoi North;Pegasus;Swannanoa;Rangiora West;
-      ")]
-        public string Substations {
-            get {
-                return ((string)(this["Substations"]));
-            }
-            set {
-                this["Substations"] = value;
             }
         }
         
@@ -70,6 +56,30 @@ namespace MainPower.DrawingsDatabase.Gui.Properties {
             }
             set {
                 this["SavedSearch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"Amberley;Balmoral;Bennetts;Oxford;Cheviot;Claverley;Cust;Greta;Hanmer;Hawarden;Leader;Leslie Hills;Lochiel;Ludstone;Marble Point;Mckenzies Road;Motunau;Mouse Point;Oaro;Omihi;Percival St;Rangiora North;Kaiapoi S1;Southbrook;Kaiapoi North;Pegasus;Swannanoa;Rangiora West;")]
+        public string Substations {
+            get {
+                return ((string)(this["Substations"]));
+            }
+            set {
+                this["Substations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CallUpgrade {
+            get {
+                return ((bool)(this["CallUpgrade"]));
+            }
+            set {
+                this["CallUpgrade"] = value;
             }
         }
     }

@@ -8,7 +8,7 @@ For major upgrades, change package guid, version number and product guid, set On
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="2D5063DE-5EF3-4E2A-801A-AB1C79F43CE2" Name="MainPower Drawings Database" Language="1033" Version="0.10.3.0" Manufacturer="MainPower" UpgradeCode="406C9771-B0DE-408B-8E10-D63EE135CA43">
-    <Package Id="*" InstallerVersion="200" InstallScope="perMachine" Description="MainPower Drawings Database Installer" Comments='Made by Raggles' Manufacturer='MainPower NZ Ltd' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+    <Package Id="*" InstallerVersion="200" InstallScope="perMachine" Description="MainPower Drawings Database Installer" Manufacturer='MainPower NZ Ltd' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
     <Property Id="ARPPRODUCTICON" Value="DrawingsDatabaseGui.exe" />
     
     <Upgrade Id='406C9771-B0DE-408B-8E10-D63EE135CA43'>
@@ -31,7 +31,7 @@ For major upgrades, change package guid, version number and product guid, set On
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id='MainPower' Name='MainPower'>
-          <Directory Id="INSTALLFOLDER" Name="DrawingsDatabase 0.10" >
+          <Directory Id="INSTALLFOLDER" Name="DrawingsDatabase" >
             <Component Id="MainExecutable" Guid="94F17E72-C95A-4D6D-8E08-03F321E8566E">
               <File Id='MainExecutable' Name='DrawingsDatabaseGui.exe' DiskId='1' Source='..\Output\AnyCPU\Release\DrawingsDatabaseGui.exe' KeyPath='yes'>
                 <Shortcut Id="startmenuDb" Directory="ProgramMenuDir" Name="Drawings Database" WorkingDirectory='INSTALLDIR' Icon="DrawingsDatabaseGui.exe" IconIndex="0" Advertise="yes" />

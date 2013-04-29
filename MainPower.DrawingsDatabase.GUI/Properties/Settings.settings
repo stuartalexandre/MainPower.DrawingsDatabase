@@ -1,14 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="MainPower.DrawingsDatabase.Gui.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MainPower.DrawingsDatabase.Gui.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Substations" Type="System.String" Scope="User">
-      <Value Profile="(Default)">
-        Amberley;Balmoral;Bennetts;Oxford;Cheviot;Claverley;Cust;Greta;Hanmer;Hawarden;Leader;Leslie Hills;Lochiel;Ludstone;Marble Point;Mckenzies Road;Motunau;Mouse Point;Oaro;Omihi;Percival St;Rangiora North;Kaiapoi S1;Southbrook;Kaiapoi North;Pegasus;Swannanoa;Rangiora West;
-      </Value>
-    </Setting>
     <Setting Name="SearchColumns" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -17,6 +10,12 @@
     </Setting>
     <Setting Name="SavedSearch" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Substations" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Amberley;Balmoral;Bennetts;Oxford;Cheviot;Claverley;Cust;Greta;Hanmer;Hawarden;Leader;Leslie Hills;Lochiel;Ludstone;Marble Point;Mckenzies Road;Motunau;Mouse Point;Oaro;Omihi;Percival St;Rangiora North;Kaiapoi S1;Southbrook;Kaiapoi North;Pegasus;Swannanoa;Rangiora West;</Value>
+    </Setting>
+    <Setting Name="CallUpgrade" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
