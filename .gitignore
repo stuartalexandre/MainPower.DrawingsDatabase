@@ -9,3 +9,6 @@ TestResults
 *.suo
 _UpgradeReport_Files
 
+# nuget stuff
+packages/*
+!packages/repositories.config
