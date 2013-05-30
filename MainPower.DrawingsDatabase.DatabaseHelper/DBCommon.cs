@@ -167,6 +167,9 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                 case AcadVersion.ACAD2012:
                     rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
                     break;
+                case AcadVersion.ACAD2013:
+                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R19.0\\ACAD-B001:409\\Applications\\DrawingsDB";
+                    break;
                 default:
                     throw new ArgumentException("Version not supported");
             }
@@ -194,15 +197,18 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             {
                 case AcadVersion.ACAD2010:
 
-                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
+                    rootPath = "Software\\Autodesk\\AutoCAD\\R18.0\\ACAD-8001:409\\Applications\\DrawingsDB";
                     break;
                 case AcadVersion.ACAD2012:
-                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
+                    rootPath = "Software\\Autodesk\\AutoCAD\\R18.2\\ACAD-A001:409\\Applications\\DrawingsDB";
+                    break;
+                case AcadVersion.ACAD2013:
+                    rootPath = "Software\\Autodesk\\AutoCAD\\R19.0\\ACAD-B001:409\\Applications\\DrawingsDB";
                     break;
                 default:
                     throw new ArgumentException("Version not supported");
             }
-            Microsoft.Win32.Registry.CurrentUser.DeleteSubKey(rootPath);
+            Microsoft.Win32.Registry.CurrentUser.DeleteSubKeyTree(rootPath);
         }
 
         

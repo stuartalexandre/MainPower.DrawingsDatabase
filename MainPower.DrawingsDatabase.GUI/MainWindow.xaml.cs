@@ -198,6 +198,18 @@ namespace MainPower.DrawingsDatabase.Gui
                 MessageBox.Show(ex.Message);
             }
         }
+        
+        private void mnuInstallPlugin2013_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.InstallPlugin(AcadVersion.ACAD2013);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void mnuRemovePlugin2012_Click(object sender, RoutedEventArgs e)
         {
@@ -216,6 +228,18 @@ namespace MainPower.DrawingsDatabase.Gui
             try
             {
                 DBCommon.RemovePlugin(AcadVersion.ACAD2010);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void mnuRemovePlugin2013_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.RemovePlugin(AcadVersion.ACAD2013);
             }
             catch (Exception ex)
             {
@@ -250,6 +274,5 @@ namespace MainPower.DrawingsDatabase.Gui
             var svm = ActiveSearch.DataContext as SearchViewModel;
             svm.ExportSearch.Execute(null);
         }
-        
     }
 }
