@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MainPower")]
 [assembly: AssemblyProduct("MainPower.DrawingsDatabase.AutoCad")]
-[assembly: AssemblyCopyright("Copyright © MainPower 2012")]
+[assembly: AssemblyCopyright("Copyright © MainPower 2012-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -38,8 +38,8 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.10.3.4")]
-[assembly: AssemblyFileVersion("0.10.3.4")]
+[assembly: AssemblyVersion("0.10.4.0")]
+[assembly: AssemblyFileVersion("0.10.4.0")]
 
 
 //Set the command class, saves AutoCad looking through all the classes to find commands

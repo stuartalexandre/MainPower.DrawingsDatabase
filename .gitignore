@@ -12,3 +12,5 @@ _UpgradeReport_Files
 # nuget stuff
 packages/*
 !packages/repositories.config
+.nuget/NuGet.exe
+Help/DrawingsDatabase.chm

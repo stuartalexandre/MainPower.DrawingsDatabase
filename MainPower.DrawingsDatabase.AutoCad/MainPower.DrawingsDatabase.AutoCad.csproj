@@ -88,17 +88,17 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AcCoreMgd">
+      <HintPath>..\Reference\Arx2013\AcCoreMgd.dll</HintPath>
+    </Reference>
     <Reference Include="AcCui">
-      <HintPath>..\Reference\AcCui.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Reference\Arx2013\AcCui.dll</HintPath>
     </Reference>
     <Reference Include="AcDbMgd">
-      <HintPath>..\Reference\AcDbMgd.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Reference\Arx2013\AcDbMgd.dll</HintPath>
     </Reference>
     <Reference Include="AcMgd">
-      <HintPath>..\Reference\AcMgd.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Reference\Arx2013\AcMgd.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -129,9 +129,9 @@
       <Project>{8A886CD4-4C87-4502-8E35-B8755CF199F6}</Project>
       <Name>MainPower.DrawingsDatabase.DatabaseHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MainPower.DrawingsDatabase.GUI\MainPower.DrawingsDatabase.Gui.csproj">
+    <ProjectReference Include="..\MainPower.DrawingsDatabase.GUI\MainPower.DrawingsDatabase.GUI.csproj">
       <Project>{B0AFAC27-17B7-49E3-9287-F5EE440B52C6}</Project>
-      <Name>MainPower.DrawingsDatabase.Gui</Name>
+      <Name>MainPower.DrawingsDatabase.GUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\MicroMvvm\MicroMvvm.csproj">
       <Project>{9EFE6CBD-DF21-436E-9F81-E258BAB0B653}</Project>

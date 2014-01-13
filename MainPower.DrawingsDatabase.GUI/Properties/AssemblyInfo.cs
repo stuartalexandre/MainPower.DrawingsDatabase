@@ -13,7 +13,7 @@ using System;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MainPower")]
 [assembly: AssemblyProduct("MainPower.DrawingsDatabase.Gui")]
-[assembly: AssemblyCopyright("Copyright © MainPower 2012")]
+[assembly: AssemblyCopyright("Copyright © MainPower 2012-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -54,5 +54,5 @@ using System;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.10.3.5")]
-[assembly: AssemblyFileVersion("0.10.3.5")]
+[assembly: AssemblyVersion("0.10.3.6")]
+[assembly: AssemblyFileVersion("0.10.3.6")]
