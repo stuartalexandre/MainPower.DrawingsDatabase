@@ -108,6 +108,16 @@ namespace MainPower.DrawingsDatabase.AutoCad
             dc.PrintVersion();
         }
 
+        [CommandMethod("ddblink")]
+        public static void CreateAndEditDrawing()
+        {
+            DrawingCommands dc = new DrawingCommands();
+            
+            AddTemplateDrawingView atv = new AddTemplateDrawingView();
+            Drawing d = dc.CreateDefaultDrawingWithFileName();
+            atv.ShowDialog(d);
+        }
+
         //
         // Gui commands
         //

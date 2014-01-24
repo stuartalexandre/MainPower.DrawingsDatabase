@@ -337,6 +337,17 @@ namespace MainPower.DrawingsDatabase.AutoCad
             }
         }
 
+        public Drawing CreateDefaultDrawingWithFileName()
+        {
+            try
+            {
+                Drawing d = DBCommon.CreateDefaultDrawing();
+                d.FileName = _db.Filename;
+                return d;
+            }
+            catch { return null; }
+        }
+
         public void PrintVersion()
         {
             _ed.WriteMessage("MainPower Drawings Database Version: " + GetType().Assembly.GetName().Version);
@@ -633,6 +644,8 @@ namespace MainPower.DrawingsDatabase.AutoCad
         }
 
         #endregion
+
+       
     }
 
     /// <summary>

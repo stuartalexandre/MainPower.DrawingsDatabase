@@ -51,7 +51,7 @@ namespace MainPower.DrawingsDatabase.Gui.Models
         public Drawing Drawing
         {
             get { return _drawing; }
-            private set
+            set
             {
                 if (Drawing == value) return;
                 _drawing = value;
