@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 using MPDrawing = MainPower.DrawingsDatabase.DatabaseHelper.Drawing;
 
 namespace MainPower.DrawingsDatabase.Gui.Views
@@ -26,6 +25,7 @@ namespace MainPower.DrawingsDatabase.Gui.Views
             InitializeComponent();
         }
 
+        /* Dont need this now, might become handy in future though.
         public bool? ShowDialog(MPDrawing d)
         {
             AddTemplateDrawingViewModel model = DataContext as AddTemplateDrawingViewModel;
@@ -33,5 +33,6 @@ namespace MainPower.DrawingsDatabase.Gui.Views
             model.SelectedTemplate.Drawing = d;
             return this.ShowDialog();
         }
+         * */
     }
 }

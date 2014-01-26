@@ -112,10 +112,15 @@ namespace MainPower.DrawingsDatabase.AutoCad
         public static void CreateAndEditDrawing()
         {
             DrawingCommands dc = new DrawingCommands();
-            
-            AddTemplateDrawingView atv = new AddTemplateDrawingView();
+            //create the drawings
             Drawing d = dc.CreateDefaultDrawingWithFileName();
-            atv.ShowDialog(d);
+            DrawingsDataContext ddc = DBCommon.NewDC;
+            ddc.Drawings.InsertOnSubmit(d);
+            //chuck it in the database
+            ddc.SubmitChanges();
+            //bring up the window to edit changes
+            ViewDrawingWindow atv = new ViewDrawingWindow(d, null, true);            
+            atv.ShowDialog();
         }
 
         //

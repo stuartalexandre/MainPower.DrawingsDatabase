@@ -343,6 +343,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
             {
                 Drawing d = DBCommon.CreateDefaultDrawing();
                 d.FileName = _db.Filename;
+                
                 return d;
             }
             catch { return null; }
