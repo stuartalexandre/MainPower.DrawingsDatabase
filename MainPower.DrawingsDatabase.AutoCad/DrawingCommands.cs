@@ -8,6 +8,7 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using MainPower.DrawingsDatabase.DatabaseHelper;
 using MainPower.DrawingsDatabase.Gui;
+using System.IO;
 
 namespace MainPower.DrawingsDatabase.AutoCad
 {
@@ -343,8 +344,27 @@ namespace MainPower.DrawingsDatabase.AutoCad
             {
                 Drawing d = DBCommon.CreateDefaultDrawing();
                 d.FileName = _db.Filename;
+                try
+                {
+                    d.Number = Path.GetFileNameWithoutExtension(d.FileName);
+                    while (DBCommon.DrawingComboExists(d.Number, d.Sheet))
+                    {
+                        PromptStringOptions pso = new PromptStringOptions(string.Format("Drawing {0} sheet {1} already exists. Please enter a new sheet number:", d.Number, d.Sheet));
+                        string str = _ed.DoPrompt(pso).StringResult;
+                        _ed.WriteMessage(str + Environment.NewLine);
+                        if (str == "")
+                        {
+                            return null;
+                        }
+                        d.Sheet = str;
+                    }
+                    
+                }
+                catch (Exception ex){ _ed.WriteMessage(ex.ToString()); }
+
                 
                 return d;
+
             }
             catch { return null; }
         }

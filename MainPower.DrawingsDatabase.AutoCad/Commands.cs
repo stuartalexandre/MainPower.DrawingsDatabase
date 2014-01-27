@@ -114,6 +114,8 @@ namespace MainPower.DrawingsDatabase.AutoCad
             DrawingCommands dc = new DrawingCommands();
             //create the drawings
             Drawing d = dc.CreateDefaultDrawingWithFileName();
+            if (d == null)
+                return;
             DrawingsDataContext ddc = DBCommon.NewDC;
             ddc.Drawings.InsertOnSubmit(d);
             //chuck it in the database
