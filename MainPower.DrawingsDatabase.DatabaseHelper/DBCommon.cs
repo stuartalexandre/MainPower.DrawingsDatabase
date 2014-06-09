@@ -29,12 +29,13 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
 
            DrawingsDataContext dc = NewDC;
            //couldnt really work out how to do this with linq, this is nicer anyways
-           var dwgs = dc.ExecuteQuery<Drawing>("select top 1 * from Drawings where (CONSULTANT='' OR CONSULTANT IS NULL) AND ISNUMERIC(NUMBER) != 0 order by  CAST(NUMBER AS INT) desc");
+           var dwgs = dc.ExecuteQuery<Drawing>("select top 1 * from Drawings where (CONSULTANT='' OR CONSULTANT IS NULL) AND ISNUMERIC(NUMBER) != 0 order by  CAST(NUMBER AS FLOAT) desc");
 
            try
            {
                Drawing d2 = dwgs.First();
-               nextNum = int.Parse(d2.Number, CultureInfo.InvariantCulture) + 1;
+               //our number might be a decimal
+               nextNum = (int)Math.Floor(double.Parse(d2.Number, CultureInfo.InvariantCulture))+ 1;
            }
            catch
            {
