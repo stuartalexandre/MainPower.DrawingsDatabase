@@ -211,6 +211,18 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
+        private void mnuInstallPlugin2015_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.InstallPlugin(AcadVersion.ACAD2015);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void mnuRemovePlugin2012_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -247,6 +259,18 @@ namespace MainPower.DrawingsDatabase.Gui
             }
         }
 
+        private void mnuRemovePlugin2015_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DBCommon.RemovePlugin(AcadVersion.ACAD2015);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void NewTab_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             AddSearchTab();
@@ -274,5 +298,6 @@ namespace MainPower.DrawingsDatabase.Gui
             var svm = ActiveSearch.DataContext as SearchViewModel;
             svm.ExportSearch.Execute(null);
         }
+
     }
 }

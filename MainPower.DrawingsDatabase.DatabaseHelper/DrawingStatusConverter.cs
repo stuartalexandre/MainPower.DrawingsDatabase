@@ -61,7 +61,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                 return null;
             switch (str.ToUpperInvariant())
             {
-                case "AS Built":
+                case "AS BUILT":
                     return DrawingStatus.AsBuilt;
                 case "CANCELLED":
                     return DrawingStatus.Canceled;

@@ -171,6 +171,9 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                 case AcadVersion.ACAD2013:
                     rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R19.0\\ACAD-B001:409\\Applications\\DrawingsDB";
                     break;
+                case AcadVersion.ACAD2015:
+                    rootPath = "HKEY_CURRENT_USER\\Software\\Autodesk\\AutoCAD\\R20.0\\ACAD-E001:409\\Applications\\DrawingsDB";
+                    break;
                 default:
                     throw new ArgumentException("Version not supported");
             }
@@ -205,6 +208,9 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                     break;
                 case AcadVersion.ACAD2013:
                     rootPath = "Software\\Autodesk\\AutoCAD\\R19.0\\ACAD-B001:409\\Applications\\DrawingsDB";
+                    break;
+                case AcadVersion.ACAD2015:
+                    rootPath = "Software\\Autodesk\\AutoCAD\\R20.0\\ACAD-E001:409\\Applications\\DrawingsDB";
                     break;
                 default:
                     throw new ArgumentException("Version not supported");

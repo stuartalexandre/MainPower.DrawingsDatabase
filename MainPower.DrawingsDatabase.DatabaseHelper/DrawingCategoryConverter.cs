@@ -67,6 +67,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             {
                 case "COMMUNICATIONS":
                     return DrawingCategory.Communications;
+                case "GENERATION":
+                    return DrawingCategory.Generation;
                 case "GXP SUBSTATION":
                     return DrawingCategory.GxpSubstation;
                 case "MISCELLANEOUS":

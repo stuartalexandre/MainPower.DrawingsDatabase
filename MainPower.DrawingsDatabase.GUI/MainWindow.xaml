@@ -26,6 +26,10 @@
                         <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2013_Click" />
                         <MenuItem Header="Remove Autocad Plugin" Click="mnuRemovePlugin2013_Click" />
                     </MenuItem>
+                    <MenuItem Header="AutoCAD 2015 SP1">
+                        <MenuItem Header="Install Autocad Plugin" Click="mnuInstallPlugin2015_Click" />
+                        <MenuItem Header="Remove Autocad Plugin" Click="mnuRemovePlugin2015_Click" />
+                    </MenuItem>
                 </MenuItem>
                 
                 <MenuItem Header="Get Next Avail Dwg No" Click="mnuNextDwgNo_Click" />

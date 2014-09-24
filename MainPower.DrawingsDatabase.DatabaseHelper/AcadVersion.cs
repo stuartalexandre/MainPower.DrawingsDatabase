@@ -9,6 +9,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
     {
         ACAD2010,
         ACAD2012,
-        ACAD2013
+        ACAD2013,
+        ACAD2015
     }
 }
