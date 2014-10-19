@@ -7,22 +7,27 @@ For minor upgrades, change package guid, and version number
 For major upgrades, change package guid, version number and product guid, set OnlyDetect to no.  Will auto uninstall old version
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="2D5063DE-5EF3-4E2A-801A-AB1C79F43CE2" Name="MainPower Drawings Database" Language="1033" Version="0.10.4.4" Manufacturer="MainPower" UpgradeCode="406C9771-B0DE-408B-8E10-D63EE135CA43">
+  <Product Id="78F2B893-D881-4B52-A00A-B62F19B186A6" Name="MainPower Drawings Database" Language="1033" Version="$(var.ProductVersion)" Manufacturer="MainPower" UpgradeCode="88978F17-AFAA-4502-BF18-0298193D5392">
     <Package Id="*" InstallerVersion="200" InstallScope="perMachine" Description="MainPower Drawings Database Installer" Manufacturer='MainPower NZ Ltd' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
     <Property Id="ARPPRODUCTICON" Value="DrawingsDatabaseGui.exe" />
     
     <Upgrade Id='406C9771-B0DE-408B-8E10-D63EE135CA43'>
-      <UpgradeVersion OnlyDetect='yes' Property='SELFFOUND'
-        Minimum='0.10.3' IncludeMinimum='yes'
-        Maximum='0.10.4.4' IncludeMaximum='yes' />
-      <UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
-        Minimum='0.10.4.4' IncludeMinimum='no' />
+      <UpgradeVersion OnlyDetect="yes" Minimum="$(var.ProductVersion)" Property="NEWERVERSIONDETECTED" IncludeMinimum="no" />
+      <UpgradeVersion OnlyDetect="no" Maximum="$(var.ProductVersion)" Property="OLDERVERSIONBEINGUPGRADED" IncludeMaximum="no" />
     </Upgrade>
 
+    <Upgrade Id='88978F17-AFAA-4502-BF18-0298193D5392'>
+      <UpgradeVersion OnlyDetect="yes" Minimum="$(var.ProductVersion)" Property="NEWERVERSIONDETECTED2" IncludeMinimum="no" />
+      <UpgradeVersion OnlyDetect="yes" Maximum="$(var.ProductVersion)" Property="OLDERVERSIONBEINGUPGRADED2" IncludeMaximum="no" />
+    </Upgrade>
+    
     <CustomAction Id='NoDowngrade' Error='A later version of [ProductName] is already installed.' />
+    <CustomAction Id='NoDowngrade2' Error='A later version of [ProductName] is already installed.' />
 
     <InstallExecuteSequence>
-      <Custom Action='NoDowngrade' After='FindRelatedProducts'>NEWERFOUND</Custom>
+      <Custom Action='NoDowngrade' After='FindRelatedProducts'>NEWERVERSIONDETECTED</Custom>
+      <Custom Action='NoDowngrade2' After='FindRelatedProducts'>NEWERVERSIONDETECTED2</Custom>
+      <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
 
     <Media Id='1' Cabinet='Setup.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />

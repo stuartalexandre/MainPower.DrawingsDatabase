@@ -38,8 +38,8 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.10.4.3")]
-[assembly: AssemblyFileVersion("0.10.4.3")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 
 
 //Set the command class, saves AutoCad looking through all the classes to find commands

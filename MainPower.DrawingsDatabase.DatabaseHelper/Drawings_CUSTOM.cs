@@ -390,6 +390,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             }
         }
 
+        [Editor(typeof(FileChooserEditor), typeof(FileChooserEditor))]
         [global::System.Data.Linq.Mapping.ColumnAttribute(Name = "FILENAME", Storage = "_FILENAME", DbType = "NVarChar(512)")]
         public string FileName
         {
