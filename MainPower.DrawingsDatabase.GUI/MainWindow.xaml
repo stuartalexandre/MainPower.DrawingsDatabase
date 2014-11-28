@@ -13,8 +13,10 @@
             <MenuItem Header="Tasks" >
                 <MenuItem Header="Search Drawings" Click="mnuSearch_Click" />
                 <MenuItem Header="Add Drawing" Click="mnuAdd_Click" />
+                <!--
                 <MenuItem Header="Raw Database Viewer" Click="mnuDbViewer_Click" />
                 <MenuItem Header="Sub Browser" Click="mnuSubBrowser_Click" />
+                -->
                 <MenuItem Header="AutoCAD Plugin" >
                     <!--
                     <MenuItem Header="AutoCAD 2012">

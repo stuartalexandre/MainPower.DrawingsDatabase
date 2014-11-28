@@ -120,7 +120,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                 }
                 else
                     obj = value;
-
+           
                 Attribs[attribute].SetValue(drawing, obj, null);
             }
             else

@@ -37,6 +37,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                         return "Planned";
                     case DrawingStatus.Superseded:
                         return "Superseded";
+                    case DrawingStatus.Draft:
+                        return "Draft";
                     case DrawingStatus.Undefined:
                         return "Undefined";
                 }
@@ -62,6 +64,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             switch (str.ToUpperInvariant())
             {
                 case "AS BUILT":
+                case "ASBUILT":
                     return DrawingStatus.AsBuilt;
                 case "CANCELLED":
                     return DrawingStatus.Canceled;
@@ -71,6 +74,8 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
                     return DrawingStatus.Planned;
                 case "SUPERSEDED":
                     return DrawingStatus.Superseded;
+                case "DRAFT":
+                    return DrawingStatus.Draft;
                 default:
                     return DrawingStatus.Undefined;
             }

@@ -45,6 +45,20 @@ namespace MainPower.DrawingsDatabase.AutoCad
             catch { }
         }
 
+        [CommandMethod("ddbrevab")]
+        public static void RevitAsBuilt()
+        {
+            DrawingCommands dc = new DrawingCommands();
+            dc.AddGenericRevision("AS BUILT");
+        }
+
+        [CommandMethod("ddbrevifc")]
+        public static void RevitIssuedForConstruction()
+        {
+            DrawingCommands dc = new DrawingCommands();
+            dc.AddGenericRevision("ISSUED FOR CONSTRUCTION");
+        }
+        
         [CommandMethod("ddbmorerev")]
         public static void NeedAnotherRevision()
         {
@@ -170,82 +184,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
             dc.DatabaseToLayout();
         }
 
-        /*
-        [CommandMethod("ddbcreatecui")]
-        public void BuildMenuCUI()
-        {
-            Editor ed = Application.DocumentManager.MdiActiveDocument.Editor;
-            
-            PromptFileNameResult res = ed.GetFileNameForSave("cuix file name");
-
-            if (res.Status == PromptStatus.OK)
-            {
-                DirectoryInfo di = Directory.GetParent(res.StringResult);
-                ed.WriteMessage(di.FullName);
-
-                string myCuiFile = di.FullName + "\\ddb.cuix";            //"C:\\Users\\hsc\\Desktop\\ddb.cuix";
-                string myCuiFileToSend = myCuiFile.Replace("\\", "/");  //"C:/Users/hsc/Desktop/ddb.cuix";
-                string myCuiSectionName = "MPRDDB";
-
-
-                //string mainCui = Application.GetSystemVariable("MENUNAME") + ".cui";
-                CustomizationSection cs = new CustomizationSection();
-                PartialCuiFileCollection pcfc = cs.PartialCuiFiles;
-
-                if (pcfc.Contains(myCuiFile))
-                {
-                    ed.WriteMessage("\nCustomization file \"" + myCuiFile + "\" already loaded.");
-                }
-                else
-                {
-                    if (System.IO.File.Exists(myCuiFile))
-                    {
-                       ed.WriteMessage("\nCustomization file \"" + myCuiFile + "\" exists");
-                        //LoadMyCui(myCuiFileToSend);
-                    }
-                    else
-                    {
-                        ed.WriteMessage("\nCustomization file \"" + myCuiFile + "\" does not exist - building it.");
-
-                        // Create a customization section for our partial menu
-                        CustomizationSection pcs = new CustomizationSection();
-                        pcs.MenuGroupName = myCuiSectionName;
-
-                        // Let's add a menu group, with two commands
-                        MacroGroup mg = new MacroGroup(myCuiSectionName, pcs.MenuGroup);
-                        MenuMacro mm1 = new MenuMacro(mg, "Put title block data into the drawings database", "^C^Cddbput", "ddbcmdput");
-                        MenuMacro mm2 = new MenuMacro(mg, "Get title block data from the drawings database", "^C^Cddbget", "ddbcmdget");
-
-                        Properties.Resources.get.Save(di.FullName + "\\getImage.bmp");
-                        Properties.Resources.put.Save(di.FullName + "\\putImage.bmp");
-
-                        mm1.macro.LargeImage = mm1.macro.SmallImage = di.FullName + "\\putImage.bmp";
-                        mm2.macro.LargeImage = mm2.macro.SmallImage = di.FullName + "\\getImage.bmp";
-
-
-                        // Finally we save the file and load it
-                        pcs.SaveAs(myCuiFile);
-                        //LoadMyCui(myCuiFileToSend);
-                    }
-                }
-            }
-        }
-
-        private void LoadMyCui(string cuiFile)
-        {
-            Document doc = Application.DocumentManager.MdiActiveDocument;
-
-            object oldCmdEcho = Application.GetSystemVariable("CMDECHO");
-            object oldFileDia = Application.GetSystemVariable("FILEDIA");
-
-            Application.SetSystemVariable("CMDECHO", 0);
-            Application.SetSystemVariable("FILEDIA", 0);
-
-            doc.SendStringToExecute("_.cuiload " + cuiFile + " ", false, false, false);
-            doc.SendStringToExecute("(setvar \"FILEDIA\" " + oldFileDia.ToString() + ")(princ) ", false, false, false);
-            doc.SendStringToExecute("(setvar \"CMDECHO\" " + oldCmdEcho.ToString() + ")(princ) ", false, false, false);
-        }
-        */
+       
     }
 
 }

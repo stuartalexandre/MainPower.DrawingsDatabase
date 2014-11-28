@@ -10,5 +10,6 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
         [Description("Superseded")] Superseded,
         [Description("Current")] Current,
         [Description("Undefined")] Undefined,
+        [Description("Draft")] Draft,
     }
 }

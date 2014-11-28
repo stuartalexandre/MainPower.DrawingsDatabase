@@ -197,72 +197,167 @@ namespace MainPower.DrawingsDatabase.AutoCad
             Transaction tr = _db.TransactionManager.StartTransaction();
             // Start the transaction
 
-            // Build a filter list so that only block references are selected
-            var filList = new[] {new TypedValue((int) DxfCode.Start, "INSERT")};
-            var filter = new SelectionFilter(filList);
-            var opts = new PromptSelectionOptions {MessageForAdding = "Select block references: "};
+            try
+            {
+                IEnumerable<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForRead);
+                foreach (BlockReference block in blocks)
+                {
+                    AttributeCollection attCol = block.AttributeCollection;
+                    Dictionary<string, AttributeReference> attribs = GetBlockAttributes(block, tr);
 
-            PromptSelectionResult res = _ed.GetSelection(opts, filter);
+                    attribs["REV-A"].TextString = attribs["REV-B"].TextString;
+                    attribs["BY-A"].TextString = attribs["BY-B"].TextString;
+                    attribs["DESCRIPTION-A"].TextString = attribs["DESCRIPTION-B"].TextString;
+                    attribs["DATE-A"].TextString = attribs["DATE-B"].TextString;
+                    attribs["APPRV-BY-A"].TextString = attribs["APPRV-BY-B"].TextString;
 
-            // Do nothing if selection is unsuccessful
-            if (res.Status != PromptStatus.OK)
+                    attribs["REV-B"].TextString = attribs["REV-C"].TextString;
+                    attribs["BY-B"].TextString = attribs["BY-C"].TextString;
+                    attribs["DESCRIPTION-B"].TextString = attribs["DESCRIPTION-C"].TextString;
+                    attribs["DATE-B"].TextString = attribs["DATE-C"].TextString;
+                    attribs["APPRV-BY-B"].TextString = attribs["APPRV-BY-C"].TextString;
+
+                    attribs["REV-C"].TextString = attribs["REV-D"].TextString;
+                    attribs["BY-C"].TextString = attribs["BY-D"].TextString;
+                    attribs["DESCRIPTION-C"].TextString = attribs["DESCRIPTION-D"].TextString;
+                    attribs["DATE-C"].TextString = attribs["DATE-D"].TextString;
+                    attribs["APPRV-BY-C"].TextString = attribs["APPRV-BY-D"].TextString;
+
+                    attribs["REV-D"].TextString = attribs["REV-E"].TextString;
+                    attribs["BY-D"].TextString = attribs["BY-E"].TextString;
+                    attribs["DESCRIPTION-D"].TextString = attribs["DESCRIPTION-E"].TextString;
+                    attribs["DATE-D"].TextString = attribs["DATE-E"].TextString;
+                    attribs["APPRV-BY-D"].TextString = attribs["APPRV-BY-E"].TextString;
+
+                    attribs["REV-E"].TextString = attribs["REV-F"].TextString;
+                    attribs["BY-E"].TextString = attribs["BY-F"].TextString;
+                    attribs["DESCRIPTION-E"].TextString = attribs["DESCRIPTION-F"].TextString;
+                    attribs["DATE-E"].TextString = attribs["DATE-F"].TextString;
+                    attribs["APPRV-BY-E"].TextString = attribs["APPRV-BY-F"].TextString;
+
+                    attribs["REV-F"].TextString = attribs["REV-G"].TextString;
+                    attribs["BY-F"].TextString = attribs["BY-G"].TextString;
+                    attribs["DESCRIPTION-F"].TextString = attribs["DESCRIPTION-G"].TextString;
+                    attribs["DATE-F"].TextString = attribs["DATE-G"].TextString;
+                    attribs["APPRV-BY-F"].TextString = attribs["APPRV-BY-G"].TextString;
+
+                    attribs["REV-G"].TextString = "";
+                    attribs["BY-G"].TextString = "";
+                    attribs["DESCRIPTION-G"].TextString = "";
+                    attribs["DATE-G"].TextString = "";
+                    attribs["APPRV-BY-G"].TextString = "";
+                }
+                tr.Commit();
+            }
+            catch
+            {
+                tr.Abort();
+            }
+        }
+
+        public void AddGenericRevision(string revisionText)
+        {
+            Transaction tr = _db.TransactionManager.StartTransaction();
+            // Start the transaction
+
+            try
+            {
+                IEnumerable<BlockReference> blocks = GetLayoutBlocks(tr, OpenMode.ForRead);
+                foreach (BlockReference block in blocks)
+                {
+                    AttributeCollection attCol = block.AttributeCollection;
+                    Dictionary<string, AttributeReference> attribs = GetBlockAttributes(block, tr);
+
+
+                    if (String.IsNullOrWhiteSpace(attribs["REV-A"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "A", "A", attribs);
+                    }
+                    else if (String.IsNullOrWhiteSpace(attribs["REV-B"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "B", GetNextChar(attribs["REV-A"].TextString[0]).ToString(), attribs);
+                    }
+                    else if (String.IsNullOrWhiteSpace(attribs["REV-C"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "C", GetNextChar(attribs["REV-B"].TextString[0]).ToString(), attribs);
+                    }
+                    else if (String.IsNullOrWhiteSpace(attribs["REV-D"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "D", GetNextChar(attribs["REV-C"].TextString[0]).ToString(), attribs);
+                    }
+                    else if (String.IsNullOrWhiteSpace(attribs["REV-E"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "E", GetNextChar(attribs["REV-D"].TextString[0]).ToString(), attribs);
+                    }
+                    else if (String.IsNullOrWhiteSpace(attribs["REV-F"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "F", GetNextChar(attribs["REV-E"].TextString[0]).ToString(), attribs);
+                    }
+                    else if (String.IsNullOrWhiteSpace(attribs["REV-G"].TextString))
+                    {
+                        AddGenericRevision(revisionText, "G", GetNextChar(attribs["REV-F"].TextString[0]).ToString(), attribs);
+                    }
+
+                }
+                tr.Commit();
+            }
+
+            catch (Exception ex)
+            {
+                _ed.WriteMessage("Exception occurred: " + ex.Message);
+                tr.Abort();
+            }
+        }
+
+        /// <summary>
+        /// Given a character, return the next character in the alphabet (wrap around at Zz)
+        /// </summary>
+        /// <param name="letter"></param>
+        /// <returns></returns>
+        private char GetNextChar(char letter)
+        {
+            if (!Char.IsLetter(letter))
+            {
+                throw new Exception("Revision must be a letter!");
+            }
+            char nextChar;
+
+            if (letter == 'z')
+                nextChar = 'a';
+            else if (letter == 'Z')
+                nextChar = 'A';
+
+            else
+                nextChar = (char)(((int)letter) + 1);
+            return nextChar;
+        }
+
+        /// <summary>
+        /// Add a new revision to the drawing with specified label
+        /// </summary>
+        /// <param name="revisionText"></param>
+        /// <param name="rev"></param>
+        /// <param name="newrev"></param>
+        /// <param name="attribs"></param>
+        private void AddGenericRevision(string revisionText, string rev, string newrev, Dictionary<string, AttributeReference> attribs)
+        {
+            var edresult = _ed.DoPrompt(new PromptStringOptions("DRAWN:"));
+            if (edresult.Status != PromptStatus.OK)
                 return;
 
-            SelectionSet selSet = res.Value;
-            ObjectId[] idArray = selSet.GetObjectIds();
-            foreach (ObjectId blkId in idArray)
-            {
-                var blkRef = (BlockReference) tr.GetObject(blkId, OpenMode.ForWrite);
-                //TODO: block validation here
-                AttributeCollection attCol = blkRef.AttributeCollection;
-                Dictionary<string, AttributeReference> attribs =
-                    (from ObjectId attId in attCol
-                     select (AttributeReference) tr.GetObject(attId, OpenMode.ForWrite)).ToDictionary(
-                         attRef => attRef.Tag);
+            string drawn = edresult.StringResult;
 
-                attribs["REV-A"].TextString = attribs["REV-B"].TextString;
-                attribs["BY-A"].TextString = attribs["BY-B"].TextString;
-                attribs["DESCRIPTION-A"].TextString = attribs["DESCRIPTION-B"].TextString;
-                attribs["DATE-A"].TextString = attribs["DATE-B"].TextString;
-                attribs["APPRV-BY-A"].TextString = attribs["APPRV-BY-B"].TextString;
+            edresult = _ed.DoPrompt(new PromptStringOptions("APPROVED:"));
+            if (edresult.Status != PromptStatus.OK)
+                return;
 
-                attribs["REV-B"].TextString = attribs["REV-C"].TextString;
-                attribs["BY-B"].TextString = attribs["BY-C"].TextString;
-                attribs["DESCRIPTION-B"].TextString = attribs["DESCRIPTION-C"].TextString;
-                attribs["DATE-B"].TextString = attribs["DATE-C"].TextString;
-                attribs["APPRV-BY-B"].TextString = attribs["APPRV-BY-C"].TextString;
+            string approved = edresult.StringResult;
 
-                attribs["REV-C"].TextString = attribs["REV-D"].TextString;
-                attribs["BY-C"].TextString = attribs["BY-D"].TextString;
-                attribs["DESCRIPTION-C"].TextString = attribs["DESCRIPTION-D"].TextString;
-                attribs["DATE-C"].TextString = attribs["DATE-D"].TextString;
-                attribs["APPRV-BY-C"].TextString = attribs["APPRV-BY-D"].TextString;
-
-                attribs["REV-D"].TextString = attribs["REV-E"].TextString;
-                attribs["BY-D"].TextString = attribs["BY-E"].TextString;
-                attribs["DESCRIPTION-D"].TextString = attribs["DESCRIPTION-E"].TextString;
-                attribs["DATE-D"].TextString = attribs["DATE-E"].TextString;
-                attribs["APPRV-BY-D"].TextString = attribs["APPRV-BY-E"].TextString;
-
-                attribs["REV-E"].TextString = attribs["REV-F"].TextString;
-                attribs["BY-E"].TextString = attribs["BY-F"].TextString;
-                attribs["DESCRIPTION-E"].TextString = attribs["DESCRIPTION-F"].TextString;
-                attribs["DATE-E"].TextString = attribs["DATE-F"].TextString;
-                attribs["APPRV-BY-E"].TextString = attribs["APPRV-BY-F"].TextString;
-
-                attribs["REV-F"].TextString = attribs["REV-G"].TextString;
-                attribs["BY-F"].TextString = attribs["BY-G"].TextString;
-                attribs["DESCRIPTION-F"].TextString = attribs["DESCRIPTION-G"].TextString;
-                attribs["DATE-F"].TextString = attribs["DATE-G"].TextString;
-                attribs["APPRV-BY-F"].TextString = attribs["APPRV-BY-G"].TextString;
-
-                attribs["REV-G"].TextString = "";
-                attribs["BY-G"].TextString = "";
-                attribs["DESCRIPTION-G"].TextString = "";
-                attribs["DATE-G"].TextString = "";
-                attribs["APPRV-BY-G"].TextString = "";
-            }
-            tr.Commit();
+            attribs["REV-" + rev].TextString = newrev;
+            attribs["BY-" + rev].TextString =drawn;
+            attribs["DESCRIPTION-" + rev].TextString = revisionText;
+            attribs["DATE-" + rev].TextString = DateTime.Now.ToShortDateString();
+            attribs["APPRV-BY-" + rev].TextString = approved;
         }
 
         /// <summary>
@@ -659,8 +754,7 @@ namespace MainPower.DrawingsDatabase.AutoCad
 
         private static Drawing GetDrawing(DrawingsDataContext dc, string drawingNumber, string sheetNumber)
         {
-            IQueryable<Drawing> drawings =
-                (from d in dc.Drawings where d.Number == drawingNumber && d.Sheet == sheetNumber select d);
+            IQueryable<Drawing> drawings = (from d in dc.Drawings where d.Number == drawingNumber && d.Sheet == sheetNumber select d);
             return !drawings.Any() ? null : drawings.First();
         }
 

@@ -268,6 +268,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="GridViewBehaviours.cs" />
+    <None Include="Help\DrawingsDatabase.chm" />
+    <None Include="Help\DrawingsDatabase.chw" />
+    <None Include="Help\DrawingsDatabase.hhp" />
+    <None Include="Help\General Usage" />
+    <None Include="Help\Index.hhk" />
+    <None Include="Help\Table of Contents.hhc" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -307,7 +313,17 @@
   <ItemGroup>
     <Resource Include="Images\MainPowerIconGreen.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Help\addDrawing.png" />
+    <Content Include="Help\Feedback.htm" />
+    <Content Include="Help\General Usage.htm" />
+    <Content Include="Help\Important Information.htm" />
+    <Resource Include="Help\MainPower.png" />
+    <Content Include="Help\Release Notes.htm" />
+    <Resource Include="Help\searchWindow.png" />
+    <Content Include="Help\User Guide.htm" />
+    <Content Include="Help\Using from AutoCAD.htm" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MainPower.DrawingsDatabase.DatabaseHelper\MainPower.DrawingsDatabase.DatabaseHelper.csproj">
       <Project>{8A886CD4-4C87-4502-8E35-B8755CF199F6}</Project>

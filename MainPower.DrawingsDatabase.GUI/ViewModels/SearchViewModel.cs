@@ -339,6 +339,16 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                 OnPropertyChanged("StatusCurrent");
             }
         }
+        public bool StatusDraft
+        {
+            get { return _searchFields.StatusDraft; }
+            set
+            {
+                if (StatusDraft == value) return;
+                _searchFields.StatusDraft = value;
+                OnPropertyChanged("StatusDraft");
+            }
+        }
         public String AdvancedSearchQuery
         {
             get { return _searchFields.AdvancedSearchQuery; }
@@ -367,121 +377,6 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
         {
             //TODO: fill this out it necessary, otherwise get rid of it
         }
-
-#region Misc code to sort out
-        /*public XpsDocument CreateXps(double pageWidth, double pageHeight, string tmpFileName)
-        {
-            var flowDoc = new FlowDocument();
-            var table1 = new Table();
-            flowDoc.Blocks.Add(table1);
-            // Set some global formatting properties for the table.
-            table1.CellSpacing = 5;
-            table1.Background = Brushes.White;
-
-            double sumOfColumnWidths = 0;
-
-            ListViewPrintInfo pi = listView1.GetListViewPrintInfo();
-
-            foreach (ColumnInfo g in pi.Columns)
-            {
-                sumOfColumnWidths += g.Width;
-            }
-
-            foreach (ColumnInfo g in pi.Columns)
-            {
-                table1.Columns.Add(new TableColumn() { Width = new GridLength(g.Width / sumOfColumnWidths * pageWidth) });
-            }
-            // Create and add an empty TableRowGroup to hold the table's Rows.
-            table1.RowGroups.Add(new TableRowGroup());
-            table1.RowGroups[0].Rows.Add(new TableRow());
-            TableRow currentRow = table1.RowGroups[0].Rows[0];
-            // Global formatting for the title row.
-            currentRow.Background = Brushes.Silver;
-            currentRow.FontSize = 20;
-            currentRow.FontWeight = System.Windows.FontWeights.Bold;
-            // Add the header row with content, 
-            currentRow.Cells.Add(new TableCell(new Paragraph(new Run("Drawings database search results"))));
-            // and set the row to span all 6 columns.
-            currentRow.Cells[0].ColumnSpan = table1.Columns.Count;
-
-            // Add the second (header) row.
-            table1.RowGroups[0].Rows.Add(new TableRow());
-            currentRow = table1.RowGroups[0].Rows[1];
-
-            // Global formatting for the header row.
-            currentRow.FontSize = 11;
-            currentRow.FontWeight = FontWeights.Normal;
-
-            foreach (ColumnInfo g in pi.Columns)
-            {
-                Run r = new Run(g.Header);
-                currentRow.Cells.Add(new TableCell(new Paragraph(r)));
-            }
-            //add rows
-            foreach (Drawing d in pi.Data)
-            {
-                // Add the next row.
-                table1.RowGroups[0].Rows.Add(new TableRow());
-                currentRow = table1.RowGroups[0].Rows[table1.RowGroups[0].Rows.Count - 1];
-
-                // Global formatting for the row.
-                currentRow.FontSize = 8;
-                currentRow.FontWeight = FontWeights.Normal;
-
-                foreach (ColumnInfo g in pi.Columns)
-                {
-                    // Add cells with content to the third row.
-                    object obj = typeof(Drawing).GetProperty(g.Header).GetValue(d, null);
-                    string text = "";
-                    if (obj is DateTime)
-                    {
-                        text = ((DateTime)obj).ToShortDateString();
-                    }
-                    else if (obj != null)
-                    {
-                        text = obj.ToString();
-                    }
-                    currentRow.Cells.Add(new TableCell(new Paragraph(new Run(text))));
-                }
-
-            }
-
-            DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDoc).DocumentPaginator;
-            paginator.PageSize = new Size(pageWidth, pageHeight);
-            flowDoc.PagePadding = new Thickness(25);
-            flowDoc.ColumnWidth = double.PositiveInfinity;
-
-            try
-            {
-                // write the XPS document
-                using (XpsDocument doc = new XpsDocument(tmpFileName, FileAccess.ReadWrite))
-                {
-                    XpsDocumentWriter writer = XpsDocument.CreateXpsDocumentWriter(doc);
-                    writer.Write(paginator);
-                }
-
-                // Read the XPS document into a dynamically generated
-                // preview Window 
-                XpsDocument document = new XpsDocument(tmpFileName, FileAccess.Read);
-
-                return document;
-            }
-            catch { return null; }
-        }
-
-        private void AddSortBinding()
-        {
-            GridView gv = (GridView)listView1.View;
-
-            for (int i = 1; i <= gv.Columns.Count; i++)
-            {
-                GridViewColumn col = gv.Columns[i - 1];
-                ListViewSorter.SetSortBindingMember(col, new Binding((string)col.Header));
-            }
-        }
-        */
-
-#endregion
 
 #region Commands
         void SearchExecute()
@@ -596,6 +491,10 @@ namespace MainPower.DrawingsDatabase.Gui.ViewModels
                     if (StatusCurrent)
                     {
                         w = w.OrElse(d => d.Status == DrawingStatus.Current);
+                    }
+                    if (StatusDraft)
+                    {
+                        w = w.OrElse(d => d.Status == DrawingStatus.Draft);
                     }
                     query = query.Where(w);
                 }

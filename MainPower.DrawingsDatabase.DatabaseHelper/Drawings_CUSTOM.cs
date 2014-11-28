@@ -591,7 +591,7 @@ namespace MainPower.DrawingsDatabase.DatabaseHelper
             }
         }
 
-        [global::System.Data.Linq.Mapping.ColumnAttribute(Name = "SHEET", Storage = "_SHEET", DbType = "NVarChar(10) NOT NULL", CanBeNull = false)]
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Name = "SHEET", Storage = "_SHEET", DbType = "NVarChar(40) NOT NULL", CanBeNull = false)]
         public string Sheet
         {
             get

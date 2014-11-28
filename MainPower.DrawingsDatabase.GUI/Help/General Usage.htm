@@ -10,22 +10,13 @@
 <h2>Search for a drawing</h2>
 Fill out the fields on the main search page (shown below).  You can have more than one search open at a time by selecting Tasks->Search Drawings.
 <br /><br />
-<img src="searchWindow.png" />
-
-
-<h2>Advanced searching</h2>
-If you need very complex search terms, you can use a execute Language Integrated Query (LINQ) directly to find what you are looking for.  Eg the query Number.Contains("1234") will search for any drawing which has the number 1234 in the drawing number.  
-<br /><br />
-At this stage this feature is temporary and is used primarily for testing purposes.
-<br />
-<br/>
-<img src="advcSearchWindow.png" />
+<img src="searchWindow.png" />&nbsp;
 
 <h2>Add a drawing (Tasks->Add Drawing)</h2>
 Use this to add a new drawing to the database (to do this you must have write permissions to the database).  Drawings are added to the database manually by way of drawing templates.  Templates are designed to speed up the process of entering manufacturers drawings by automatically filling out common fields.
 <br />
 <br/>
-<img src="addDrawing.png" />
+<img src="addDrawing.png" />&nbsp;
 <br />
 The default drawing template always exists, if you delete it it will appear again the next time the window is opened.  Templates have two states, the state of the template that is stored on disk (the Original State) and the currently Edited State.  If you save the template, the Edited State is saved to disk and becomes the OriginalState.  You can reset the Edited State to the Original State by right clicking the template and selecting Reset.
 <br/>
@@ -44,10 +35,5 @@ Search for the drawing that you want to open, then right click the entry in the 
 <i>Database Connection String</i><br />
 This is the connection string to the database.  If the database ever moves location you will need to update this to reflect that change.<br />
 
-<h2>Raw Database Viewer (Tasks->Raw Database Viewer)</h2>
-The raw database viewer shows the database as it is stored with no (not much) data manipulation.  This is used mainly for testing and debugging purposes.
-
-<h2>Sub Browser (Tasks->Sub Browser)</h2>
-The Substation Browser is a quick way to view all the drawings for a substation.  It works by searching for the substation's name in the project title, combined with the Zone Substation category.  The text shown is the drawing number followed by the Title Line 1 field of the drawing.  Double-click an entry to open it in AutoCAD. 
 </BODY>
 </HTML>
